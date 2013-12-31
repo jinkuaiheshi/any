@@ -16,30 +16,31 @@ class SmokeController extends CommonController
     public function index(){
         $islogin = session('islogin');
         if($islogin->type == 1){
-            $data = Smoke::All();
+            $data = Smoke::with('User')->get();
         }
         return view('admin/smoke')->with('data',$data);
     }
-    public function dianliang(){
+    public function dianliang($cid){
         $ch = curl_init();//初始化curlhttp://api.heclouds.com/devices/528079844/datapoints? datastream_id=3200_0_5503
-        curl_setopt($ch, CURLOPT_URL,'http://api.heclouds.com/devices/528079844/datapoints?datastream_id=3200_0_5501');//抓取指定网页
+        curl_setopt($ch, CURLOPT_URL,'http://api.heclouds.com/devices/'.$cid.'/datapoints?datastream_id=3200_0_5501');//抓取指定网页
         curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
         curl_setopt($ch, CURLOPT_HTTPHEADER ,array('api-key:BtlWp3lrdfRJ7cggnoAd7Tp2c=A='));//这里要用自己的api-key 我用###########把自己的隐藏掉了
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
         //curl_setopt($ch, CURLOPT_POSTFIELDS, '528079844');
         $data = curl_exec($ch);//运行curl
         curl_close($ch);
+
         $dianliang = array();
         foreach (json_decode($data)->data->datastreams as $v){
-            $dianliang['time'] = $v->datapoints['0']->at;
-            $dianliang['value'] = $v->datapoints['0']->value;
+            $dianliang[$cid]['time'] = $v->datapoints['0']->at;
+            $dianliang[$cid]['value'] = $v->datapoints['0']->value;
         }
 
-        return redirect(url()->previous())->with('dianliang',$dianliang)->withInput();
+        return redirect(url()->previous())->with('dianliang',$dianliang[$cid])->withInput();
     }
-    public function yanwu(){
+    public function yanwu($cid){
         $ch = curl_init();//初始化curlhttp://api.heclouds.com/devices/528079844/datapoints? datastream_id=3200_0_5503
-        curl_setopt($ch, CURLOPT_URL,'http://api.heclouds.com/devices/528079844/datapoints?datastream_id=3200_0_5503');//抓取指定网页
+        curl_setopt($ch, CURLOPT_URL,'http://api.heclouds.com/devices/'.$cid.'/datapoints?datastream_id=3200_0_5503');//抓取指定网页
         curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
         curl_setopt($ch, CURLOPT_HTTPHEADER ,array('api-key:BtlWp3lrdfRJ7cggnoAd7Tp2c=A='));//这里要用自己的api-key 我用###########把自己的隐藏掉了
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
@@ -56,7 +57,7 @@ class SmokeController extends CommonController
         $start = str_replace(" ","T",date("Y-m-d H:i:s",strtotime("-0 year -3 month -0 day")));
 
         $ch = curl_init();//初始化curlhttp://api.heclouds.com/devices/528079844/datapoints? datastream_id=3200_0_5503
-        curl_setopt($ch, CURLOPT_URL,'http://api.heclouds.com/devices/528079844/datapoints?datastream_id=3200_0_5503&start='.$start.'&end='.$end);//抓取指定网页
+        curl_setopt($ch, CURLOPT_URL,'http://api.heclouds.com/devices/'.$cid.'/datapoints?datastream_id=3200_0_5503&start='.$start.'&end='.$end);//抓取指定网页
         curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
         curl_setopt($ch, CURLOPT_HTTPHEADER ,array('api-key:BtlWp3lrdfRJ7cggnoAd7Tp2c=A='));//这里要用自己的api-key 我用###########把自己的隐藏掉了
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
@@ -76,9 +77,9 @@ class SmokeController extends CommonController
 
         return redirect(url()->previous())->with('yanwu',$yanwu)->with('time',\GuzzleHttp\json_encode($time))->with('value',\GuzzleHttp\json_encode($value))->withInput();
     }
-    public function nongdu(){
+    public function nongdu($cid){
         $ch = curl_init();//初始化curlhttp://api.heclouds.com/devices/528079844/datapoints? datastream_id=3200_0_5503
-        curl_setopt($ch, CURLOPT_URL,'http://api.heclouds.com/devices/528079844/datapoints?datastream_id=3200_0_5504');//抓取指定网页
+        curl_setopt($ch, CURLOPT_URL,'http://api.heclouds.com/devices/'.$cid.'/datapoints?datastream_id=3200_0_5504');//抓取指定网页
         curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
         curl_setopt($ch, CURLOPT_HTTPHEADER ,array('api-key:BtlWp3lrdfRJ7cggnoAd7Tp2c=A='));//这里要用自己的api-key 我用###########把自己的隐藏掉了
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
@@ -96,7 +97,7 @@ class SmokeController extends CommonController
         $start = str_replace(" ","T",date("Y-m-d H:i:s",strtotime("-0 year -3 month -0 day")));
 
         $ch = curl_init();//初始化curlhttp://api.heclouds.com/devices/528079844/datapoints? datastream_id=3200_0_5503
-        curl_setopt($ch, CURLOPT_URL,'http://api.heclouds.com/devices/528079844/datapoints?datastream_id=3200_0_5504&start='.$start.'&end='.$end);//抓取指定网页
+        curl_setopt($ch, CURLOPT_URL,'http://api.heclouds.com/devices/'.$cid.'/datapoints?datastream_id=3200_0_5504&start='.$start.'&end='.$end);//抓取指定网页
         curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
         curl_setopt($ch, CURLOPT_HTTPHEADER ,array('api-key:BtlWp3lrdfRJ7cggnoAd7Tp2c=A='));//这里要用自己的api-key 我用###########把自己的隐藏掉了
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
@@ -116,16 +117,18 @@ class SmokeController extends CommonController
 
         return redirect(url()->previous())->with('nongdu',$nongdu)->with('time',\GuzzleHttp\json_encode($time))->with('value',\GuzzleHttp\json_encode($value))->withInput();
     }
-    public function mute(){
+    public function mute($cid){
         $ch = curl_init();//初始化curlhttp://api.heclouds.com/devices/528079844/datapoints? datastream_id=3200_0_5503
-        curl_setopt($ch, CURLOPT_URL,'http://api.heclouds.com/devices/528079844/datapoints?datastream_id=3200_0_5505');//抓取指定网页
+        curl_setopt($ch, CURLOPT_URL,'http://api.heclouds.com/devices/'.$cid.'/datapoints?datastream_id=3200_0_5505');//抓取指定网页
         curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
         curl_setopt($ch, CURLOPT_HTTPHEADER ,array('api-key:BtlWp3lrdfRJ7cggnoAd7Tp2c=A='));//这里要用自己的api-key 我用###########把自己的隐藏掉了
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
         //curl_setopt($ch, CURLOPT_POSTFIELDS, '528079844');
         $data = curl_exec($ch);//运行curl
         curl_close($ch);
-        dd($data);
+        if(json_decode($data)->error == 'succ'){
+            return redirect(url()->previous())->with('message', '设备消音成功')->with('type','success')->withInput();
+        }
     }
     public function smoke(){
         $islogin = session('islogin');
@@ -159,5 +162,26 @@ class SmokeController extends CommonController
 
         }
         return view('admin/new_smoke')->with('data',$data)->with('company',$company)->with('map1',\GuzzleHttp\json_encode($tmps));
+    }
+    public function add(Request $request){
+        if ($request->isMethod('POST')) {
+            $IMEI = $request['IMEI'];
+            $smoke = Smoke::where('IMEI',$IMEI)->first();
+            if($smoke){
+                return redirect(url()->previous())->with('message', '设备已经存在，无法继续添加')->with('type','danger')->withInput();
+            }else{
+                $islogin = session('islogin');
+                $smoke = new Smoke();
+                $smoke->name = $request['name'];
+                $smoke->IMEI = $request['IMEI'];
+                $smoke->cid = $request['cid'];
+                $smoke->api = 'BtlWp3lrdfRJ7cggnoAd7Tp2c=A=';
+                $smoke->uid = $islogin->id;
+                if($smoke->save()){
+                    return redirect(url()->previous())->with('message', '设备添加成功')->with('type','success')->withInput();
+                }
+
+            }
+        }
     }
 }

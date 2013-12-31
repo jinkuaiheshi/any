@@ -15,4 +15,8 @@ class Smoke extends Model
     {
         return $this->hasOne('App\Admin\Company','id','company_id');
     }
+    public function User()
+    {
+        return $this->hasOne('App\Admin\User','id','uid');
+    }
 }

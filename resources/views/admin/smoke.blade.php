@@ -6,7 +6,7 @@
 
         <div class="box box-block bg-white">
             <div class="form-group" style="height: auto; overflow: hidden;">
-
+                <a href="jacascript::void(0)" ><button type="button" class="  btn btn-primary w-min-sm m-b-1 waves-effect waves-light" style="float: right;display:inline-block" data-toggle="modal" data-target="#smoke" data-action="smoke">添加烟感设备</button></a>
             </div>
             <table class="table table-striped table-bordered dataTable" id="tab" >
                 <thead>
@@ -15,7 +15,7 @@
                     <th>设备名称</th>
                     <th>IMEI</th>
                     <th>产品ID</th>
-                    <th>用户ID</th>
+                    <th>操作人</th>
 
                     <th>操作</th>
 
@@ -29,11 +29,11 @@
                         <td>{{$v->name}}</td>
                         <td>{{$v->IMEI}}</td>
                         <td>{{$v->cid}}</td>
-                        <td>{{$v->uid}}</td>
-                        <td><a href="{{url('admin/smoke/dianliang')}}" ><button type="button" class="btn btn-purple w-min-xs  waves-effect waves-light"   >电量查询</button></a>
-                            <a href="{{url('admin/smoke/yanwu')}}" ><button type="button" class="btn btn-warning w-min-xs  waves-effect waves-light "  >设备状态</button></a>
-                            <a href="{{url('admin/smoke/nongdu')}}" ><button type="button" class="btn btn-warning w-min-xs  waves-effect waves-light "  >烟雾浓度</button></a>
-                            <a href="{{url('admin/smoke/mute')}}" ><button type="button" class="btn btn-danger w-min-xs  waves-effect waves-light "  >设备消音</button></a>
+                        <td>{{$v->User->fullname}}</td>
+                        <td><a href="{{url('admin/smoke/dianliang/'.$v->cid)}}" ><button type="button" class="btn btn-purple w-min-xs  waves-effect waves-light"   >电量查询</button></a>
+                            <a href="{{url('admin/smoke/yanwu/'.$v->cid)}}" ><button type="button" class="btn btn-warning w-min-xs  waves-effect waves-light "  >设备状态</button></a>
+                            <a href="{{url('admin/smoke/nongdu/'.$v->cid)}}" ><button type="button" class="btn btn-warning w-min-xs  waves-effect waves-light "  >烟雾浓度</button></a>
+                            <a href="{{url('admin/smoke/mute/'.$v->cid)}}" ><button type="button" class="btn btn-danger w-min-xs  waves-effect waves-light "  >设备消音</button></a>
                         </td>
                     </tr>
                 @endforeach
@@ -79,33 +79,11 @@
                 <div class="modal-body">
 
                     <div class="form-group h-a" style="text-align: center">
-                        <label for="name" class=" col-form-label label200" >烟雾：</label>
+                        <label for="name" class=" col-form-label label200" >状态：</label>
                         <div  style="float:left; width: 250px;">
-                            <input class="form-control" type="text"  readonly value="
+                            <input class="form-control" type="text"  style="text-align: left;" readonly value="
 
-@if(Session::get('yanwu')['value'] == 7)
-正常
-@elseif(Session::get('yanwu')['value'] == 1)
-                                    烟雾报警
-                                    @elseif(Session::get('yanwu')['value'] == 2)
-                                    设备静音
-                                    @elseif(Session::get('yanwu')['value'] == 4)
-                                    低压
-                                    @elseif(Session::get('yanwu')['value'] == 5)
-                                    传感器故障
-                                    @elseif(Session::get('yanwu')['value'] == 8)
-                                    指示模块已接收平台下发单次静音指令
-                                    @elseif(Session::get('yanwu')['value'] == 9)
-                                    指示模块已接收平台下发连续静音指令
-                                    @elseif(Session::get('yanwu')['value'] == 10)
-                                    拆卸报警
-                                     @elseif(Session::get('yanwu')['value'] == 11)
-                                    拆卸恢复
-                                     @elseif(Session::get('yanwu')['value'] == 14)
-                                    测试键在正常状态按下
-                                     @elseif(Session::get('yanwu')['value'] == 15)
-                                    测试键在低压状态按下
-                            @endif
+@if(Session::get('yanwu')['value'] == 7)正常@elseif(Session::get('yanwu')['value'] == 1)烟雾报警@elseif(Session::get('yanwu')['value'] == 2)设备静音@elseif(Session::get('yanwu')['value'] == 4)低压@elseif(Session::get('yanwu')['value'] == 5)传感器故障@elseif(Session::get('yanwu')['value'] == 8)指示模块已接收平台下发单次静音指令@elseif(Session::get('yanwu')['value'] == 9)指示模块已接收平台下发连续静音指令@elseif(Session::get('yanwu')['value'] == 10)拆卸报警@elseif(Session::get('yanwu')['value'] == 11)拆卸恢复@elseif(Session::get('yanwu')['value'] == 14)测试键在正常状态按下@elseif(Session::get('yanwu')['value'] == 15)测试键在低压状态按下@endif
                             " >
 
                         </div>
@@ -243,6 +221,44 @@
 
         </div>
     </div>
+    <div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" id="smoke" >
+        <div class="modal-dialog" role="document" style="max-width: 1000px;">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form class="form-horizontal " method="post" enctype="multipart/form-data" action="{{url('/admin/smoke/add')}}">
+                        {{ csrf_field() }}
+                    <div class="form-group h-a" style="text-align: center">
+                        <label for="name" class=" col-form-label label200" >烟感名称：</label>
+                        <div  style="float:left; width: 250px;">
+                            <input class="form-control" type="text" name="name"  value="" >
+
+                        </div>
+                    </div>
+                    <div class="form-group h-a" style="text-align: center">
+                        <label for="name" class=" col-form-label label200" >设备唯一码：</label>
+                        <div  style="float:left; width: 250px;">
+                            <input class="form-control" type="text"  name="IMEI" value=""  >
+
+                        </div>
+                    </div>
+                    <div class="form-group h-a" style="text-align: center">
+                        <label for="name" class=" col-form-label label200" >设备唯一ID：</label>
+                        <div  style="float:left; width: 250px;">
+                            <input class="form-control" type="text"  name="cid" value=""  >
+
+                        </div>
+                    </div>
+
+
+                <div class="modal-footer">
+
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
     @if(Session::has('dianliang'))
     <script>
         $(function(){
@@ -332,6 +348,8 @@
 
         </script>
     @endif
+
+
     @if(Session::has('message'))
         <div id="toast-container" class="toast-top-right" aria-live="polite" role="alert"><div class="toast
 @if(Session::get('type')=='danger')
@@ -339,18 +357,19 @@
 @elseif(Session::get('type')=='success')
                     toast-success
 @endif " style="display: block;"><div class="toast-message">{{Session::get('message')}}</div></div></div>
+
     @endif
 
 
-    <script>
-        $(function () {
-            var toast = $('#toast-container');
-            setTimeout(function () {
-                toast.fadeOut(1000);
-            },3000);
-        })
-    </script>
 
+        <script>
+            $(function () {
+                var toast = $('#toast-container');
+                setTimeout(function () {
+                    toast.fadeOut(1000);
+                },3000);
+            })
+        </script>
 
 
     <script>

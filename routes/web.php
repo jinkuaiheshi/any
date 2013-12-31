@@ -39,12 +39,14 @@ Route::group(['middleware'=>['web','Admin']],function() {
 
 
     Route::get('/admin/smoke','Admin\SmokeController@index');//赛特维尔烟感
-    Route::get('/admin/smoke/dianliang','Admin\SmokeController@dianliang');//赛特维尔烟感
-    Route::get('/admin/smoke/yanwu','Admin\SmokeController@yanwu');//赛特维尔烟感
-    Route::get('/admin/smoke/nongdu','Admin\SmokeController@nongdu');//赛特维尔烟感
-    Route::get('/admin/smoke/mute','Admin\SmokeController@mute');//赛特维尔烟感
+    Route::get('/admin/smoke/dianliang/{cid}','Admin\SmokeController@dianliang');//赛特维尔烟感
+    Route::get('/admin/smoke/yanwu/{cid}','Admin\SmokeController@yanwu');//赛特维尔烟感
+    Route::get('/admin/smoke/nongdu/{cid}','Admin\SmokeController@nongdu');//赛特维尔烟感
+    Route::get('/admin/smoke/mute/{cid}','Admin\SmokeController@mute');//赛特维尔烟感
+    Route::post('/admin/smoke/add','Admin\SmokeController@add');//赛特维尔烟感
 
     Route::get('/admin/new/smoke','Admin\SmokeController@smoke');//赛特维尔烟感
+
 
     //运营中心
     Route::get('/admin/operation/alarmlist','Admin\OperationController@alarmlist' );//报警详情

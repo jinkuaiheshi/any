@@ -42,6 +42,7 @@ class AdminController extends CommonController
         dd(123);
     }
     public function index(){
+
         return view('admin/index');
     }
     public function logout(){

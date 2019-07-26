@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <!-- Title -->
-    <title>Neptune</title>
+    <title>安云智联全系产品管理系统</title>
 
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="{{asset('resources/assets/admin/vendor/bootstrap/css/bootstrap.min.css')}}">
@@ -77,8 +77,19 @@
         <div class="col-md-3">
             <div class="modal static-modal custom-modal-1">
                 <div class="modal-dialog">
-                    <a href="{{url('/admin/dashboard')}}">
-                        <div class="modal-content">
+                    {{--<a href="{{url('/admin/dashboard')}}">--}}
+                    <form class="form-horizontal " method="post" enctype="multipart/form-data" action="{{url('http://dhy.anyzeal.cn/index.php/Portal/Login/Index/login')}}" name="login">
+                        {{ csrf_field() }}
+                            <input type="hidden" name="username" value="{{$info->username}}">
+                            <input type="hidden" name="pwd" value="{{$info->password}}">
+                            <input type="hidden" name="type" value="9">
+
+                        <div class="modal-content" style="position: relative">
+
+                            <button style="position: absolute;width: 100%; height: 100%;z-index: 999;opacity: 0;" type="submit" >
+
+                            </button>
+
                             <div class="cm-img img-cover" style="background-image: url(img/photos-1/5.jpg);">
                                 <div class="gradient gradient-danger"></div>
                                 <div class="cm-content">
@@ -88,7 +99,8 @@
                             </div>
 
                         </div>
-                    </a>
+                    </form>
+                    {{--</a>--}}
                 </div>
             </div>
         </div>

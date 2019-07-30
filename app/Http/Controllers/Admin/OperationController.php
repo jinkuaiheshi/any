@@ -58,7 +58,7 @@ class OperationController extends CommonController
             if($v->AlarmText=='离线')
             {
                 if(!isset($uuu[$v->CustomerName])){
-                    break;
+                    continue;
                 }
                 $offline[$k]['company_name']=$v->CustomerName;
                 if(!isset($tmp[$v->CRCID])){
@@ -75,10 +75,7 @@ class OperationController extends CommonController
                 $offline[$k]['area_code']=$uuu[$v->CustomerName.'_area'];
                 $offline[$k]['SimCard']=$v->SimCard;
 
-            }
-
-
-            else{
+            }else{
 
                 if($status != 2) {
                     $AlarmWord=ltrim($v->AlarmWord,'[');
@@ -146,9 +143,10 @@ class OperationController extends CommonController
 
             }
 
+
         }
 
-
+      
 
 
         //开始处理天一达产品E开头的产品

@@ -146,7 +146,7 @@ class OperationController extends CommonController
 
         }
 
-      
+
 
 
         //开始处理天一达产品E开头的产品
@@ -163,9 +163,11 @@ class OperationController extends CommonController
             }
             $offs = array();
             $off = array();
+
             foreach ($data as $lixian){
+
                 $off['company_name'] = $lixian->Company->name;
-                $off['org_name'] = $lixian->Organization->name;
+                $off['org_name'] = isset($lixian->Organization->name)?$lixian->Organization->name:'';
                 $off['code'] = $lixian->code;
 
                 $vaule = substr($lixian->code,1,7);

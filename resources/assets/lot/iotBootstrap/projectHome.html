@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>智慧式用电安全监管与电能管理平台</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<!-- 引入 Bootstrap -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+		<!-- HTML5 Shiv 和 Respond.js 用于让 IE8 支持 HTML5元素和媒体查询 -->
+		<!-- 注意： 如果通过 file://  引入 Respond.js 文件，则该文件无法起效果 -->
+		<!--[if lt IE 9]>
+         	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+         	<script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+      	<![endif]-->
+		<link rel="stylesheet" type="text/css" href="font/iconfont.css">
+		<link rel="stylesheet" href="css/animate.css" />
+		<link rel="stylesheet" href="css/main.css" />
+		<style>
+			.infoNumber {
+				background-color: #f56c6c;
+				border-radius: 10px;
+				color: #fff;
+				display: inline-block;
+				font-size: 12px;
+				height: 8px;
+				padding: 0 4px;
+				text-align: center;
+				white-space: nowrap;
+				margin-top: 10px;
+				position: absolute;
+				top: 7px;
+				left: 45px;
+			}
+			
+			.topNav {
+				height: 60px;
+				line-height: 60px;
+				background: #251c6d;
+				position: fixed;
+				width: 100%;
+				top: 0;
+				left: 0;
+				z-index: 20;
+			}
+			
+			.slidContain {
+				width: 220px;
+				height: 100%;
+				background-color: #022961;
+				transition: all .3s;
+				position: relative;
+				top: 60px;
+			}
+			/*侧边栏*/
+			
+			.slidContain {
+				width: 220px;
+				height: 100%;
+				background-color: #022961;
+				transition: all .3s;
+			}
+			
+			.slidContain a {
+				display: block;
+				overflow: hidden;
+				padding-left: 20px;
+				line-height: 40px;
+				max-height: 40px;
+				color: rgba(255, 255, 255, 0.8);
+				text-decoration: none;
+				transition: all .3s;
+			}
+			
+			.slidContain a span {
+				margin-left: 30px;
+			}
+			
+			.nav-item {
+				position: relative;
+			}
+			
+			.nav-item.nav-show {
+				border-bottom: none;
+			}
+			
+			.nav-item ul {
+				display: none;
+				background: rgba(0, 0, 0, .1);
+			}
+			
+			.nav-item:first-of-type ul {
+				display: block;
+			}
+			
+			.nav-item.nav-show ul {
+				display: block;
+			}
+			
+			.nav-item>a:before {
+				content: "";
+				position: absolute;
+				left: 0px;
+				width: 2px;
+				height: 40px;
+				background: #34A0CE;
+				opacity: 0;
+				transition: all .3s;
+			}
+			
+			.slidContain .nav-icon {
+				font-size: 20px;
+				position: absolute;
+				margin-left: -1px;
+			}
+			/* 此处修改导航图标 可自定义iconfont 替换*/
+			
+			.icon_1::after {
+				content: "\e62b";
+			}
+			
+			.icon_2::after {
+				content: "\e669";
+			}
+			
+			.icon_3::after {
+				content: "\e61d";
+			}
+			/*---------------------*/
+			
+			.nav-more {
+				float: right;
+				margin-right: 20px;
+				font-size: 12px;
+				transition: transform .3s;
+			}
+			/* 此处为导航右侧箭头 如果自定义iconfont 也需要替换*/
+			
+			.nav-more::after {
+				content: "\e621";
+			}
+			/*---------------------*/
+			
+			.nav-show .nav-more {
+				transform: rotate(90deg);
+			}
+			
+			.nav-item:first-of-type li:first-of-type a {
+				color: #FFF;
+				background: rgba(0, 0, 0, .1);
+			}
+			
+			.nav-item:first-of-type li:first-of-type a.activeColor {
+				color: #FFF;
+				background: rgba(0, 0, 0, .1);
+			}
+			
+			.nav-item:first-of-type li .activeColor {
+				color: #FFF;
+				background: rgba(0, 0, 0, .1);
+			}
+			
+			.nav-show,
+			.nav-item>a:hover {
+				color: #FFF;
+				/*background: rgba(0, 0, 0, .1);*/
+			}
+			
+			.nav-show>a:before,
+			.nav-item>a:hover:before {
+				opacity: 1;
+			}
+			
+			.nav-item li:hover a {
+				color: #FFF;
+				/*background: rgba(0, 0, 0, .1);*/
+			}
+			/* nav-mini */
+			
+			.nav-mini.nav {
+				width: 60px;
+			}
+			
+			.nav-mini.nav .nav-icon {
+				/* margin-left:-2px; */
+			}
+			
+			.nav-mini.nav .nav-item>a span {
+				display: none;
+			}
+			
+			.nav-mini.nav .nav-more {
+				margin-right: -20px;
+			}
+			
+			.nav-mini.nav .nav-item ul {
+				position: absolute;
+				top: 0px;
+				left: 60px;
+				width: 180px;
+				z-index: 99;
+				background: #3C474C;
+				overflow: hidden;
+			}
+			
+			.nav-mini.nav .nav-item:hover {
+				background: rgba(255, 255, 255, .1);
+			}
+			
+			.nav-mini.nav .nav-item:hover .nav-item a {
+				color: #FFF;
+			}
+			
+			.nav-mini.nav .nav-item:hover a:before {
+				opacity: 1;
+			}
+			
+			.nav-mini.nav .nav-item:hover ul {
+				display: block;
+			}
+			
+			.navbar {
+				border-radius: 0px;
+			}
+			/********下半部分内容**********/
+			/*.rightBottom{
+				overflow: hidden;
+			}*/
+			
+			.rightBottomBox {
+				/*overflow: hidden;*/
+				height: 479px;
+				overflow-y: auto;
+			}
+			
+			.bottomContent {
+				/*height:100%;*/
+			}
+			
+			.slidContain,
+			.rightContent,
+			.rightNav,
+			.btnExport,
+			.radioBox,
+			.inputLayout,
+			.spanTitle,
+			.inputBox {
+				float: left;
+			}
+			
+			.rightContent {
+				margin-top: 60px;
+				height: 100%;
+				background-color: #f8f8f8;
+			}
+			
+			.rightNav {
+				margin-top: 5px;
+			}
+			
+			.rightNav li,
+			.rightChartBox,
+			.leftChartBox {
+				float: left;
+			}
+			
+			.rightNav li a {
+				color: #666;
+				text-decoration: none;
+			}
+			
+			.rightNav li a.active {
+				color: #409eff;
+			}
+			
+			.rightSelect {
+				float: right;
+			}
+			
+			.rightContentTop {
+				padding: 10px 20px;
+				min-height: 30px;
+				line-height: 30px;
+				border-bottom: 1px solid #eee;
+				background-color: #fff;
+			}
+			
+			.rightNav li a.whiteColor {
+				color: #7d7e80;
+				cursor: default;
+			}
+			
+			.grayColor {
+				color: #b0bad5;
+			}
+			/*右侧选择*/
+			
+			.rightSelect .btnExport {
+				padding: 3px 10px;
+				border-radius: 4px;
+				background-color: #409eff;
+				color: #fff;
+				cursor: pointer;
+				margin-right: 8px;
+			}
+			
+			.richradio,
+			.richcheckbox {
+				border: 1px solid #CCC;
+				color: #6b6363;
+				display: inline-block;
+				padding: 2px 15px 2px 15px;
+				text-align: center;
+				margin: 0px 2px;
+				font-size: 14px;
+				border-radius: 4px;
+				font-weight: 400;
+			}
+			
+			.richradio:hover,
+			.richcheckbox:hover {
+				cursor: pointer;
+			}
+			
+			.lowIE {
+				position: absolute\9;
+				top: -999px\9;
+				left: -999px\9;
+			}
+			
+			.otherBrowser {
+				display: none;
+			}
+			
+			.IEChecked {
+				background-size: auto auto;
+				border: 1px solid #409eff;
+				background-size: 21px 21px;
+				color: #fff;
+				background-color: #409eff;
+				;
+			}
+			
+			.otherBrowserChecked {
+				background-size: auto auto;
+				border: 1px solid #409eff;
+				background-size: 21px 21px;
+				color: #fff;
+				background-color: #409eff;
+			}
+			
+			.inputLayout {
+				padding: 2px 0;
+				margin-left: 6px;
+			}
+			
+			.inputLayout span {
+				color: '#666'
+			}
+			
+			#inputMonth {
+				display: none;
+			}
+			/*echart*/
+			
+			.rightEchart {
+				margin: 10px 15px;
+			}
+			
+			.rightChartBox,
+			.leftChartBox {
+				height: 330px;
+				background-color: #fff;
+				border-radius: 4px;
+			}
+			
+			.rightChartBox {
+				width: 49%;
+				margin-right: 1%;
+			}
+			/*echart tab切换*/
+			#tit,
+			#tit1 {
+				height: 30px;
+				border-bottom: 1px solid #eee;
+			}
+			
+			#tit span,
+			#tit1 span {
+				float: left;
+				height: 30px;
+				line-height: 30px;
+				width: 115px;
+				font-size: 14px;
+				padding-left: 10px;
+				color: #666;
+				cursor: pointer;
+			}
+			
+			#con li,
+			#con1 li {
+				display: none;
+				height: 300px;
+			}
+			
+			#tit span.select,
+			#tit1 span.select1 {
+				color: #409eff;
+				border-bottom: 1px solid #409eff;
+			}
+			
+			#con li.show,
+			#con1 li.show1 {
+				display: block;
+			}
+			
+			.leftChartBox {
+				width: 50%;
+			}
+			
+			.rightTable {
+				background-color: #fff;
+				margin: 0 15px 10px 15px;
+				overflow-y: auto;
+			}
+			
+			@media (min-width: 768px) .navbar {
+				border-radius: 0px !important;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="home">
+			<!--响应式导航-->
+			<div class="navbar navbar-default topNav">
+				<div class="navbar-header">
+					<div class="navLogo">
+						<div class="img"><img src="images/logo.png" alt="" /></div>
+						<div class="titleLogo">智慧式用电安全监管与电能管理平台</div>
+					</div>
+				</div>
+				<ul id="shownav" class="nav navbar-nav collapse navbar-collapse">
+					<li>
+						<div class="noiceIcon"></div>
+					</li>
+					<li>
+						<a href="#" class="mainFontColor">
+							<div>报警</div>
+							<div class="flexDiv infoNumber"></div>
+						</a>
+					</li>
+					<li>
+						<a class="dropdown" data-toggle="dropdown" href="">安云智联<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li>
+								<a href="./index.html" class="mainFontColor">管理平台</a>
+							</li>
+							<li>
+								<a href="./record.html" class="mainFontColor">操作日志</a>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#" class="mainFontColor" data-toggle="modal" data-target="#myModal">修改密码</a>
+					</li>
+					<li>
+						<a href="/login.html" class="mainFontColor">退出</a>
+					</li>
+				</ul>
+				<!--</div>-->
+			</div>
+			<div class="bottomContent clearfix">
+				<!--侧边栏-->
+				<div class="slidContain">
+					<ul>
+						<li class="nav-item">
+							<a href="javascript:;"><i class="my-icon nav-icon icon_1"></i><span>电气安全监管</span><i class="my-icon nav-more"></i></a>
+							<ul>
+								<li>
+									<a href="javascript:;"><span>全部报警</span></a>
+								</li>
+								<li>
+									<a href="javascript:;"><span>漏电流</span></a>
+								</li>
+								<li>
+									<a href="javascript:;"><span>温度</span></a>
+								</li>
+								<li>
+									<a href="javascript:;"><span>漏电报警</span></a>
+								</li>
+								<li>
+									<a href="javascript:;"><span>温度报警</span></a>
+								</li>
+								<li>
+									<a href="javascript:;"><span>漏保自检</span></a>
+								</li>
+								<li>
+									<a href="javascript:;"><span>短路报警</span></a>
+								</li>
+								<li>
+									<a href="javascript:;"><span>过欠压</span></a>
+								</li>
+								<li>
+									<a href="javascript:;"><span>过流过载</span></a>
+								</li>
+								<li>
+									<a href="javascript:;"><span>打火报警</span></a>
+								</li>
+								<li>
+									<a href="javascript:;"><span>三相报警</span></a>
+								</li>
+								<li>
+									<a href="javascript:;"><span>窃电报警</span></a>
+								</li>
+							</ul>
+						</li>
+						<li class="nav-item">
+							<a href="javascript:;"><i class="my-icon nav-icon icon_2"></i><span>智慧能源管理</span><i class="my-icon nav-more"></i></a>
+							<ul>
+								<li>
+									<a href="javascript:;"><span>电量</span></a>
+								</li>
+								<li>
+									<a href="javascript:;"><span>负载</span></a>
+								</li>
+								<li>
+									<a href="javascript:;"><span>综合管理</span></a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div class="rightContent">
+					<div class="rightContentTop clearfix">
+						<div class="rightNav clearfix">
+							<ul>
+								<li>
+									<a href="./index.html" class="active">首页</a>
+									<span class="grayColor">&nbsp;/&nbsp;</span>
+								</li>
+								<li>
+									<a href="#">北仑耶稣堂</a>
+									<span class="grayColor">&nbsp;/&nbsp;</span>
+								</li>
+								<li>
+									<a href="#">电气安全监管</a>
+									<span class="grayColor">&nbsp;/&nbsp;</span>
+								</li>
+								<li>
+									<a href="#" class="whiteColor">全部报警</a>
+								</li>
+							</ul>
+						</div>
+						<div class="rightSelect clearfix">
+							<!--右侧选择-->
+							<div class="btnExport" @click="export" id="exoprt">导出</div>
+							<div class="radioBox">
+								<input name="date" value="day" type="radio" lab="日" />
+								<input name="date" value="month" type="radio" lab="月" />
+							</div>
+							<div class="inputLayout clearfix">
+								<div class="spanTitle">日期：</div>
+								<div class="inputBox">
+									<input type="text" class="demo-input" placeholder="请选择日期" id="inputDay">
+									<input type="text" class="demo-input" placeholder="请选择月份" id="inputMonth">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="rightBottom">
+						<div class="rightBottomBox">
+							<div class="rightEchart clearfix">
+								<div class="rightChartBox">
+									<!--tab切换echart-->
+									<div id="wrap">
+										<div id="tit">
+											<span class="select">用电报警柱状图</span>
+											<span>用电预警柱状图</span>
+										</div>
+										<ul id="con">
+											<li class="show tabContent">
+												<div id="barEchart1" class="chart-block" style="height:280px;"></div>
+											</li>
+											<li class="tabContent">
+												<div id="barEchart2" class="chart-block" style="height:280px;"></div>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="leftChartBox">
+									<div id="wrap1">
+										<div id="tit1">
+											<span class="select1">用电报警饼形图</span>
+											<span>用电预警饼形图</span>
+										</div>
+										<ul id="con1">
+											<li class="show1 tabContent1">
+												<div id="pieEchart1" class="chart-block1" style="height:280px;"></div>
+											</li>
+											<li class="tabContent1">
+												<div id="pieEchart2" class="chart-block1" style="height:280px;"></div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div class="rightTable">
+								<div class="tableBody">
+									<table class="table table-bordered " style="margin: 8px 0 0 0;table-layout:fixed">
+										<thead>
+											<tr>
+												<th>地点</th>
+												<th>线路</th>
+												<th>报警类型</th>
+												<th>报警时间</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>1栋1单元01ACC</td>
+												<td>线路2</td>
+												<td>欠压预警</td>
+												<td>2019-07-19 17:34:24</td>
+											</tr>
+											<tr>
+												<td>1栋1单元01ACC</td>
+												<td>线路2</td>
+												<td>欠压预警</td>
+												<td>2019-07-19 17:34:24</td>
+											</tr>
+											<tr>
+												<td>1栋1单元01ACC</td>
+												<td>线路2</td>
+												<td>欠压预警</td>
+												<td>2019-07-19 17:34:24</td>
+											</tr>
+											<tr>
+												<td>1栋1单元01ACC</td>
+												<td>线路2</td>
+												<td>欠压预警</td>
+												<td>2019-07-19 17:34:24</td>
+											</tr>
+											<tr>
+												<td>1栋1单元01ACC</td>
+												<td>线路2</td>
+												<td>欠压预警</td>
+												<td>2019-07-19 17:34:24</td>
+											</tr>
+											<tr>
+												<td>1栋1单元01ACC</td>
+												<td>线路2</td>
+												<td>欠压预警</td>
+												<td>2019-07-19 17:34:24</td>
+											</tr>
+											<tr>
+												<td>1栋1单元01ACC</td>
+												<td>线路2</td>
+												<td>欠压预警</td>
+												<td>2019-07-19 17:34:24</td>
+											</tr>
+											<tr>
+												<td>1栋1单元01ACC</td>
+												<td>线路2</td>
+												<td>欠压预警</td>
+												<td>2019-07-19 17:34:24</td>
+											</tr>
+											
+										</tbody>
+										<tbody class="nodataTable">
+											<tr>
+												<td colspan="4">暂无数据</td>
+											</tr>
+										</tbody>
+										
+									</table>
+									<nav aria-label="Page navigation " class="clearfix">
+										<ul class="pagination" style="margin: 8px 0 0 0;float:right">
+											<li>
+												<a href="#" aria-label="Previous">
+													<span aria-hidden="true">&laquo;</span>
+												</a>
+											</li>
+											<li>
+												<a href="#">1</a>
+											</li>
+											<li>
+												<a href="#">2</a>
+											</li>
+											<li>
+												<a href="#">3</a>
+											</li>
+											<li>
+												<a href="#">4</a>
+											</li>
+											<li>
+												<a href="#">5</a>
+											</li>
+											<li>
+												<a href="#" aria-label="Next">
+													<span aria-hidden="true">&raquo;</span>
+												</a>
+											</li>
+										</ul>
+									</nav>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script src="js/jquery-3.4.1.min.js"></script>
+		<!-- 包括所有已编译的插件 -->
+		<script src="js/bootstrap.min.js"></script>
+		<!--引入echart-->
+		<script src="js/echarts.js"></script>
+		<!--日历-->
+		<script src="laydate/laydate.js"></script>
+		<!--radio美化-->
+		<script type="text/javascript" src="js/jquery.richUI.min.js"></script>
+		<script type="text/javascript" src="js/jquery.browser.min.js"></script>
+		<script>
+			$(function() {
+				// nav收缩展开
+				$('.nav-item>a').on('click', function() {
+					if($(this).next().css('display') == "none") {
+						//展开未展开						
+						$('.nav-item').children('ul').slideUp(300);
+						$(this).next('ul').slideDown(300);
+						//a标签的样式控制默认状态
+						$(this).parent('li').addClass('nav-show').siblings('li').removeClass('nav-show');
+					} else {
+						//收缩已展开
+						$(this).next('ul').slideUp(300);
+						$('.nav-item.nav-show').removeClass('nav-show');
+						$('.nav-item li a.activeColor').removeClass('activeColor');
+						//a标签字体颜色和背景颜色
+						//						$(this).addClass('activeColor').siblings('li a').removeClass('activeColor')
+					}
+					//					}
+				});
+				//*****************************修改密码************************
+				function validateForm() {
+					var oldPwd = $('#oldPassWorld').val();
+					var newPwd = $('#newPassWorld').val()
+					if(oldPwd == null || oldPwd == "" || oldPwd == undefined) {
+						$('#oldError').show()
+						$('#oldError').html('请输入旧密码')
+					} else {
+						$('#oldError').hide()
+					}
+
+					if(newPwd == null || newPwd == "" || newPwd == undefined) {
+						$('#newError').show()
+						$('#newError').html('请输入新密码')
+					} else {
+						$('#newError').hide()
+					}
+				}
+
+				function cancle() {
+					$('#oldError').hide()
+					$('#newError').hide()
+					$('#oldPassWorld').val('')
+					$('#newPassWorld').val('')
+				}
+				$('.close').click(function(){
+					$('#oldError').hide()
+					$('#newError').hide()
+					$('#oldPassWorld').val('')
+					$('#newPassWorld').val('')
+				})
+				// 右侧内容盒子的宽度
+				var winHeight = $(window).height();
+				$('.bottomContent').height(winHeight - 60);
+				var width = $('.bottomContent').width();
+				$('.rightContent').width(width - 220);
+				$('.rightBottom').height(winHeight - 128);
+				$('.rightBottomBox').height(winHeight - 128);
+				// 导出功能
+				$('#export').click(function() {
+
+				})
+				//单选框美化
+				$("input[name='date']").richradio({
+					selected: "day"
+				});
+				//点击日则显示日的日历，点击月则显示月的日历
+				$("input[name='date']").click(function() {
+					if($(this).attr("value") == 'month') {
+						$('#inputMonth').show();
+						$('#inputDay').hide();
+						laydate.render({
+							elem: '#inputMonth',
+							type: 'month',
+							range: false
+						});
+					}
+					if($(this).attr("value") == 'day') {
+						$('#inputMonth').hide();
+						$('#inputDay').show();
+						laydate.render({
+							elem: '#inputDay',
+							range: false
+						});
+					}
+				})
+				//默认显示当天日期
+				var now = new Date();
+				var time = now.getFullYear() + "-" + ((now.getMonth() + 1) < 10 ? "0" : "") + (now.getMonth() + 1) + "-" + (now.getDate() < 10 ? "0" : "") + now.getDate();
+				$('#inputDay').val(time);
+				//echart Tab切换
+				//左侧tab
+				$('#tit span').click(function() {
+					var i = $(this).index(); //下标第一种写法
+					$(this).addClass('select').siblings().removeClass('select');
+					$('#con li').eq(i).addClass('show').siblings().removeClass('show');
+				});
+				//右侧tab
+				$('#tit1 span').click(function() {
+					var index = $(this).index(); //下标第一种写法
+					$(this).addClass('select1').siblings().removeClass('select1');
+					$('#con1 li').eq(index).addClass('show1').siblings().removeClass('show1');
+				});
+				// 用电报警柱状图
+				//echart
+				$('.chart-block').css('width', $('.tabContent').width());
+				$('.chart-block1').css('width', $('.tabContent1').width());
+				var barEchart1 = echarts.init($('#barEchart1').get(0));
+				var barEchart2 = echarts.init($('#barEchart2').get(0));
+				var pieEchart1 = echarts.init($('#pieEchart1').get(0));
+				var pieEchart2 = echarts.init($('#pieEchart2').get(0));
+				var option = {
+					title: {
+						text: ''
+					},
+					color: ["#CB3F40"],
+					tooltip: {
+						trigger: 'item',
+						formatter: "{b}: {c} ({d}%)"
+					},
+					grid: {
+						left: 30,
+						right: 10,
+						width: '90%',
+						height: '70%'
+					},
+					xAxis: {
+						data: ['短路报警', '漏电报警', '过载过流', '过压报警', '欠压报警', '温度报警', '浪涌报警', '打火报警', '三相报警'],
+						axisLine: {
+							lineStyle: {
+								color: '#797979'
+							}
+						},
+						'axisLabel': {
+							'interval': 0,
+							textStyle: {
+								color: 'rgb(0,0,0)'
+							}
+						}
+					},
+					yAxis: {
+						axisLine: {
+							lineStyle: {
+								color: '#797979'
+							}
+						},
+						splitLine: {
+							lineStyle: {
+								color: '#dcdcdc'
+							}
+						},
+						//                    name:this.yAxisName,
+						nameGap: 8
+					},
+					series: [{
+						name: '报警预警数量',
+						type: 'bar',
+						barWidth: 15,
+						data: [11, 2, 3, 4, 5, 6, 7, 4, 9]
+					}]
+				};
+				var option1 = {
+					title: {
+						text: ''
+					},
+					color: ["#CB3F40"],
+					tooltip: {
+						trigger: 'item',
+						formatter: "{b}: {c} ({d}%)"
+					},
+					grid: {
+						left: 30,
+						right: 10,
+						width: '90%',
+						height: '70%'
+					},
+					xAxis: {
+						data: ['短路预警', '漏电预警', '过载过流', '过压预警', '欠压预警', '温度预警', '浪涌报预警', '打火预警', '三相预警'],
+						axisLine: {
+							lineStyle: {
+								color: '#797979'
+							}
+						},
+						'axisLabel': {
+							'interval': 0,
+							textStyle: {
+								color: 'rgb(0,0,0)'
+							}
+						}
+					},
+					yAxis: {
+						axisLine: {
+							lineStyle: {
+								color: '#797979'
+							}
+						},
+						splitLine: {
+							lineStyle: {
+								color: '#dcdcdc'
+							}
+						},
+						nameGap: 8
+					},
+					series: [{
+						name: '报警预警数量',
+						type: 'bar',
+						barWidth: 15,
+						data: [4, 12, 9, 14, 21, 24, 19, 12, 21]
+					}]
+
+				};
+				var option3 = {
+					title: {
+						text: ''
+					},
+					legend: {
+						icon: 'stack',
+						data: ['短路报警', '漏电报警', '过载报警', '过压报警', '欠压报警', '温度报警', '浪涌报警', '打火报警', '三相报警'],
+						top: 50,
+						right: 50,
+						orient: 'vertical',
+						itemGap: 8,
+						itemWidth: 20,
+						textStyle: {
+							color: '#666',
+							fontWeight: 'normal',
+							fontSize: 12
+						}
+					},
+					color: ["#CB3F40", "#F26665", "#F2A5A6", "#B92EE3", "#C077CD", "#D19EDC", "#E79C28", "#F0C647", "#FEE7A2"],
+					tooltip: {
+						trigger: 'item',
+						formatter: "{b}: {c} ({d}%)"
+					},
+					series: {
+						type: 'pie',
+						radius: ['76%', '48%'], // 控制大小
+						center: ['35%', '54%'], // 控制距离盒子左边上面的距离
+						label: {
+							normal: {
+								show: false
+							},
+							emphasis: {
+								show: false,
+								textStyle: {
+									fontSize: '14',
+									color: '#666'
+								}
+							}
+						},
+						labelLine: {
+							normal: {
+								show: false
+							}
+						},
+						data: [{
+								name: '短路报警',
+								value: 20
+							},
+							{
+								name: '漏电报警',
+								value: 1
+							},
+							{
+								name: '过载报警',
+								value: 150
+							},
+							{
+								name: '过压报警',
+								value: 10
+							},
+							{
+								name: '欠压报警',
+								value: 3
+							},
+							{
+								name: '温度报警',
+								value: 360
+							},
+							{
+								name: '浪涌报警',
+								value: 10
+							},
+							{
+								name: '打火报警',
+								value: 360
+							},
+							{
+								name: '三相报警',
+								value: 10
+							}
+						]
+					}
+				};
+				var option4 = {
+					title: {
+						text: ''
+					},
+					legend: {
+						icon: 'stack',
+						data: ['短路预警', '漏电预警', '过载预警', '过压预警', '欠压预警', '温度预警', '浪涌预警', '打火预警', '三相预警'],
+						top: 50,
+						right: 50,
+						orient: 'vertical',
+						itemGap: 8,
+						itemWidth: 20,
+						textStyle: {
+							color: '#666',
+							fontWeight: 'normal',
+							fontSize: 12
+						}
+					},
+					color: ["#CB3F40", "#F26665", "#F2A5A6", "#B92EE3", "#C077CD", "#D19EDC", "#E79C28", "#F0C647", "#FEE7A2"],
+					tooltip: {
+						trigger: 'item',
+						formatter: "{b}: {c} ({d}%)"
+					},
+					series: {
+						type: 'pie',
+						radius: ['76%', '48%'], // 控制大小
+						center: ['35%', '54%'], // 控制距离盒子左边上面的距离
+						label: {
+							normal: {
+								show: false
+							},
+							emphasis: {
+								show: false,
+								textStyle: {
+									fontSize: '14',
+									color: '#666'
+								}
+							}
+						},
+						labelLine: {
+							normal: {
+								show: false
+							}
+						},
+						data: [{
+								name: '短路预警',
+								value: 10
+							},
+							{
+								name: '漏电预警',
+								value: 11
+							},
+							{
+								name: '过载预警',
+								value: 50
+							},
+							{
+								name: '过压预警',
+								value: 8
+							},
+							{
+								name: '欠压预警',
+								value: 12
+							},
+							{
+								name: '温度预警',
+								value: 36
+							},
+							{
+								name: '浪涌预警',
+								value: 10
+							},
+							{
+								name: '打火预警',
+								value: 20
+							},
+							{
+								name: '三相预警',
+								value: 10
+							}
+						]
+					}
+				};
+				barEchart1.setOption(option);
+				barEchart2.setOption(option1);
+				pieEchart1.setOption(option3);
+				pieEchart2.setOption(option4);
+				window.addEventListener("resize", () => {
+					this.barEchart1.resize();
+					this.barEchart2.resize();
+					pieEchart1.setOption(option3);
+					pieEchart2.setOption(option4);
+				});
+				//用电预警柱状图
+				//用电报警圆环
+				//用电预警圆环
+				//表格分页
+
+			});
+		</script>
+	</body>
+
+</html>

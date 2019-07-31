@@ -151,22 +151,22 @@
 
                     {{--</ul>--}}
                 {{--</li>--}}
-                <li class="with-sub">
-                    <a href="#" class="waves-effect  waves-light">
-                        <span class="s-caret"><i class="fa fa-angle-down"></i></span>
-                        <span class="s-icon"><i class="ti-dashboard"></i></span>
-                        <span class="s-text">设备列表</span>
-                    </a>
-                    <ul>
+                {{--<li class="with-sub">--}}
+                    {{--<a href="#" class="waves-effect  waves-light">--}}
+                        {{--<span class="s-caret"><i class="fa fa-angle-down"></i></span>--}}
+                        {{--<span class="s-icon"><i class="ti-dashboard"></i></span>--}}
+                        {{--<span class="s-text">设备列表</span>--}}
+                    {{--</a>--}}
+                    {{--<ul>--}}
 
-                        <li><a href="{{url('/admin/monitor/bt')}}">佰腾</a></li>
-                        <li><a href="{{url('/admin/monitor/v1')}}">电气火灾探测器（旧版）</a></li>
-                        <li><a href="{{url('/admin/monitor/v2')}}">电气火灾探测器（标准版）</a></li>
-                        <li><a href="{{url('/admin/monitor/v3')}}">电气火灾探测器（电量版）</a></li>
+                        {{--<li><a href="{{url('/admin/monitor/bt')}}">佰腾</a></li>--}}
+                        {{--<li><a href="{{url('/admin/monitor/v1')}}">电气火灾探测器（旧版）</a></li>--}}
+                        {{--<li><a href="{{url('/admin/monitor/v2')}}">电气火灾探测器（标准版）</a></li>--}}
+                        {{--<li><a href="{{url('/admin/monitor/v3')}}">电气火灾探测器（电量版）</a></li>--}}
 
 
-                    </ul>
-                </li>
+                    {{--</ul>--}}
+                {{--</li>--}}
 
 
 

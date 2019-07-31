@@ -1,0 +1,387 @@
+html,
+body,
+p,
+ul,
+li {
+	margin: 0;
+	padding: 0;
+}
+
+html,
+body {
+	height: 100% !important;
+	font-family: "微软雅黑";
+	font-size: 14px;
+	/*color:#666;*/
+}
+
+
+/***********公用的样式***************/
+
+.mt15 {
+	/*距离上边距15px*/
+	margin-top: 15px;
+}
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
+a {
+	text-decoration: none;
+}
+
+li {
+	list-style: none;
+}
+
+
+/*去除按钮默认样式*/
+
+button {
+	border: 0;
+	background-color: transparent;
+	outline: none;
+}
+
+
+/*******导航部分*******/
+
+.home {
+	height: 100%
+}
+
+.navbar {
+	margin-bottom: 0;
+}
+
+.navbar-collapse.collapse li {
+	height: 60px;
+}
+
+.navbar-default {
+	background-color: #00255a;
+	color: #fff;
+	border: 0px;
+}
+
+.navLogo {
+	font-size: 18px;
+	height: 60px;
+	line-height: 60px;
+}
+
+.navLogo .img {
+	width: 180px;
+	height: 40px;
+	margin: -4px 15px 0px 15px;
+}
+
+.navLogo .img img {
+	width: 100%;
+	height: 100%;
+}
+
+.navLogo .img,
+.titleLogo {
+	float: left
+}
+/*导航向左移动菜单*/
+.leftSlider,.rightSlider{
+	width:20px;
+	height:20px;
+	margin: 20px 10px;
+	cursor: pointer;
+}
+.leftSlider{	
+	background: url('../images/leftSlider.png') no-repeat 100% 100%;
+}
+.rightSlider{
+	background: url('../images/rightSlider.png') no-repeat  100% 100% ;
+}
+/****导航右侧*****/
+
+.navbar-default .navbar-collapse,
+.navbar-default .navbar-form {
+	border-color: #e7e7e7;
+	float: right;
+}
+
+.navbar-default .navbar-nav>li>a {
+	/*主要的字体颜色，鼠标划过是白色*/
+	color: rgba(255, 255, 255, 0.7);
+	height: 60px;
+	line-height: 30px;
+}
+
+.navbar-default .navbar-nav>li>a:focus,
+.navbar-default .navbar-nav>li>a:hover {
+	color: #fff;
+	background-color: transparent;
+}
+
+.navbar-default .navbar-nav>.open>a,
+.navbar-default .navbar-nav>.open>a:focus,
+.navbar-default .navbar-nav>.open>a:hover {
+	color: #ffff;
+	background-color: #001e48;
+}
+
+
+/*****导航下拉框******/
+
+.dropdown-menu {
+	background-color: #00255a;
+}
+
+.dropdown-menu>li>a {
+	padding: 10px 20px;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.dropdown-menu>li>a:focus,
+.dropdown-menu>li>a:hover {
+	color: #fff;
+	text-decoration: none;
+	background-color: #001e48;
+}
+
+.open .dropdown-menu li {
+	height: 40px;
+}
+
+.noiceIcon,.noNoiceIcon{
+	width: 34px;
+	height: 34px;
+	margin-top: 4px;
+	cursor: pointer;
+}
+.noiceIcon{	
+	background: url('../images/noice.png') no-repeat 100% 100%;
+}
+.noNoiceIcon{
+	background: url('../images/noNoice.png') no-repeat 100% 100%;
+}
+.noNoiceIcon:hover{
+	background: url('../images/noNoiceHover.png') no-repeat 100% 100%;
+}
+.noiceIcon:hover {
+	background: url('../images/noiceHover.png') no-repeat 100% 100%;
+}
+
+
+/*******index页面左侧菜单 隐藏滚动条，依然有滚动条的效果******/
+
+.slidBox {
+	/*外部盒子*/
+	overflow: hidden;
+	float: left;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+
+/*内部的盒子*/
+
+.slidMenuHome {
+	width: 385px;
+	height: 100%;
+	background-color: #022961;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+
+/*清除浮动*/
+
+.clearfix:after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: ".";
+	clear: both;
+	height: 0;
+}
+
+* html .clearfix {
+	zoom: 1;
+}
+
+*:first-child+html .clearfix {
+	zoom: 1;
+}
+
+
+/****contentMain没有侧边栏的样式****/
+
+.contentMain {
+	background-color: #f8f8f8;
+}
+
+
+/*表格+搜索框*/
+
+.tableBody {
+	width: 100%;
+	box-sizing: border-box;
+	padding: 8px 16px;
+}
+
+.table_log {
+	width: 100%;
+	box-sizing: border-box;
+	background-color: #fff;
+	padding: 8px 16px;
+}
+
+.home {
+	background-color: #f8f8f8;
+}
+
+.tableTitle {
+	font-size: 16px;
+	line-height: 35px;
+}
+
+.table th,
+.table td {
+	text-align: center;
+	line-height: 30px;
+}
+
+.table th {
+	background-color: #e4e4f5;
+}
+
+.table tbody tr {
+	background-color: #fff;
+}
+
+.table td {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.table tbody tr:hover {
+	background-color: #f5f5fb;
+}
+
+.search {
+	padding: 8px 0;
+}
+
+.search button {
+	height: 32px;
+	padding: 5px 10px;
+	background-color: #;
+	background-color: #408eff;
+	color: #fff;
+	border-radius: 4px;
+}
+.nodataTable{
+	display: none;
+}
+.tableBody{
+	color:#666;
+}
+
+/*修改密码样式*/
+.color66{
+	color:#666;
+}
+.passWordModal {
+	display: table;
+	width: 380px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.modal-header {
+	padding: 15px;
+	border-bottom: 0px;
+	background-color: #409eff;
+	color: #fff;
+}
+
+.modal-dialog {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.modal-content {
+	border-radius: 4px;
+}
+
+.modal-footer {
+	padding: 10px 15px;
+	background-color: #f5f8fb;
+	text-align: right;
+	border-top: 0px;
+}
+
+.close:focus,
+.close:hover {
+	color: #e0dbdb;
+}
+
+.close {
+	text-shadow: 0 0 0 #e0dbdb;
+	color: #fff;
+}
+.btn {
+    border-radius: 4px !important;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #409eff;
+    border-color: #409eff;
+}
+.btn-primary.active,
+.btn-primary:active,
+.open>.dropdown-toggle.btn-primary {
+	color: #fff;
+	background-color: #409eff;
+	border-color: #409eff;
+}
+
+.btn-primary.active.focus,
+.btn-primary.active:focus,
+.btn-primary.active:hover,
+.btn-primary:active.focus,
+.btn-primary:active:focus,
+.btn-primary:active:hover,
+.open>.dropdown-toggle.btn-primary.focus,
+.open>.dropdown-toggle.btn-primary:focus,
+.open>.dropdown-toggle.btn-primary:hover {
+	color: #fff;
+	background-color: #62b6ff!important;
+	border-color: #62b6ff!important;
+}
+
+#newPassWorld,
+#oldPassWorld {
+	width: 282px;
+	height: 34px;
+	line-height: 40px;
+	margin: 10px 0 10px;
+	font-weight: 400;
+}
+.errorShow {
+	color: red;
+	font-size: 12px;
+	display: none;
+	margin-left: 60px;
+}
+
+@media (min-width: 768px) {
+	.navbar {
+		border-radius: 0px;
+	}
+}

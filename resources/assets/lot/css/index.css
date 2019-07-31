@@ -1,0 +1,363 @@
+/********左侧城市选择相关样式*******/
+
+.citySelect {
+	height: 40px;
+	position: relative;
+}
+
+
+/*echart*/
+
+#warningEchart {
+	display: none;
+}
+
+.titleBox {
+	margin: 15px;
+	width: 91%;
+	padding: 10px 0;
+	border: 1px solid rgba(255, 255, 255, 0.07);
+	border-radius: 4px;
+	cursor: default;
+}
+
+.title {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	position: relative;
+}
+
+.common {
+	line-height: 40px;
+	padding-left: 15px;
+	width: 95px;
+	text-align: center;
+	text-align: center;
+	cursor: pointer;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.tody {
+	cursor: default;
+}
+
+.tody,
+.all {
+	width: 60px;
+}
+
+.all a {
+	text-decoration: none;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.all a:hover,
+.tab1:hover,
+.tab2:hover {
+	color: #fff;
+}
+
+.bottomLine {
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	background-color: rgba(255, 255, 255, 0.07);
+	z-index: 1;
+	left: 0;
+	top: 38px;
+}
+
+.activeLine {
+	width: 90px;
+	position: absolute;
+	height: 2px;
+	background-color: #057df9;
+	z-index: 1;
+	left: 70px;
+	top: 38px;
+}
+
+
+/**********今日昨日数据比较*********/
+
+.number {
+	border: 1px solid rgba(255, 255, 255, 0.07);
+	border-radius: 4px;
+	margin: 15px;
+}
+
+.numberDataBox {
+	float: left;
+	width: 30%;
+	padding: 10px 20px;
+	text-align: center;
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.9);
+	width: 33%;
+}
+
+.dataNumber {
+	font-size: 18px;
+}
+
+.topIcon img {
+	width: 16px;
+	height: 16px;
+}
+
+.topNumber {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+
+/************项目列表************/
+
+.project,
+.citySelect {
+	margin: 15px;
+}
+
+.btnInput {
+	/*flex兼容性*/
+	display: -webkit-box;
+	/* Chrome 4+, Safari 3.1, iOS Safari 3.2+ */
+	display: -moz-box;
+	/* Firefox 17- */
+	display: -webkit-flex;
+	/* Chrome 21+, Safari 6.1+, iOS Safari 7+, Opera 15/16 */
+	display: -moz-flex;
+	/* Firefox 18+ */
+	display: -ms-flexbox;
+	/* IE 10 */
+	display: flex;
+	/* Chrome 29+, Firefox 22+, IE 11+, Opera 12.1/17/18, Android 4.4+ */
+	flex-direction: row;
+	-webkit-box-orient: horizontal;
+	/* 12版 */
+	-webkit-flex-direction: row;
+	-moz-flex-direction: row;
+	-ms-flex-direction: row;
+	-o-flex-direction: row;
+	flex-direction: row;
+}
+
+.project span,
+.citySelect .span {
+	width: 50px;
+}
+
+.fontColor {
+	color: rgba(255, 255, 255, 0.9);
+	font-size: 14px;
+	/*display: block;*/
+	line-height: 36px;
+	;
+}
+
+.projectList {
+	border: 1px solid rgba(255, 255, 255, 0.07);
+	margin-top: 15px;
+}
+
+.projectList li {
+	list-style: none;
+	line-height: 36px;
+	display: flex;
+	flex-direction: row;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.projectList li a {
+	display: flex;
+	flex-direction: row;
+	text-decoration: none;
+	width: 100%;
+}
+
+.flexDiv {
+	color: rgba(255, 255, 255, 0.9);
+	margin-right: 10px;
+}
+
+.infoNumber {
+	background-color: #f56c6c;
+	border-radius: 10px;
+	color: #fff;
+	display: inline-block;
+	font-size: 12px;
+	height: 18px;
+	line-height: 15px;
+	padding: 0 6px;
+	text-align: center;
+	white-space: nowrap;
+	margin-top: 10px;
+}
+
+.pl10 {
+	padding-left: 10px;
+}
+
+
+/**************************右侧地图相关***********************/
+
+.mapContainer {
+	float: left;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.amap-icon img,
+.amap-marker-content img {
+	width: 30px;
+	height: 34px;
+}
+
+.marker {
+	position: absolute;
+	top: -20px;
+	right: -118px;
+	color: #fff;
+	padding: 4px 10px;
+	box-shadow: 1px 1px 1px rgba(10, 10, 10, .2);
+	white-space: nowrap;
+	font-size: 12px;
+	font-family: "";
+	background-color: #25A5F7;
+	border-radius: 3px;
+}
+
+
+/******地图上的数据展示******/
+
+.mapContainer {
+	position: relative
+}
+
+.numberBox {
+	float: left;
+	width: 25%;
+}
+
+.positionNumber {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+	width: 324px;
+	min-height: 68px;
+	padding: 10px 20px;
+	text-align: center;
+	font-size: 14px;
+	background-color: rgba(0, 0, 0, 0.4);
+	border: 1px solid rgba(255, 255, 255, 0.07);
+	border-radius: 4px;
+	color: rgba(255, 255, 255, 0.9);
+}
+
+.numberData {
+	margin-bottom: 10px;
+	font-size: 24px;
+}
+
+/*修改密码部分*/
+
+.oldPassWord,
+.newPassWord {
+	height: 40px;
+	line-height: 40px;
+}
+
+.oldPassWord {
+	margin-bottom: 15px;
+}
+
+.mainFontColor {
+	position: relative;
+}
+
+.btnInput,
+.projectNameInput {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	height: 35px;
+	font-size: 14px;
+	color: rgba(255, 255, 255, 0.9);
+	background: #022961;
+	border-radius: 2px;
+	position: absolute;
+	right: 0;
+	outline: 0;
+	border: 1px solid #14386c;
+}
+
+.btnInput {
+	top: 54px;
+	width: 282px;
+	text-align: center;
+	cursor: pointer;
+}
+
+.projectNameInput {
+	top: 0px;
+	width: 285px;
+	padding-left: 10px;
+}
+
+form {
+	padding: 5px 0;
+}
+
+label {
+	margin-bottom: 0;
+}
+
+#newPassWorld,
+#oldPassWorld {
+	width: 282px;
+	height: 34px;
+	line-height: 40px;
+	margin: 10px 0 10px;
+	font-weight: 400;
+}
+
+input[type=search]::-webkit-input-placeholder {
+	color: rgba(255, 255, 255, 0.9);
+}
+
+#inputExport::-webkit-input-placeholder {
+	color: rgba(255, 255, 255, 0.9);
+}
+#inputExport{
+	cursor: pointer;
+    position: absolute;
+    top: 0px;
+    width: 72px;
+    left: 7px;
+    border-bottom: 60px solid rgba(226, 226, 226, 0);
+}
+input[type=button],
+input[type=search] {
+	cursor: pointer;
+}
+
+input[type=button]:hover,
+input[type=search]:hover {
+	border-color: #8391a5;
+}
+
+input[type=button]:focus,
+input[type=search]:focus {
+	border-color: #20a0ff;
+}
+
+
+@media (min-width: 768px) {
+	.navbar {
+		border-radius: 0px;
+	}
+	.modal-dialog {
+		width: 380px;
+		margin: 30px auto;
+	}
+}

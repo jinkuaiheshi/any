@@ -67,10 +67,12 @@ class TerminalController extends CommonController
             curl_close($ch);
 
            $terminal = json_decode($data)->data;
+            $sum = count(json_decode($data)->data);
+
 
         }
 
-
+        //return view('admin/lot_index')->with('data',$terminal)->with('sum',$sum)->with('mac',Mac::count());
         return view('admin/terminal_mandun')->with('data',$terminal);
     }
     public function duilie(){
@@ -85,15 +87,12 @@ class TerminalController extends CommonController
                 $queue = $client->getQueueRef($queueName);
 
                 $receiptHandle = NULL;
-
-
                     $res = $queue->receiveMessage(10);
 
                     if ($res->getMessageBodyMD5())
                     {
 
                         $data  =  $res->getMessageBody();
-
                         $topic_power = '/'.$value->ProductKey.'/'.$value->DeviceName.'/user/power';
                         $topic_leakage = '/'.$value->ProductKey.'/'.$value->DeviceName.'/user/leakage';
                         $topic_temp = '/'.$value->ProductKey.'/'.$value->DeviceName.'/user/temp';

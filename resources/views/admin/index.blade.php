@@ -143,16 +143,18 @@
         <div class="col-md-3">
             <div class="modal static-modal custom-modal-1">
                 <div class="modal-dialog">
+                    <a href="{{url('/admin/smoke')}}">
                     <div class="modal-content">
                         <div class="cm-img img-cover" style="background-image: url(img/photos-1/5.jpg);">
                             <div class="gradient gradient-purple"></div>
                             <div class="cm-content">
-                                <div class="cm-title">智慧用电</div>
-                                <div class="cm-text">Smart electricity consumption</div>
+                                <div class="cm-title">智能烟感</div>
+                                <div class="cm-text">Smart Smoke Sense</div>
                             </div>
                         </div>
 
                     </div>
+                    </a>
                 </div>
             </div>
         </div>

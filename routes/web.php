@@ -31,7 +31,15 @@ Route::group(['middleware'=>['web','Admin']],function() {
     Route::get('/admin/jingbaoRun','Admin\SysController@jingbaoRun');
 
 
+    Route::get('/admin/lot','Admin\TerminalController@lot');//曼顿末端
+    Route::get('/admin/map','Admin\TerminalController@map');//曼顿末端
 
+
+
+    Route::get('/admin/smoke','Admin\SmokeController@index');//赛特维尔烟感
+    Route::get('/admin/smoke/dianliang','Admin\SmokeController@dianliang');//赛特维尔烟感
+    Route::get('/admin/smoke/yanwu','Admin\SmokeController@yanwu');//赛特维尔烟感
+    Route::get('/admin/smoke/nongdu','Admin\SmokeController@nongdu');//赛特维尔烟感
 
 
     //运营中心

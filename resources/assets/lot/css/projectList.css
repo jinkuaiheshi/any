@@ -1,0 +1,404 @@
+.infoNumber {
+	background-color: #f56c6c;
+	border-radius: 10px;
+	color: #fff;
+	display: inline-block;
+	font-size: 12px;
+	height: 8px;
+	padding: 0 4px;
+	text-align: center;
+	white-space: nowrap;
+	margin-top: 10px;
+	position: absolute;
+	top: 7px;
+	left: 45px;
+}
+
+.topNav {
+	height: 60px;
+	line-height: 60px;
+	background: #251c6d;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 20;
+}
+
+.slidContain {
+	width: 220px;
+	height: 100%;
+	background-color: #022961;
+	transition: all .3s;
+	position: relative;
+	top: 60px;
+}
+
+
+/*侧边栏*/
+
+.slidContain {
+	width: 220px;
+	height: 100%;
+	background-color: #022961;
+	transition: all .3s;
+}
+
+.slidContain a {
+	display: block;
+	overflow: hidden;
+	padding-left: 20px;
+	line-height: 40px;
+	max-height: 40px;
+	color: rgba(255, 255, 255, 0.8);
+	text-decoration: none;
+	transition: all .3s;
+}
+
+.slidContain a span {
+	margin-left: 30px;
+}
+
+.nav-item {
+	position: relative;
+}
+
+.nav-item.nav-show {
+	border-bottom: none;
+}
+
+.nav-item ul {
+	display: none;
+	background: rgba(0, 0, 0, .1);
+}
+
+.nav-item:first-of-type ul {
+	display: block;
+}
+
+.nav-item.nav-show ul {
+	display: block;
+}
+
+.nav-item>a:before {
+	content: "";
+	position: absolute;
+	left: 0px;
+	width: 2px;
+	height: 40px;
+	background: #34A0CE;
+	opacity: 0;
+	transition: all .3s;
+}
+
+.slidContain .nav-icon {
+	font-size: 20px;
+	position: absolute;
+	margin-left: -1px;
+}
+
+
+/* 此处修改导航图标 可自定义iconfont 替换*/
+
+.icon_1::after {
+	content: "\e62b";
+}
+
+.icon_2::after {
+	content: "\e669";
+}
+
+.icon_3::after {
+	content: "\e61d";
+}
+
+
+/*---------------------*/
+
+.nav-more {
+	float: right;
+	margin-right: 20px;
+	font-size: 12px;
+	transition: transform .3s;
+}
+
+
+/* 此处为导航右侧箭头 如果自定义iconfont 也需要替换*/
+
+.nav-more::after {
+	content: "\e621";
+}
+
+
+/*---------------------*/
+
+.nav-show .nav-more {
+	transform: rotate(90deg);
+}
+
+.nav-item:first-of-type li:first-of-type a {
+	color: #FFF;
+	background: rgba(0, 0, 0, .1);
+}
+
+.nav-item:first-of-type li:first-of-type a.activeColor {
+	color: #FFF;
+	background: rgba(0, 0, 0, .1);
+}
+
+.nav-item:first-of-type li .activeColor {
+	color: #FFF;
+	background: rgba(0, 0, 0, .1);
+}
+
+.nav-show,
+.nav-item>a:hover {
+	color: #FFF;
+	/*background: rgba(0, 0, 0, .1);*/
+}
+
+.nav-show>a:before,
+.nav-item>a:hover:before {
+	opacity: 1;
+}
+
+.nav-item li:hover a {
+	color: #FFF;
+	/*background: rgba(0, 0, 0, .1);*/
+}
+
+
+/* nav-mini */
+
+.nav-mini.nav {
+	width: 60px;
+}
+
+.nav-mini.nav .nav-icon {
+	/* margin-left:-2px; */
+}
+
+.nav-mini.nav .nav-item>a span {
+	display: none;
+}
+
+.nav-mini.nav .nav-more {
+	margin-right: -20px;
+}
+
+.nav-mini.nav .nav-item ul {
+	position: absolute;
+	top: 0px;
+	left: 60px;
+	width: 180px;
+	z-index: 99;
+	background: #3C474C;
+	overflow: hidden;
+}
+
+.nav-mini.nav .nav-item:hover {
+	background: rgba(255, 255, 255, .1);
+}
+
+.nav-mini.nav .nav-item:hover .nav-item a {
+	color: #FFF;
+}
+
+.nav-mini.nav .nav-item:hover a:before {
+	opacity: 1;
+}
+
+.nav-mini.nav .nav-item:hover ul {
+	display: block;
+}
+
+.navbar {
+	border-radius: 0px;
+}
+
+
+/*列表内容*/
+
+.rightContentBox {
+	height: 479px;
+	height: 910px;
+	overflow-y: auto;
+}
+
+.listNav {
+	margin: 10px;
+	padding: 10px 20px;
+	min-height: 30px;
+	line-height: 30px;
+	border-bottom: 1px solid #eee;
+	background-color: #fff;
+}
+
+.listNav li a.whiteColor {
+	color: #7d7e80;
+	cursor: default;
+}
+
+.listNav li a.grayColor {
+	color: #b0bad5;
+}
+
+.list {
+	margin: 10px;
+	padding: 15px 20px 15px 15px;
+	background-color: #fff;
+}
+
+.marginBtm15 {
+	margin-bottom: 15px;
+}
+
+.rightBottomBox {
+	/*overflow: hidden;*/
+	height: 510px;
+	overflow-y: auto;
+}
+
+.bottomContent {
+	/*height:100%;*/
+}
+
+.slidContain,
+.rightContent {
+	float: left;
+}
+
+.rightContent {
+	margin-top: 60px;
+	height: 100%;
+	background-color: #f8f8f8;
+}
+
+.listTop {
+	position: relative;
+	font-size: 16px;
+}
+
+.line {
+	width: 4px;
+	height: 24px;
+	margin-right: 5px;
+	background-color: #409EFF;
+}
+
+.number {
+	background-color: #C4CCD7;
+	border-radius: 10px;
+	color: #fff;
+	display: inline-block;
+	font-size: 12px;
+	min-height: 22px;
+	padding: 2px 8px;
+	text-align: center;
+	white-space: nowrap;
+	margin-top: 10px;
+	position: absolute;
+	top: -8px;
+	left: 60px;
+}
+
+.listProject {
+	padding-left: 3.2%;
+}
+
+.listProject li {
+	width: 32%;
+	margin-right: 1%;
+	margin-top: 15px;
+	position: relative;
+	border: 1px solid #eee;
+	min-height: 150px;
+}
+
+.backImg {
+	width: 25px;
+	height: 20px;
+	display: inline-block;
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	background: url('../images/iconfont.png') no-repeat;
+}
+
+.backImg1 {
+	width: 16px;
+	height: 20px;
+	margin-top: 2px;
+	margin-right: 4px;
+	display: block;
+	background: url('../images/search.png') no-repeat;
+}
+
+.floor {
+	position: absolute;
+    top: 10px;
+    left: 40px;
+    font-size: 16px;
+    color: #5d5c5c;
+}
+
+.btnDetail {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	padding: 4px 6px;
+	line-height: 20px;
+	border: 1px solid #409EFF;
+	border-radius: 2px;
+}
+
+.btnDetail span {
+	display: block;
+	color: #5d5c5c;
+}
+
+.center {
+	width: 94px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -16px;
+	margin-left: -47px;
+}
+
+.center .img {
+	margin-right: 10px;
+}
+
+.centerTitle {
+	font-size: 20px;
+}
+
+.listProject .time {
+	position: absolute;
+	bottom: 20px;
+	left: 50%;
+	margin-left: -68px;
+    color: #666;
+}
+
+.redColor {
+	color: #FF0000;
+}
+
+.greenColor {
+	color: #00B83F;
+}
+
+@media (min-width: 768px) {
+	.navbar {
+		border-radius: 0px !important;
+	}
+}
+
+@media (max-width: 1500px) {
+	.rightContentBox {
+		height: 510px;
+		overflow-y: auto;
+	}
+}

@@ -75,6 +75,58 @@ class TerminalController extends CommonController
         //return view('admin/lot_index')->with('data',$terminal)->with('sum',$sum)->with('mac',Mac::count());
         return view('admin/terminal_mandun')->with('data',$terminal);
     }
+    public function lot(){
+        $islogin = session('islogin');
+
+
+        // $mns = new \CreateQueueAndSendMessage($accessId,$accessKey,$endPoint);
+        //dd($mns->run());
+        if($islogin->type == 1){
+
+
+            $token = $this->mandunToken();
+            $APP_SECRET = '7B814218CC2A3EED32BD571059D58B2B';
+            $accessToken = json_decode($token)->data->accessToken;
+
+
+            //session(['accessToken' => $accessToken]);
+            $method = 'GET_PROJECTS';
+            $client_id ='O000002093';
+            $timestamp = date('YmdHis',time());
+            //dd($accessToken,$method,$client_id,$timestamp);
+            $sign = md5($accessToken.$client_id.$method.$timestamp.$APP_SECRET);
+
+            $url = 'https://open.snd02.com/invoke/router.as';
+
+            $param  = ['client_id'=>$client_id,'method'=>$method,'access_token'=>$accessToken,'timestamp'=>$timestamp,'sign'=>$sign];
+            $o = "";
+            foreach ( $param as $k => $v )
+            {
+                $o.= "$k=" . urlencode( $v ). "&" ;
+            }
+            $param = substr($o,0,-1);
+
+            $ch = curl_init();//初始化curl
+            curl_setopt($ch, CURLOPT_URL,$url);//抓取指定网页
+            curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
+            curl_setopt($ch, CURLOPT_POST, 1);//post提交方式
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+            //https请求需要加上此行
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 对认证证书来源的检查
+            $data = curl_exec($ch);//运行curl
+            curl_close($ch);
+            $terminal = json_decode($data)->data;
+            $sum = count(json_decode($data)->data);
+
+        }
+
+        return view('admin/lot_index')->with('data',$terminal)->with('sum',$sum)->with('mac',Mac::count())->with('userinfo',$islogin);
+
+    }
+    public function map(){
+        return view('admin/lot_map')->with('mac',Mac::count());
+    }
     public function duilie(){
         $accessId = "LTAI32xr6egWoWsF";
         $accessKey = "YdY7ZvRZqEzxDPG62f7wm6uxmjFfzh";

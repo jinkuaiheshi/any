@@ -9,7 +9,6 @@
 		<style>
 			.dataLayout {
 				position: relative;
-			
 			}
 			
 			#pieChart {
@@ -29,7 +28,7 @@
 		</style>
 	</head>
 
-	<body style="width: 100%; height: auto;overflow: hidden; ">
+	<body>
 		<div class="dataLayout">
 			<div class="dataTextLogo">
 				智慧用电安全监管服务平台
@@ -145,22 +144,17 @@
 		<script>
 			window.onload = function() {
 				//获取盒子的宽高
-				//$('body').width($(window).width());
+				$('body').width($(window).width());
 				$('body').height($(window).height());
-
-				if(document.body.clientWidth < 1400) {
+				console.log(document.body.clientWidth);
+				if(document.body.clientWidth<1400){
 					var ratioX = document.body.offsetWidth / window.innerWidth;
 					var ratioY = 0.66;
 					var leftMap = 240;
 					$('.dataLayout').css("transform", "scale(" + ratioX + "," + ratioY + ")");
-				} else if(1401 < document.body.clientWidth < 1500) {
-					var ratioX = window.innerWidth / document.body.offsetWidth;
-					var ratioY = window.innerHeight / document.body.offsetHeight;
-					var leftMap = 420;
-					$('.dataLayout').css("transform", "scale(" + ratioX + "," + ratioY + ")");
-				} 
-					$('.dataLayout').css('height',$(window).height());
-
+				}else{
+					var leftMap = 380;
+				}
 				/*****************************************时间***********************************************/
 				/**
 				 * 时分秒数加0判断
@@ -479,10 +473,10 @@
 				// 使用制定的配置项和数据显示图表
 				mapBoxEchart.setOption(mapBoxOption);
 				mapBoxEchart.on('click', function(params) {
-					//					console.log(params);
-					if(params.seriesIndex) {
+//					console.log(params);
+					if(params.name) {
 						window.location.href = "./index.html";
-					} else {}
+					}
 				});
 				/**************************************************Echart图表相关*******************************************************/
 				var pieChart = echarts.init(document.getElementById('pieChart'));

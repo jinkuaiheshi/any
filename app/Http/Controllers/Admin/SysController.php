@@ -83,6 +83,7 @@ class SysController extends CommonController
                 $userType->status = 1;
                 $userType->created_time = date('Y-m-d H:i:s', time());
                 $userType->orderBy = 1;
+                
                 if($userType->save()){
                     return redirect(url()->previous())->with('message', '添加用户组成功')->with('type','success')->withInput();
                 }

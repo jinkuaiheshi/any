@@ -32,14 +32,21 @@
 <body style="width: 100%; height: auto;overflow: hidden; ">
 <div class="dataLayout">
     <div class="dataTextLogo">
-        <a href="" style="color: #fff;text-decoration: none;" >智慧用电安全监管服务平台</a>
+        <a href="{{url('admin/map')}}" style="color: #fff;text-decoration: none;" >智慧用电安全监管服务平台</a>
     </div>
     <div class="day">
         <span class="date" id="date"></span>
         <span class="time" id="time"></span>
     </div>
     <div class="currentUser">
-        当前登录用户：<span class="currentUserSpan">超级管理员</span>
+        当前登录用户：<span class="currentUserSpan">@if($userinfo->type == 1)
+                超级管理员
+        @elseif($userinfo->type == 2)
+        服务商
+         @else
+            企业
+                                                 @endif
+        </span>
     </div>
     <div class="dataTotal">
         <!--总接入企业和 总监控点-->
@@ -60,7 +67,7 @@
     <!--实时告警列表-->
     <div class="alarmList">
         <div class="box-title">实时告警列表
-            <a class="stopBtn" id="stopSound" href="javascript:;">关闭报警声音</a>
+            {{--<a class="stopBtn" id="stopSound" href="javascript:;">关闭报警声音</a>--}}
         </div>
         <table class="table" border="0" cellspacing="0" cellpadding="0">
             <thead>
@@ -322,14 +329,14 @@
             name: '南京',
             value: 14
         }, {
-            name: '六安',
+            name: '测试环境',
             value: 29
         }];
         // 散点坐标
         var geoCoordMap = {
             '宁波': [121.613715, 29.857638],
             '南京': [118.738044, 31.944317],
-            '六安': [116.512268, 31.74378]
+            '测试环境': [116.512268, 31.74378]
         };
         var convertData = function(data) { // 处理数据函数
             var res = [];

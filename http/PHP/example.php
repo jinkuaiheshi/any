@@ -35,8 +35,9 @@ $resolved_body = Util::resolveBody($raw_input);
  * At last, var $resolved_body is the data that is pushed
  */
 // Util::l($resolved_body);
-echo $resolved_body;
-file_put_contents('/http/http.log',$resolved_body);
+$basePath = dirname(__File__);
+ file_put_contents($basePath.'./http.log',$resolved_body);die;
+
 /**
  * *************************************
  * 一个简单的示例结束

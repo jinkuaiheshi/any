@@ -34,9 +34,9 @@ $resolved_body = Util::resolveBody($raw_input);
  * 最后得到的$resolved_body就是推送过后的数据
  * At last, var $resolved_body is the data that is pushed
  */
-$a = '2222';
+
 $basePath = dirname(__File__);
- file_put_contents($basePath.'./http.log',$a);
+ file_put_contents($basePath.'./http.log',$resolved_body);
 
 /**
  * *************************************

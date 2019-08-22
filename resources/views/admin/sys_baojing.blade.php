@@ -44,6 +44,7 @@
 
 
     </div>
+
     <div class="modal fade" id="info" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
         <div class="modal-dialog" role="document" style="max-width: 1200px;">
             <div class="modal-content">

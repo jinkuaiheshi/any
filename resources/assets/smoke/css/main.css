@@ -7,7 +7,6 @@ li {
 	padding: 0;
 }
 
-html,
 body {
 	height: 100% !important;
 	font-family: "微软雅黑";
@@ -54,7 +53,7 @@ button {
 
 .home {
 	height: 100%;
-    /*overflow: hidden;*/
+	/*overflow: hidden;*/
 }
 
 .navbar {
@@ -92,19 +91,24 @@ button {
 .titleLogo {
 	float: left
 }
+
 /*导航向左移动菜单*/
-.leftSlider,.rightSlider{
-	width:20px;
-	height:20px;
+.leftSlider,
+.rightSlider {
+	width: 20px;
+	height: 20px;
 	margin: 20px 10px;
 	cursor: pointer;
 }
-.leftSlider{	
+
+.leftSlider {
 	background: url('../images/leftSlider.png') no-repeat 100% 100%;
 }
-.rightSlider{
-	background: url('../images/rightSlider.png') no-repeat  100% 100% ;
+
+.rightSlider {
+	background: url('../images/rightSlider.png') no-repeat 100% 100%;
 }
+
 /****导航右侧*****/
 
 .navbar-default .navbar-collapse,
@@ -156,21 +160,26 @@ button {
 	height: 40px;
 }
 
-.noiceIcon,.noNoiceIcon{
+.noiceIcon,
+.noNoiceIcon {
 	width: 34px;
 	height: 34px;
 	margin-top: 4px;
 	cursor: pointer;
 }
-.noiceIcon{	
+
+.noiceIcon {
 	background: url('../images/noice.png') no-repeat 100% 100%;
 }
-.noNoiceIcon{
+
+.noNoiceIcon {
 	background: url('../images/noNoice.png') no-repeat 100% 100%;
 }
-.noNoiceIcon:hover{
+
+.noNoiceIcon:hover {
 	background: url('../images/noNoiceHover.png') no-repeat 100% 100%;
 }
+
 .noiceIcon:hover {
 	background: url('../images/noiceHover.png') no-repeat 100% 100%;
 }
@@ -256,13 +265,13 @@ button {
 	line-height: 30px;
 }
 
-.table th {
+/* .table th {
 	background-color: #e4e4f5;
 }
 
 .table tbody tr {
 	background-color: #fff;
-}
+} */
 
 .table td {
 	overflow: hidden;
@@ -281,21 +290,23 @@ button {
 .search button {
 	height: 32px;
 	padding: 5px 10px;
-	background-color: #;
+	background-color: #408eff;
 	background-color: #408eff;
 	color: #fff;
 	border-radius: 4px;
 }
-.nodataTable{
+
+.nodataTable {
 	display: none;
 }
-.tableBody{
-	color:#666;
+
+.tableBody {
+	color: #666;
 }
 
 /*修改密码样式*/
-.color66{
-	color:#666;
+.color66 {
+	color: #666;
 }
 
 .modal-header {
@@ -304,18 +315,22 @@ button {
 	background-color: #409eff;
 	color: #fff;
 }
+
 .modal-content {
 	border-radius: 4px;
 }
+
 .modal-body {
-    background-color: #fff5f5!important;
+	background-color: #fff5f5 !important;
 }
+
 .modal-footer {
 	padding: 10px 15px;
 	background-color: #f5f8fb;
 	text-align: right;
 	border-top: 0px;
 }
+
 .close:focus,
 .close:hover {
 	color: #e0dbdb;
@@ -325,20 +340,23 @@ button {
 	text-shadow: 0 0 0 #e0dbdb;
 	color: #fff;
 }
+
 .btn {
-    border-radius: 4px !important;
+	border-radius: 4px !important;
 }
+
 .btn-primary {
-    color: #fff!important;
-    background-color: #409eff!important;
-    border-color: #409eff!important;
+	color: #fff !important;
+	background-color: #409eff !important;
+	border-color: #409eff !important;
 }
+
 .btn-primary.active,
 .btn-primary:active,
 .open>.dropdown-toggle.btn-primary {
-	color: #fff!important;
-	background-color: #409eff!important;
-	border-color: #409eff!important;
+	color: #fff !important;
+	background-color: #409eff !important;
+	border-color: #409eff !important;
 }
 
 .btn-primary.active.focus,
@@ -350,9 +368,9 @@ button {
 .open>.dropdown-toggle.btn-primary.focus,
 .open>.dropdown-toggle.btn-primary:focus,
 .open>.dropdown-toggle.btn-primary:hover {
-	color: #fff!important;
-	background-color: #62b6ff!important;
-	border-color: #62b6ff!important;
+	color: #fff !important;
+	background-color: #62b6ff !important;
+	border-color: #62b6ff !important;
 }
 
 #newPassWorld,
@@ -363,6 +381,7 @@ button {
 	margin: 10px 0 10px;
 	font-weight: 400;
 }
+
 .errorShow {
 	color: red;
 	font-size: 12px;

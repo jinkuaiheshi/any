@@ -33,6 +33,7 @@
                         <td><a href="{{url('admin/smoke/dianliang')}}" ><button type="button" class="btn btn-purple w-min-xs  waves-effect waves-light"   >电量查询</button></a>
                             <a href="{{url('admin/smoke/yanwu')}}" ><button type="button" class="btn btn-warning w-min-xs  waves-effect waves-light "  >设备状态</button></a>
                             <a href="{{url('admin/smoke/nongdu')}}" ><button type="button" class="btn btn-warning w-min-xs  waves-effect waves-light "  >烟雾浓度</button></a>
+                            <a href="{{url('admin/smoke/mute')}}" ><button type="button" class="btn btn-danger w-min-xs  waves-effect waves-light "  >设备消音</button></a>
                         </td>
                     </tr>
                 @endforeach

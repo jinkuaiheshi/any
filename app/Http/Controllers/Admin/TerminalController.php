@@ -8,6 +8,7 @@ use App\Admin\Monitor;
 use App\Admin\Provider;
 use App\Admin\Province;
 use App\Admin\Terminal;
+use App\Admin\TerminalAlarmLog;
 use App\Admin\TerminalLeakage;
 use App\Admin\TerminalPower;
 use App\Admin\TerminalStatus;
@@ -16,6 +17,7 @@ use App\Admin\User;
 use App\Http\Controllers\CommonController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Session;
 use AliyunMNS\Client;
 use Psy\Util\Json;
@@ -68,12 +70,73 @@ class TerminalController extends CommonController
 
            $terminal = json_decode($data)->data;
             $sum = count(json_decode($data)->data);
+            //告警分类
 
 
         }
 
         //return view('admin/lot_index')->with('data',$terminal)->with('sum',$sum)->with('mac',Mac::count());
         return view('admin/terminal_mandun')->with('data',$terminal);
+    }
+    public function alarmLog(){
+
+        $mac = Mac::All();
+        foreach ($mac as $v){
+            $token = $this->mandunToken();
+            $APP_SECRET = '7B814218CC2A3EED32BD571059D58B2B';
+            $accessToken = json_decode($token)->data->accessToken;
+
+            $projectCode = 'P00000001204';
+            $method = 'GET_BOX_ALARM';
+            $client_id ='O000002093';
+            $timestamp = date('YmdHis',time());
+            $mac = $v->mac;
+            $start = date('Y-m-d 00:00',strtotime("-1 year -0 month -0 day"));
+            $end	 = date('Y-m-d 00:00',strtotime("-0 year -0 month -0 day"));
+
+            $pageSize = '9999';
+            $sign = md5($accessToken.$client_id.$end.$mac.$method.$pageSize.$projectCode.$start.$timestamp.$APP_SECRET);
+
+
+
+            $url = 'https://open.snd02.com/invoke/router.as';
+
+//       $param = ['client_id'=>$client_id,'method'=>$method,'access_token'=>$accessToken,'timestamp'=>$timestamp,'sign'=>$sign,'projectCode'=>$projectCode];
+            $param = ['client_id'=>$client_id,'method'=>$method,'access_token'=>$accessToken,'timestamp'=>$timestamp,'sign'=>$sign,'projectCode'=>$projectCode,'mac'=>$mac,'start'=>$start,'end'=>$end,'pageSize'=>9999];
+            $o = "";
+            foreach ( $param as $k => $vv )
+            {
+                $o.= "$k=" . urlencode( $vv ). "&" ;
+            }
+            $param = substr($o,0,-1);
+
+            $ch = curl_init();//初始化curl
+            curl_setopt($ch, CURLOPT_URL,$url);//抓取指定网页
+            curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
+            curl_setopt($ch, CURLOPT_POST, 1);//post提交方式
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+            //https请求需要加上此行
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 对认证证书来源的检查
+            $data = curl_exec($ch);//运行curl
+            curl_close($ch);
+            $info = json_decode($data)->data;
+
+            foreach ($info->datas as $value){
+
+                $terminalAlarmLog = new TerminalAlarmLog();
+                $terminalAlarmLog->auto_id = $value->auto_id;
+                $terminalAlarmLog->node = $value->node;
+                $terminalAlarmLog->type = $value->type;
+                $terminalAlarmLog->time = $value->time;
+                $terminalAlarmLog->typeNumber = $value->typeNumber;
+                $terminalAlarmLog->addr = $value->addr;
+                $terminalAlarmLog->info = $value->info;
+                $terminalAlarmLog->mac = $v->id;
+                $terminalAlarmLog->save();
+            }
+        }
+
     }
     public function lot(){
         $islogin = session('islogin');
@@ -119,9 +182,44 @@ class TerminalController extends CommonController
             $terminal = json_decode($data)->data;
             $sum = count(json_decode($data)->data);
 
+            $time = date('Y-m-d 00:00',strtotime("-0 year -3 month -0 day"));
+           // $alarmgroup = TerminalAlarmLog::select('typeNumber')->where('time','<=',$time)->groupBy('typeNumber')->get();
+
+            $alarmgroup = DB::table('terminal_alarm_log')
+                ->select('typeNumber', DB::raw('count(typeNumber) as nums'),'info')
+                ->where('time','>=',$time)
+                ->groupBy('typeNumber')
+                ->get();
+
+            $fenbu = array();
+            $fenbus = array();
+            $title = array();
+            foreach ($alarmgroup as $value ){
+                $fenbu['name'] = $value->info;
+                $fenbu['value'] = $value->nums;
+                $fenbus[] = $fenbu;
+                $title[] =$value->info;
+            }
+            //预警 报警分布
+            $yujing = TerminalAlarmLog::where('info','like','%预警')->where('time','>=',$time)->count();
+            $baojing = TerminalAlarmLog::where('info','like','%报警')->where('time','>=',$time)->count();
+            $alarmType = array($yujing,$baojing);
+
+            //最新5条报警
+            $newAlarm = TerminalAlarmLog::take(5)->orderBy('time','DESC')->get();
+
+            //企业接入
+
+
+
+        }elseif($islogin->type == 3){
+            $islogin = session('islogin');
+
+            $terminal = Mac::where('company_id',$islogin->id)->count();
+            $sum = 1;
         }
 
-        return view('admin/lot_index')->with('data',$terminal)->with('sum',$sum)->with('mac',Mac::count())->with('userinfo',$islogin);
+        return view('admin/lot_index')->with('data',$terminal)->with('sum',$sum)->with('mac',Mac::count())->with('userinfo',$islogin)->with('fenbus',json_encode($fenbus))->with('title',json_encode($title))->with('alarmType',json_encode($alarmType))->with('newAlarm',$newAlarm);
 
     }
     public function map(){
@@ -648,7 +746,7 @@ class TerminalController extends CommonController
         $pageSize = '9999';
         $sign = md5($accessToken.$client_id.$end.$mac.$method.$pageSize.$projectCode.$start.$timestamp.$APP_SECRET);
 
-
+        
 
         $url = 'https://open.snd02.com/invoke/router.as';
 

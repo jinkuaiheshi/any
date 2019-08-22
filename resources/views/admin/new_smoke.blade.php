@@ -1,67 +1,31 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="UTF-8">
-    <title>智慧用电安全监管服务平台</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <link rel="stylesheet" href="{{asset('resources/assets/lot/css/bigData.css')}}" />
-    <style>
-        .dataLayout {
-            position: relative;
-
-        }
-
-        #pieChart {
-            height: 218px;
-            width: 100%;
-        }
-
-        #barChart {
-            height: 204px;
-            width: 100%;
-        }
-
-        #lineChart {
-            height: 198px;
-            width: 100%;
-        }
-    </style>
-</head>
-
-<body style="width: 100%; height: auto;overflow: hidden; ">
+@extends('admin.somke_header')
+@section('content')
+<body>
 <div class="dataLayout">
-    <div class="dataTextLogo">
-        <a href="{{url('admin/map')}}" style="color: #fff;text-decoration: none;" >智慧用电安全监管服务平台</a>
-    </div>
+    <a href="{{url('/admin/new/map')}}" target="_block">
+        <div class="dataTextLogo">
+            烟感监督平台
+        </div>
+    </a>
     <div class="day">
-        <span class="date" id="date"></span>
-        <span class="time" id="time"></span>
+        <span class="date" id="date">2019年00月00日</span>
+        <span class="time" id="time">00 : 00 : 00</span>
     </div>
     <div class="currentUser">
-        当前登录用户：<span class="currentUserSpan">@if($userinfo->type == 1)
-                超级管理员
-        @elseif($userinfo->type == 2)
-        服务商
-         @else
-            企业
-                                                 @endif
-        </span>
+        当前登录用户：<span class="currentUserSpan">超级管理员</span>
     </div>
-    @if($userinfo->type == 1)
     <div class="dataTotal">
         <!--总接入企业和 总监控点-->
         <div class="demo-detail">
-            <span class="value" id="totalCompany"> {{$sum}} <small>家</small></span>
+            <span class="value" id="totalCompany"> {{$company}} <small>家</small></span>
             <span class="name"> 总接入企业 </span>
         </div>
         <hr class="row-hr" />
         <div class="demo-detail">
-            <span class="value" id="totalMonitor"> {{$mac}} <small>组</small></span>
-            <span class="name"> 总监控组 </span>
+            <span class="value" id="totalMonitor"> {{$data}} <small>个</small></span>
+            <span class="name"> 总监控点 </span>
         </div>
     </div>
-    @endif
     <!--地图-->
     <div class="dataMap">
         <div id="mapChart"></div>
@@ -69,9 +33,9 @@
     <!--实时告警列表-->
     <div class="alarmList">
         <div class="box-title">实时告警列表
-            {{--<a class="stopBtn" id="stopSound" href="javascript:;">关闭报警声音</a>--}}
+
         </div>
-        <table class="table" border="0" cellspacing="0" cellpadding="0">
+        <table class="table1" border="0" cellspacing="0" cellpadding="0">
             <thead>
             <tr style="background-color: #2456c7;">
                 <th>排序</th>
@@ -82,36 +46,59 @@
             </tr>
             </thead>
             <tbody id=" alarmList ">
-            @foreach( $newAlarm as $k=>$value)
             <tr class="color-red ">
-                <td><span class="badge " style="background-color: @if($k==0)
-                            #F43530
-                            @elseif($k==1)
-                            #ff8457
-                            @elseif($k==2)
-                            #ecb11c
-                            @elseif($k==3)
-                            #2458cd
-                            @elseif($k==4)
-                            #2458cd
-                            @endif; ">{{$k+1}}</span></td>
-                <td>{{$value->mac}}</td>
-                <td>{{$value->info}}</td>
-                <td>{{$value->node}}</td>
-                <td>{{$value->time}}</td>
+                <td><span class="badge " style="background-color: #F43530; ">1</span></td>
+                <td>风尚公寓</td>
+                <td>合肥市</td>
+                <td>2</td>
+                <td>07-24 22:24</td>
             </tr>
-            @endforeach
-
-
-
+            <tr class="color-red ">
+                <td><span class="badge " style="background-color: #ff8457; ">2</span></td>
+                <td>风尚公寓</td>
+                <td>合肥市</td>
+                <td>2</td>
+                <td>07-24 22:24</td>
+            </tr>
+            <tr class="color-red ">
+                <td><span class="badge " style="background-color: #ecb11c; ">3</span></td>
+                <td>风尚公寓</td>
+                <td>合肥市</td>
+                <td>2</td>
+                <td>07-24 22:24</td>
+            </tr>
+            <tr class="color-red ">
+                <td><span class="badge " style="background-color: #2458cd; ">4</span></td>
+                <td>风尚公寓</td>
+                <td>合肥市</td>
+                <td>2</td>
+                <td>07-24 22:24</td>
+            </tr>
+            <tr class="color-red ">
+                <td><span class="badge " style="background-color: #2458cd; ">5</span></td>
+                <td>风尚公寓</td>
+                <td>合肥市</td>
+                <td>2</td>
+                <td>07-24 22:24</td>
+            </tr>
             </tbody>
         </table>
     </div>
-
-    <div class="alarmType " style="top:100px; height: 328px;">
+    <div class="currentAlarm " style="display: flex ">
+        <div class="flex-item ">
+            <span class="value " id="alarmCompany " style="color:red "> 200 <small>家</small></span>
+            <span class="name "> 当前告警企业 </span>
+        </div>
+        <hr class="col-hr " />
+        <div class="flex-item ">
+            <span class="value " id="alarmOrg " style="color:red "> 10 <small>个</small></span>
+            <span class="name "> 当前告警监控点 </span>
+        </div>
+    </div>
+    <div class="alarmType ">
         <div class="box-title ">告警分类</div>
-        <div class="no-data " >暂无数据</div>
-        <div id="pieChart" style="height: 294px;"></div>
+        <div class="no-data ">暂无数据</div>
+        <div id="pieChart"></div>
     </div>
     <div class="breakWg ">
         <div class="box-title ">网关状态</div>
@@ -125,28 +112,21 @@
     </div>
 </div>
 
-<script src="{{asset('resources/assets/lot/js/jquery-3.4.1.min.js')}} "></script>{
-<script src="{{asset('resources/assets/lot/js/echarts.js')}} "></script>
-<script src="{{asset('resources/assets/lot/js/china.js')}}"></script>
-<script>
-    window.onload = function() {
-        //获取盒子的宽高
-        //$('body').width($(window).width());
-        $('body').height($(window).height());
 
-        if(document.body.clientWidth < 1400) {
+<script>
+    window.onload = function () {
+        //获取盒子的宽高
+        $('body').width($(window).width());
+        $('body').height($(window).height());
+        console.log(document.body.clientWidth);
+        if (document.body.clientWidth < 1400) {
             var ratioX = document.body.offsetWidth / window.innerWidth;
             var ratioY = 0.66;
             var leftMap = 240;
             $('.dataLayout').css("transform", "scale(" + ratioX + "," + ratioY + ")");
-        } else if(1401 < document.body.clientWidth < 1500) {
-            var ratioX = window.innerWidth / document.body.offsetWidth;
-            var ratioY = window.innerHeight / document.body.offsetHeight;
-            var leftMap = 420;
-            $('.dataLayout').css("transform", "scale(" + ratioX + "," + ratioY + ")");
+        } else {
+            var leftMap = 280;
         }
-        $('.dataLayout').css('height',$(window).height());
-
         /*****************************************时间***********************************************/
         /**
          * 时分秒数加0判断
@@ -169,7 +149,7 @@
             $('#time').html(zero(oHours) + " : " + zero(oMinute) + " : " + zero(oSecond));
             $('#date').html(oYear + "年" + zero(oMonth) + "月" + zero(oDay) + "日");
         }
-        setInterval(function() {
+        setInterval(function () {
             clock();
         }, 1000);
         /*****************************************地图***********************************************/
@@ -301,27 +281,20 @@
             },
         ];
         // 散点数据
-        var sanData = [{
-            name: '宁波',
-            value: 44
-        }, {
-            name: '南京',
-            value: 14
-        }, {
-            name: '测试环境',
-            value: 29
-        }];
+        var sanData = {!! $map1 !!};
         // 散点坐标
         var geoCoordMap = {
-            '宁波': [121.613715, 29.857638],
-            '南京': [118.738044, 31.944317],
-            '测试环境': [116.512268, 31.74378]
+            '宁波市': [121.638, 29.8846],
+            '无锡市': [120.34, 31.586],
+            '丽水市': [120.738044, 30.944317],
+            '慈溪市': [120.718044, 30.144317],
+
         };
-        var convertData = function(data) { // 处理数据函数
+        var convertData = function (data) { // 处理数据函数
             var res = [];
-            for(var i = 0; i < data.length; i++) {
+            for (var i = 0; i < data.length; i++) {
                 var geoCoord = geoCoordMap[data[i].name];
-                if(geoCoord) {
+                if (geoCoord) {
                     res.push({
                         name: data[i].name,
                         value: geoCoord.concat(data[i].value)
@@ -332,37 +305,37 @@
         };
         // 指定相关的配置项和数据
         var mapBoxOption = {
-            // visualMap: {
-            //     min: 0,
-            //     max: 20,
-            //     show: true,
-            //     text: ['接入用户多', '接入用户少'],
-            //     textGap: 20,
-            //     textStyle: {
-            //         color: '#fff',
-            //         fontSize: 14
-            //     },
-            //     seriesIndex: [0],
-            //     inRange: {
-            //         color: ['#f8dfa0', '#f2b600']
-            //     },
-            //     calculable: true,
-            //     left: 20
-            // },
+            visualMap: {
+                min: 0,
+                max: 20,
+                show: false,
+                text: ['接入用户多', '接入用户少'],
+                textGap: 20,
+                textStyle: {
+                    color: '#fff',
+                    fontSize: 14
+                },
+                seriesIndex: [0],
+                inRange: {
+                    color: ['#f8dfa0', '#f2b600']
+                },
+                calculable: true,
+                left: 20
+            },
             tooltip: {
                 trigger: 'item',
                 backgroundColor: 'rgba(1,113,195,0.9)',
-                formatter: function(params) {
+                formatter: function (params) {
                     var index = params.seriesIndex;
-                    if(index == 0) {
+                    if (index == 0) {
                         var value = params.value;
-                        if(value) {
-                            return params.name + '<br/>' + params.seriesName + ' : ' + value + '家';
+                        if (value) {
+                            return params.name + '<br/>' + params.seriesName + ' : ' + value ;
                         } else {
                             return '暂未接入企业';
                         }
                     } else {
-                        return params.name + '<br/>' + params.seriesName + ' : ' + params.value[2] + '家';
+                        return params.name + '<br/>' + params.seriesName + ' : ' + params.value[2] ;
                     }
                 }
             },
@@ -422,7 +395,7 @@
                     }
                 }
             }, {
-                name: '当前告警企业',
+                name: '安装烟感设备',
                 type: 'effectScatter',
                 coordinateSystem: 'geo',
                 data: convertData(sanData),
@@ -437,8 +410,8 @@
                 label: {
                     normal: {
                         show: true,
-                        formatter: function(item) {
-                            if(item.value[2] != 0) {
+                        formatter: function (item) {
+                            if (item.value[2] != 0) {
                                 return item.value[2];
                             } else {
                                 return '';
@@ -464,11 +437,11 @@
         };
         // 使用制定的配置项和数据显示图表
         mapBoxEchart.setOption(mapBoxOption);
-        mapBoxEchart.on('click', function(params) {
+        mapBoxEchart.on('click', function (params) {
             //					console.log(params);
-            if(params.seriesIndex) {
-                window.location.href = "./index.html";
-            } else {}
+            if (params.name) {
+                window.location.href = "./mapPage.html";
+            }
         });
         /**************************************************Echart图表相关*******************************************************/
         var pieChart = echarts.init(document.getElementById('pieChart'));
@@ -479,8 +452,10 @@
                 backgroundColor: 'rgba(1,113,195,0.9)'
             },
             legend: {
-                show: false,
-                data: {!! $title !!}  ,
+                show: true,
+                data: ['超烟告警'
+                    // , '漏电流告警', '过流告警'
+                ],
                 y: 'bottom',
                 bottom: 20,
                 padding: 15,
@@ -490,7 +465,9 @@
                     fontSize: 14
                 }
             },
-            color: ['#15628c', '#ffa82c', '#fe574f'],
+            color: ['#15628c'
+                // , '#ffa82c', '#fe574f'
+            ],
             series: [{
                 name: '',
                 type: 'pie',
@@ -513,9 +490,19 @@
                         }
                     }
                 },
-                data: {!! $fenbus !!}
-
-
+                data: [{
+                    name: '超温告警',
+                    value: 50
+                },
+                    // {
+                    // 	name: '漏电流告警',
+                    // 	value: 20
+                    // },
+                    // {
+                    // 	name: '过流告警',
+                    // 	value: 10
+                    // }
+                ]
             }]
         };
         pieChart.setOption(pieOption);
@@ -532,7 +519,7 @@
             },
             yAxis: [{
                 type: 'category',
-                data: ['预警', '告警'],
+                data: ['通讯正常', '通讯异常'],
                 axisTick: {
                     alignWithLabel: true
                 },
@@ -564,7 +551,7 @@
                 name: '故障网关总数和分类',
                 type: 'bar',
                 barWidth: '60%',
-                data: {!! $alarmType !!} ,
+                data: [23, 45],
                 label: {
                     normal: {
                         show: true,
@@ -654,11 +641,19 @@
                 type: 'bar',
                 barMaxWidth: 30,
                 data: [12, 21, 23, 31, 14, 25, 24.18, 29, 10, 15, 16, 18]
-            }
+            },
+                {
+                    name: '接入网关数',
+                    type: 'line',
+                    smooth: true,
+                    symbol: 'circle',
+                    symbolSize: 10,
+                    data: [22, 21, 33, 21, 10, 21, 14.28, 19, 6, 12, 11, 21]
+                }
             ]
         };
         lineChart.setOption(lineOption);
-        window.addEventListener("resize", function() {
+        window.addEventListener("resize", function () {
             mapBoxEchart.resize();
             barChart.resize();
             pieChart.resize();
@@ -669,3 +664,4 @@
 </body>
 
 </html>
+@stop

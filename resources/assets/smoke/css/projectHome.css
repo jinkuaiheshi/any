@@ -1,0 +1,620 @@
+.infoNumber {
+	background-color: #f56c6c;
+	border-radius: 10px;
+	color: #fff;
+	display: inline-block;
+	font-size: 12px;
+	height: 8px;
+	padding: 0 4px;
+	text-align: center;
+	white-space: nowrap;
+	margin-top: 10px;
+	position: absolute;
+	top: 7px;
+	left: 45px;
+}
+
+.topNav {
+	height: 60px;
+	line-height: 60px;
+	/* background: #251c6d; */
+	background-color: #1C86EE;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 20;
+}
+
+/*侧边栏*/
+
+.slidContain {
+	width: 11%;
+	height: 100%;
+	margin-top: 60px;
+	background-color: #022961;
+	position: fixed;
+	top: 0px;
+}
+
+.slidContain a {
+	display: block;
+	overflow: hidden;
+	padding-left: 20px;
+	line-height: 40px;
+	max-height: 40px;
+	color: rgba(255, 255, 255, 0.8);
+	text-decoration: none;
+}
+
+.slidContain a span {
+	margin-left: 30px;
+}
+
+.nav-item {
+	position: relative;
+}
+
+.nav-item.nav-show {
+	border-bottom: none;
+}
+
+.nav-item ul {
+	display: none;
+	background: rgba(0, 0, 0, .1);
+}
+
+.nav-item.nav-show ul {
+	display: block;
+}
+
+.nav-item>a:before {
+	content: "";
+	position: absolute;
+	left: 0px;
+	width: 2px;
+	height: 40px;
+	background: #34A0CE;
+	opacity: 0;
+}
+
+.slidContain .nav-icon {
+	font-size: 20px;
+	position: absolute;
+	margin-left: -1px;
+}
+
+/* 此处修改导航图标 可自定义iconfont 替换*/
+
+.icon_1::after {
+	content: "\e62b";
+}
+
+.icon_2::after {
+	content: "\e669";
+}
+
+.icon_3::after {
+	content: "\e61d";
+}
+
+/*---------------------*/
+
+.nav-more {
+	float: right;
+	margin-right: 20px;
+	font-size: 12px;
+	transition: transform .3s;
+}
+
+/* 此处为导航右侧箭头 如果自定义iconfont 也需要替换*/
+
+.nav-more::after {
+	content: "\e621";
+}
+
+/*---------------------*/
+
+.nav-show .nav-more {
+	transform: rotate(90deg);
+}
+
+
+.nav-show,
+.nav-item>a:hover {
+	color: #FFF;
+	background: rgba(0, 0, 0, .1);
+}
+
+.nav-show>a:before,
+.nav-item>a:hover:before {
+	opacity: 1;
+}
+
+.nav-item li:hover a {
+	color: #FFF;
+	background: rgba(0, 0, 0, .1);
+}
+
+/* nav-mini */
+
+.nav-mini.nav {
+	width: 60px;
+}
+
+/* .nav-mini.nav .nav-icon {
+	margin-left:-2px;
+} */
+
+.nav-mini.nav .nav-item>a span {
+	display: none;
+}
+
+.nav-mini.nav .nav-more {
+	margin-right: -20px;
+}
+
+.nav-mini.nav .nav-item ul {
+	position: absolute;
+	top: 0px;
+	left: 60px;
+	width: 180px;
+	z-index: 99;
+	background: #3C474C;
+	overflow: hidden;
+}
+
+.nav-mini.nav .nav-item:hover {
+	background: rgba(255, 255, 255, .1);
+}
+
+.nav-mini.nav .nav-item:hover .nav-item a {
+	color: #FFF;
+}
+
+.nav-mini.nav .nav-item:hover a:before {
+	opacity: 1;
+}
+
+.nav-mini.nav .nav-item:hover ul {
+	display: block;
+}
+
+.navbar {
+	border-radius: 0px;
+}
+
+/********下半部分内容**********/
+/*.rightBottom{
+		overflow: hidden;
+	}*/
+
+.rightBottomBox {
+	/*overflow: hidden;*/
+	/*height: 479px;*/
+	height: 760px;
+	/* overflow-y: auto; */
+}
+
+.bottomContent {
+	height: 100%;
+}
+
+.slidContain,
+.rightContent1,
+.rightNav,
+.btnExport,
+.radioBox,
+.inputLayout,
+.spanTitle,
+.inputBox {
+	float: left;
+}
+
+.rightContent1 {
+	margin-top: 60px;
+	width: 89%;
+	height: 100%;
+	background-color: #f8f8f8;
+	position: inherit;
+	float: right;
+}
+
+.rightNav {
+	margin-top: 5px;
+}
+
+.rightNav li,
+.rightChartBox,
+.leftChartBox {
+	float: left;
+}
+
+.rightNav li a {
+	color: #666;
+	text-decoration: none;
+}
+
+.rightNav li a.active {
+	color: #409eff;
+}
+
+.rightSelect {
+	float: right;
+}
+
+.rightContentTop {
+	padding: 10px 20px;
+	min-height: 30px;
+	line-height: 30px;
+	border-bottom: 1px solid #eee;
+	background-color: #fff;
+}
+
+.rightNav li a.whiteColor {
+	color: #7d7e80;
+	cursor: default;
+}
+
+.grayColor {
+	color: #b0bad5;
+}
+
+/*右侧选择*/
+
+.rightSelect .btnExport {
+	padding: 3px 10px;
+	border-radius: 4px;
+	background-color: #409eff;
+	color: #fff;
+	cursor: pointer;
+	margin-right: 8px;
+}
+
+.richradio,
+.richcheckbox {
+	border: 1px solid #CCC;
+	color: #6b6363;
+	display: inline-block;
+	padding: 2px 15px 2px 15px;
+	text-align: center;
+	margin: 0px 2px;
+	font-size: 14px;
+	border-radius: 4px;
+	font-weight: 400;
+}
+
+.richradio:hover,
+.richcheckbox:hover {
+	cursor: pointer;
+}
+
+.lowIE {
+	position: absolute\9;
+	top: -999px\9;
+	left: -999px\9;
+}
+
+.otherBrowser {
+	display: none;
+}
+
+.IEChecked {
+	background-size: auto auto;
+	border: 1px solid #409eff;
+	background-size: 21px 21px;
+	color: #fff;
+	background-color: #409eff;
+	;
+}
+
+.otherBrowserChecked {
+	background-size: auto auto;
+	border: 1px solid #409eff;
+	background-size: 21px 21px;
+	color: #fff;
+	background-color: #409eff;
+}
+
+.inputLayout {
+	padding: 2px 0;
+	margin-left: 6px;
+}
+
+.inputLayout span {
+	color: '#666'
+}
+
+#inputMonth {
+	display: none;
+}
+
+/*echart*/
+
+.rightEchart {
+	margin: 10px 15px;
+}
+
+.rightEchartOne {
+	margin: 10px 15px;
+	background: #fff;
+	padding: 15px;
+	position: relative;
+}
+
+.rightChartBox,
+.leftChartBox {
+	height: 330px;
+	background-color: #fff;
+	border-radius: 4px;
+}
+
+.rightChartBox {
+	width: 49%;
+	margin-right: 1%;
+}
+
+#lineEchart1,
+#lineEchart2,
+#power1,
+#power2,
+#load1,
+#load2 {
+	margin: 15px;
+}
+
+/*全部告警echart tab切换*/
+
+#tit,
+#tit1 {
+	height: 30px;
+	border-bottom: 1px solid #eee;
+}
+
+#tit span,
+#tit1 span {
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	width: 115px;
+	font-size: 14px;
+	padding-left: 10px;
+	color: #666;
+	cursor: pointer;
+}
+
+#con li,
+#con1 li {
+	display: none;
+	height: 300px;
+}
+
+#tit span.select,
+#tit1 span.select1 {
+	color: #409eff;
+	border-bottom: 1px solid #409eff;
+}
+
+#con li.show,
+#con1 li.show1 {
+	display: block;
+}
+
+.leftChartBox {
+	width: 50%;
+}
+
+/*table*/
+
+.rightTable {
+	background-color: #fff;
+	margin: 0 15px 10px 15px;
+	padding-bottom: 10px;
+	/* overflow-y: auto; */
+	position: relative;
+}
+
+.tableBtn {
+	border: 1px solid #eee;
+	padding: 5px 10px;
+	border-radius: 4px;
+}
+
+.tableBtn1 {
+	color: #409EFF;
+}
+
+.tableBtn2 {
+	color: #F43530;
+}
+
+.margingTop10 {
+	margin-top: 10px;
+}
+
+.tableInput {
+	margin: 10px 18px;
+}
+
+.startDay {
+	margin-right: 15px;
+}
+
+.tableInputTitle {
+	height: 32.8px;
+	line-height: 32.8px;
+}
+
+.startDay,
+.endDay {
+	width: 160px;
+}
+
+.selectContent {
+	height: 40px;
+}
+
+.selectBox {
+	position: absolute;
+	top: 12px;
+	left: 434px;
+	width: 160px;
+}
+
+.selectBox1 {
+	left: 20px;
+}
+
+.selectBox2 {
+	left: 172px;
+}
+
+.selectBox3 {
+	left: 330px;
+	width: 218px;
+}
+
+.selectBtn {
+	position: absolute;
+	left: 605px;
+	top: 12px;
+	width: 60px;
+	text-align: center;
+	cursor: pointer;
+	border: 1px solid #ced4da;
+	padding: 5px 10px;
+	border-radius: 4px;
+}
+
+.selectBtn:hover {
+	border: 1px solid #409EFF;
+}
+
+.powerTitle {
+	position: absolute;
+	top: 15px;
+	left: 24px;
+	font-size: 18px;
+	color: #666;
+}
+
+.powerNumber {
+	margin-top: 70px;
+	width: 30%;
+	font-size: 18px;
+	float: left;
+}
+
+.powerNumber div {
+	margin-bottom: 20px;
+}
+
+.inputPower,
+.inputControl {
+	height: 32.8px;
+	line-height: 32.8px;
+	position: absolute;
+	top: 11px;
+	left: 552px;
+}
+
+.inputControl {
+	left: 295px;
+}
+
+.powerBtn {
+	left: 810px;
+}
+
+.controlBtn {
+	left: 478px;
+}
+
+.setBtn {
+	left: 545px;
+	width: 150px;
+}
+
+.currentPower {
+	color: #2EC7C9;
+}
+
+.lastPower {
+	color: #5AB1EF;
+}
+
+.comparePower {
+	color: #5AB1EF;
+	font-size: 16px;
+}
+
+.closeContorl {
+	color: red;
+}
+
+.contorlLine {
+	margin: 0 5px;
+}
+
+.mr15 {
+	margin-right: 15px;
+}
+
+.tabPower {
+	position: relative;
+	margin-top: 4px;
+}
+
+.tabPower li a {
+	color: #666;
+	text-decoration: none;
+}
+
+.tabPower li a.tabPowerActive {
+	color: #409EFF;
+}
+
+.tabPower li a:hover {
+	color: #7d7e80;
+}
+
+.tabPowerOneLine,
+.tabPowerTwoLine {
+	width: 110px;
+	height: 2px;
+	background-color: #409EFF;
+	position: absolute;
+	bottom: -11px;
+}
+
+.tabPowerOneLine {
+	left: -4px;
+}
+
+.tabPowerTwoLine {
+	left: 108px;
+}
+
+.rightBottomBox {
+	height: 480px
+}
+
+@media (min-width: 768px) {
+	.navbar {
+		border-radius: 0px !important;
+	}
+}
+
+@media (max-width: 1500px) {
+	.rightBottomBox {
+		height: 480px
+	}
+
+	.slidContain {
+		width: 18%;
+	}
+
+	.rightContent1 {
+		width: 82%;
+	}
+}

@@ -17,7 +17,8 @@
 .topNav {
 	height: 60px;
 	line-height: 60px;
-	background: #251c6d;
+	/* background: #251c6d; */
+	background-color: #1C86EE;
 	position: fixed;
 	width: 100%;
 	top: 0;
@@ -34,6 +35,8 @@
 	margin-top: 60px;
 	background-color: #022961;
 	transition: all .3s;
+	position: fixed;
+	top: 0px;
 }
 
 .slidContain a {
@@ -109,7 +112,6 @@
 	content: "\e61d";
 }
 
-
 /*---------------------*/
 
 .nav-more {
@@ -119,13 +121,11 @@
 	transition: transform .3s;
 }
 
-
 /* 此处为导航右侧箭头 如果自定义iconfont 也需要替换*/
 
 .nav-more::after {
 	content: "\e621";
 }
-
 
 /*---------------------*/
 
@@ -171,9 +171,9 @@
 	width: 60px;
 }
 
-.nav-mini.nav .nav-icon {
-	/* margin-left:-2px; */
-}
+/* .nav-mini.nav .nav-icon {
+	margin-left:-2px;
+} */
 
 .nav-mini.nav .nav-item>a span {
 	display: none;
@@ -219,8 +219,9 @@
 .rightContentBox {
 	height: 479px;
 	height: 910px;
-	overflow-y: auto;
+	/* overflow-y: auto; */
 	width: 89%;
+	float: right;
 }
 
 .listNav {
@@ -252,14 +253,14 @@
 }
 
 .rightBottomBox {
-	/*overflow: hidden;*/
+	/* overflow: hidden; */
 	height: 510px;
-	overflow-y: auto;
+	/* overflow-y: auto; */
 }
 
-.bottomContent {
-	/*height:100%;*/
-}
+/* .bottomContent {
+	height:100%;
+} */
 
 .slidContain,
 .rightContent {
@@ -271,6 +272,7 @@
 	height: 100%;
 	width: 100%;
 	background-color: #f8f8f8;
+	margin-left: 0px;
 }
 
 .listTop {
@@ -278,7 +280,7 @@
 	font-size: 16px;
 }
 
-.line {
+.Line {
 	width: 4px;
 	height: 24px;
 	margin-right: 5px;
@@ -310,7 +312,7 @@
 	margin-right: 1%;
 	margin-top: 15px;
 	position: relative;
-	border: 1px solid #eee;
+	border: 1px solid rgb(192, 192, 192);
 	min-height: 150px;
 }
 
@@ -399,12 +401,14 @@
 	.rightBottomBox {
 		height: 480px
 	}
+
 	.slidContain {
 		width: 18%;
 	}
+
 	.rightContentBox {
 		height: 510px;
 		width: 82%;
-		overflow-y: auto;
+		/* overflow-y: auto; */
 	}
 }

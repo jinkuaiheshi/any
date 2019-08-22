@@ -36,7 +36,7 @@ $resolved_body = Util::resolveBody($raw_input);
  */
 // Util::l($resolved_body);
 echo $resolved_body;
-
+file_put_contents('/http/http.log',$resolved_body);
 /**
  * *************************************
  * 一个简单的示例结束

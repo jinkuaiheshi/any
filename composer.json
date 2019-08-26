@@ -32,7 +32,8 @@
         "classmap": [
             "tests/TestCase.php", 
              "app/libs/api_sdk",
-              "app/libs/msg_sdk"
+              "app/libs/msg_sdk",
+              "app/libs/php_send"
 
 
          

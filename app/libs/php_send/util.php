@@ -2,19 +2,19 @@
 
 /**
  * 
- * @title OneNETÊý¾ÝÍÆËÍPHP SDK/OneNET Data Push PHP SDK
+ * @title OneNETï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½PHP SDK/OneNET Data Push PHP SDK
  * @author limao (limao777@126.com)
  * @date 2017
  */
 class Util
 {
 
-    public static $token = 'anyun';
+    public static $token = 'anyun123456';
 
     public static $encodekey = '';
 
     /**
-     * Ò»¸ö³¬ÇáÁ¿¼¶µÄÈÕÖ¾·½·¨£¬¸ø¿ª·¢Õßµ÷ÊÔÊ¹ÓÃ
+     * Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ßµï¿½ï¿½ï¿½Ê¹ï¿½ï¿½
      * A super-lightweight log method, for developers debugging
      * 
      * @param
@@ -29,7 +29,7 @@ class Util
     }
 
     /**
-     * ¼ì²éÏûÏ¢ÕªÒª
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ÕªÒª
      * Check the message digest
      */
     protected static function _checkSignature($body, $token)
@@ -44,7 +44,7 @@ class Util
     }
 
     /**
-     * ¼ì²éÏûÏ¢ÕªÒª£¬»ñÈ¡ÍÆËÍÊý¾Ý
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ÕªÒªï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      * Check the message digest and get the push data
      */
     protected static function _handleRuleMsg($body, $token)
@@ -59,9 +59,9 @@ class Util
     }
 
     /**
-     * ½âÃÜÏûÏ¢
+     * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
      * Decrypt the message
-     * encodeKeyÎªÆ½Ì¨ÎªÓÃ»§Éú³ÉµÄAESµÄBASE64±àÂë¸ñÊ½ÃØÔ¿
+     * encodeKeyÎªÆ½Ì¨Îªï¿½Ã»ï¿½ï¿½ï¿½ï¿½Éµï¿½AESï¿½ï¿½BASE64ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½Ô¿
      * EncodeKey is the user-generated AES's BASE64 encoding format secret key
      */
     protected static function _decryptMsg($body, $encodeKey)
@@ -75,9 +75,9 @@ class Util
     }
 
     /**
-     * bodyÎªhttpÇëÇóµÄbody²¿·Ö
+     * bodyÎªhttpï¿½ï¿½ï¿½ï¿½ï¿½bodyï¿½ï¿½ï¿½ï¿½
      * Body is the body part of the http request
-     * ´úÂë×Ô¶¯ÅÐ¶ÏÊÇ·ñÊÇ¼ÓÃÜÏûÏ¢ÒÔ¼°ÊÇ·ñÊÇµÚÒ»´ÎÑéÖ¤Ç©Ãû
+     * ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Ð¶ï¿½ï¿½Ç·ï¿½ï¿½Ç¼ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ô¼ï¿½ï¿½Ç·ï¿½ï¿½Çµï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ö¤Ç©ï¿½ï¿½
      * The code automatically determines whether the message is encrypted and whether it is the first time to verify the signature
      */
     public static function resolveBody($body)

@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/admin/smoke/http','Admin\SmokeController@http');//赛特维尔烟感
 Route::any('/admin/login','Admin\AdminController@login' );
 Route::get('/admin/logout','Admin\AdminController@logout' );
 
@@ -46,7 +47,7 @@ Route::group(['middleware'=>['web','Admin']],function() {
     Route::post('/admin/smoke/add','Admin\SmokeController@add');//赛特维尔烟感
 
     Route::get('/admin/new/smoke','Admin\SmokeController@smoke');//赛特维尔烟感
-    Route::get('/admin/smoke/http','Admin\SmokeController@http');//赛特维尔烟感
+
 
     //运营中心
     Route::get('/admin/operation/alarmlist','Admin\OperationController@alarmlist' );//报警详情

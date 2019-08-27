@@ -457,6 +457,7 @@ class SmokeController extends CommonController
 
 
         }
+        Util::l($resolved_body);
         echo $resolved_body;
     }
 }

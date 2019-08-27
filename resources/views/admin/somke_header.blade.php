@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{asset('resources/assets/smoke/css/animate.css')}}" />
     <link rel="stylesheet" href="{{asset('resources/assets/smoke/css/main.css')}}" />
     <link rel="stylesheet" href="{{asset('resources/assets/smoke/css/bigData.css')}}" />
+    <link rel="stylesheet" href="{{asset('resources/assets/smoke/css/zTreeStyle/zTreeStyle.css')}}" />
     <link rel="stylesheet" href="{{asset('resources/assets/smoke/css/projectHome.css')}}" />
     <link rel="stylesheet" href="{{asset('resources/assets/smoke/css/projectList.css')}}" />
     <link rel="stylesheet" href="{{asset('resources/assets/smoke/css/map.css')}}" />

@@ -45,8 +45,12 @@ Route::group(['middleware'=>['web','Admin']],function() {
     Route::get('/admin/smoke/nongdu/{cid}','Admin\SmokeController@nongdu');//赛特维尔烟感
     Route::get('/admin/smoke/mute/{cid}','Admin\SmokeController@mute');//赛特维尔烟感
     Route::post('/admin/smoke/add','Admin\SmokeController@add');//赛特维尔烟感
+    Route::get('/admin/smoke/alarmLog','Admin\SmokeController@alarmLog');//赛特维尔烟感
 
     Route::get('/admin/new/smoke','Admin\SmokeController@smoke');//赛特维尔烟感
+    Route::get('/admin/new/map','Admin\SmokeController@new_map');//赛特维尔烟感
+    Route::get('/admin/new/pro','Admin\SmokeController@new_pro');//赛特维尔烟感
+    Route::get('/admin/smoke/info/{cid}','Admin\SmokeController@info');//赛特维尔烟感
 
 
     //运营中心

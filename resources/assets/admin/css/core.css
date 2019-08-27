@@ -3368,7 +3368,7 @@ footer .f-title {
 
 /* Sign form */
 .sign-form {
-  padding-top: 100px;
+  padding-top: 130px;
 }
 
 .sign-form .box {
@@ -7549,9 +7549,10 @@ a.text-grey:focus .underline, a.text-grey:hover .underline {
 }
 
 .img-cover {
+  background: #171715 url("../img/bg11.jpg");
   -webkit-background-size: cover;
-  background-size: cover;
-  background-position: center center;
+  background-size: 75% 100%;
+  background-position: 60% center;
   background-repeat: no-repeat;
 }
 
@@ -9153,10 +9154,16 @@ a.text-grey:focus .underline, a.text-grey:hover .underline {
   right: 0px;
 }
 .bg-keji{
-  background: url("../img/keji.jpg") no-repeat;  background-size:cover;background-position: center center;
-
+  background: url("../img/keji.jpg") no-repeat;  
+  background-size:cover;
+  background-position: center center;
+  
   width: 100%;
   height: 100%;
+}
+
+.menban{
+
 }
 .color373a3c{
   color: #373a3c;

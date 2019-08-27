@@ -193,13 +193,14 @@ class TerminalController extends CommonController
 
             $fenbu = array();
             $fenbus = array();
-            $title = array();
+            $title = array( 1 =>'',);
             foreach ($alarmgroup as $value ){
                 $fenbu['name'] = $value->info;
                 $fenbu['value'] = $value->nums;
                 $fenbus[] = $fenbu;
-                $title[] =$value->info;
+
             }
+
             //预警 报警分布
             $yujing = TerminalAlarmLog::where('info','like','%预警')->where('time','>=',$time)->count();
             $baojing = TerminalAlarmLog::where('info','like','%报警')->where('time','>=',$time)->count();

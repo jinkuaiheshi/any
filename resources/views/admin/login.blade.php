@@ -26,15 +26,15 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="img-cover" style="background-color: #212330;">
+<body class="img-cover">
 
 <div class="container-fluid">
     <div class="sign-form">
         <div class="row">
-            <div class="col-md-4 offset-md-4 p-x-3">
+            <div class="col-md-4 offset-md-2 p-x-3">
                 <div class="box b-a-0">
                     <div class="p-a-2 text-xs-center">
-                        <h5>Welcome</h5>
+                        <h5>欢迎</h5>
                     </div>
                     @if(Session::has('message'))
                     <div class="alert alert-danger-outline alert-dismissible fade in m-l-1 m-r-1" role="alert">
@@ -61,8 +61,7 @@
                     </form>
 
                     <div class="p-a-2 text-xs-center text-muted">
-
-
+                        浙江安云智联信息科技有限公司
                     </div>
                 </div>
             </div>

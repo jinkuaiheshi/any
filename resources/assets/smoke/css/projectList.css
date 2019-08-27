@@ -18,7 +18,7 @@
 	height: 60px;
 	line-height: 60px;
 	/* background: #251c6d; */
-	background-color: #1C86EE;
+	background-color:#409EFF;
 	position: fixed;
 	width: 100%;
 	top: 0;
@@ -254,7 +254,7 @@
 
 .rightBottomBox {
 	/* overflow: hidden; */
-	height: 510px;
+	height: 100%;
 	/* overflow-y: auto; */
 }
 
@@ -359,7 +359,7 @@
 }
 
 .center {
-	width: 94px;
+	width: 100%;
 	position: absolute;
 	top: 50%;
 	left: 50%;

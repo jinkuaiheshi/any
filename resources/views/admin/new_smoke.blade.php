@@ -2,7 +2,7 @@
 @section('content')
 <body>
 <div class="dataLayout">
-    <a href="{{url('/admin/new/map')}}" target="_block">
+    <a href="{{url('/admin/new/pro')}}" target="_block">
         <div class="dataTextLogo">
             烟感监督平台
         </div>
@@ -40,61 +40,44 @@
             <tr style="background-color: #2456c7;">
                 <th>排序</th>
                 <th>告警企业名称</th>
-                <th>所在城市</th>
-                <th>隐患点个数</th>
+                <th>设备名称</th>
+                <th>告警类型</th>
                 <th>最新告警时间</th>
             </tr>
             </thead>
             <tbody id=" alarmList ">
-            <tr class="color-red ">
-                <td><span class="badge " style="background-color: #F43530; ">1</span></td>
-                <td>风尚公寓</td>
-                <td>合肥市</td>
-                <td>2</td>
-                <td>07-24 22:24</td>
-            </tr>
-            <tr class="color-red ">
-                <td><span class="badge " style="background-color: #ff8457; ">2</span></td>
-                <td>风尚公寓</td>
-                <td>合肥市</td>
-                <td>2</td>
-                <td>07-24 22:24</td>
-            </tr>
-            <tr class="color-red ">
-                <td><span class="badge " style="background-color: #ecb11c; ">3</span></td>
-                <td>风尚公寓</td>
-                <td>合肥市</td>
-                <td>2</td>
-                <td>07-24 22:24</td>
-            </tr>
-            <tr class="color-red ">
-                <td><span class="badge " style="background-color: #2458cd; ">4</span></td>
-                <td>风尚公寓</td>
-                <td>合肥市</td>
-                <td>2</td>
-                <td>07-24 22:24</td>
-            </tr>
-            <tr class="color-red ">
-                <td><span class="badge " style="background-color: #2458cd; ">5</span></td>
-                <td>风尚公寓</td>
-                <td>合肥市</td>
-                <td>2</td>
-                <td>07-24 22:24</td>
-            </tr>
+
+            @foreach( $newAlarm as $k=>$value)
+                <tr class="color-red ">
+                    <td><span class="badge " style="background-color: @if($k==0)
+                                #F43530
+                        @elseif($k==1)
+                                #ff8457
+                        @elseif($k==2)
+                                #ecb11c
+                        @elseif($k==3)
+                                #2458cd
+                        @elseif($k==4)
+                                #2458cd
+                        @endif; ">{{$k+1}}</span></td>
+                    <td>{{$value->Company->name}}</td>
+
+
+                    <td>{{$value->Smoke->name}}</td>
+                    <td>
+                    @if($value->status == 14)测试键在正常状态按下@endif
+                        @if($value->status == 1)烟雾报警@endif
+
+
+
+                       </td>
+                    <td>{{$value->time}}</td>
+                </tr>
+            @endforeach
             </tbody>
         </table>
     </div>
-    <div class="currentAlarm " style="display: flex ">
-        <div class="flex-item ">
-            <span class="value " id="alarmCompany " style="color:red "> 200 <small>家</small></span>
-            <span class="name "> 当前告警企业 </span>
-        </div>
-        <hr class="col-hr " />
-        <div class="flex-item ">
-            <span class="value " id="alarmOrg " style="color:red "> 10 <small>个</small></span>
-            <span class="name "> 当前告警监控点 </span>
-        </div>
-    </div>
+
     <div class="alarmType ">
         <div class="box-title ">告警分类</div>
         <div class="no-data ">暂无数据</div>
@@ -105,11 +88,7 @@
         <div class="no-data ">暂无数据</div>
         <div id="barChart"></div>
     </div>
-    <div class="accessNum ">
-        <div class="box-title ">用户接入</div>
-        <div class="no-data ">暂无数据</div>
-        <div id="lineChart"></div>
-    </div>
+
 </div>
 
 
@@ -287,7 +266,9 @@
             '宁波市': [121.638, 29.8846],
             '无锡市': [120.34, 31.586],
             '丽水市': [120.738044, 30.944317],
-            '慈溪市': [120.718044, 30.144317],
+            '慈溪市': [121.497, 30.1536],
+            '市辖区': [121.425, 31.2261],
+            '嘉兴市': [121.014, 30.6988],
 
         };
         var convertData = function (data) { // 处理数据函数
@@ -490,19 +471,7 @@
                         }
                     }
                 },
-                data: [{
-                    name: '超温告警',
-                    value: 50
-                },
-                    // {
-                    // 	name: '漏电流告警',
-                    // 	value: 20
-                    // },
-                    // {
-                    // 	name: '过流告警',
-                    // 	value: 10
-                    // }
-                ]
+                data: {!! $fenbus !!}
             }]
         };
         pieChart.setOption(pieOption);
@@ -519,7 +488,7 @@
             },
             yAxis: [{
                 type: 'category',
-                data: ['通讯正常', '通讯异常'],
+                data: ['正常通讯', '告警次数'],
                 axisTick: {
                     alignWithLabel: true
                 },
@@ -551,12 +520,12 @@
                 name: '故障网关总数和分类',
                 type: 'bar',
                 barWidth: '60%',
-                data: [23, 45],
+                data: {!! $alarmType !!} ,
                 label: {
                     normal: {
                         show: true,
                         position: 'right',
-                        formatter: '{c} 个',
+                        formatter: '{c} 次',
                         textStyle: {
                             color: '#fff',
                             fontSize: 16,

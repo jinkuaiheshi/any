@@ -2,7 +2,7 @@
 
 /**
  * 
- * @title OneNET数据推送PHP Demo/OneNET Data Push PHP Demo
+ * @title OneNET脢媒戮脻脥脝脣脥PHP Demo/OneNET Data Push PHP Demo
  * @author limao (limao777@126.com)
  * @date 2017
  */
@@ -13,32 +13,34 @@ require_once 'util.php';
 
 /**
  * *************************************
- * 一个简单的示例开始
+ * 脪禄赂枚录貌碌楼碌脛脢戮脌媒驴陋脢录
  * A simple example begins
  * *************************************
  */
 
 /**
- * 第一步需要获取HTTP body的数据
+ * 碌脷脪禄虏陆脨猫脪陋禄帽脠隆HTTP body碌脛脢媒戮脻
  * Step1, get the HTTP body's data
  */
 $raw_input = file_get_contents('php://input');
 
 /**
- * 第二步直接解析body，如果是第一次验证签名则raw_input为空，由resolveBody方法自动判断，依赖$_GET
+ * 碌脷露镁虏陆脰卤陆脫陆芒脦枚body拢卢脠莽鹿没脢脟碌脷脪禄麓脦脩茅脰陇脟漏脙没脭貌raw_input脦陋驴脮拢卢脫脡resolveBody路陆路篓脳脭露炉脜脨露脧拢卢脪脌脌碌$_GET
  * Step2, directly to resolve the body, if it is the first time to verify the signature, the raw_input is empty, by the resolveBody method to automatically determine, it's relied on $ _GET
  */
 $resolved_body = Util::resolveBody($raw_input);
 
 /**
- * 最后得到的$resolved_body就是推送过后的数据
+ * 脳卯潞贸碌脙碌陆碌脛$resolved_body戮脥脢脟脥脝脣脥鹿媒潞贸碌脛脢媒戮脻
  * At last, var $resolved_body is the data that is pushed
  */
 
  Util::l($resolved_body);
 
+ echo $resolved_body;
+
 /**
  * *************************************
- * 一个简单的示例结束
+ * 脪禄赂枚录貌碌楼碌脛脢戮脌媒陆谩脢酶
  * A simple example ends
  ***************************************/

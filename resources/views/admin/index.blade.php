@@ -65,7 +65,8 @@
 
 
 
-
+<!-- anyadmin
+123456 -->
 </head>
 <body class="large-sidebar fixed-sidebar fixed-header content-appear " >
 
@@ -73,7 +74,8 @@
     <script type="text/javascript" src="{{asset('resources/assets/admin/js/demo.js')}}"></script>
     <script type="text/javascript" src="{{asset('resources/assets/admin/js/forms-pickers.js')}}"></script>
 <div class="bg-keji">
-    <div class="row" style="width: 1400px; margin: 0 auto; padding-top: 10%;">
+<div class="menban" style="text-align: center;height:120px;line-height: 120px;font-size: 42px;font-weight: bold;color:#fff;position: relative;">智 慧 物 联 云 平 台</div>
+    <div class="row" style="width: 1400px; margin: 0 auto; padding-top: 5%;">
         <div class="col-md-3">
             <div class="modal static-modal custom-modal-1">
                 <div class="modal-dialog">

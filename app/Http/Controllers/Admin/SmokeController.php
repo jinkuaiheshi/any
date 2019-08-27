@@ -412,7 +412,7 @@ class SmokeController extends CommonController
             $smoke = Smoke::where('cid',$resolved_body['dev_id'])->first();
             $smokeLog = new  SmokeLog();
             $smokeLog->status = $resolved_body['value'];
-            $smokeLog->time = $resolved_body['at'];
+            $smokeLog->time = date('Y-m-d H:i:s',$resolved_body['at']);
             $smokeLog->cid = $resolved_body['dev_id'];
             $smokeLog->company_id = $smoke->company_id;
             $smokeLog->save();

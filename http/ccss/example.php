@@ -2,7 +2,7 @@
 
 /**
  * 
- * @title OneNETÊý¾ÝÍÆËÍPHP Demo/OneNET Data Push PHP Demo
+ * @title OneNETï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½PHP Demo/OneNET Data Push PHP Demo
  * @author limao (limao777@126.com)
  * @date 2017
  */
@@ -13,32 +13,32 @@ require_once 'util.php';
 
 /**
  * *************************************
- * Ò»¸ö¼òµ¥µÄÊ¾Àý¿ªÊ¼
+ * Ò»ï¿½ï¿½ï¿½òµ¥µï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Ê¼
  * A simple example begins
  * *************************************
  */
 
 /**
- * µÚÒ»²½ÐèÒª»ñÈ¡HTTP bodyµÄÊý¾Ý
+ * ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½È¡HTTP bodyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * Step1, get the HTTP body's data
  */
 $raw_input = file_get_contents('php://input');
 
 /**
- * µÚ¶þ²½Ö±½Ó½âÎöbody£¬Èç¹ûÊÇµÚÒ»´ÎÑéÖ¤Ç©ÃûÔòraw_inputÎª¿Õ£¬ÓÉresolveBody·½·¨×Ô¶¯ÅÐ¶Ï£¬ÒÀÀµ$_GET
+ * ï¿½Ú¶ï¿½ï¿½ï¿½Ö±ï¿½Ó½ï¿½ï¿½ï¿½bodyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ö¤Ç©ï¿½ï¿½ï¿½ï¿½raw_inputÎªï¿½Õ£ï¿½ï¿½ï¿½resolveBodyï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½Ð¶Ï£ï¿½ï¿½ï¿½ï¿½ï¿½$_GET
  * Step2, directly to resolve the body, if it is the first time to verify the signature, the raw_input is empty, by the resolveBody method to automatically determine, it's relied on $ _GET
  */
 $resolved_body = Util::resolveBody($raw_input);
 
 /**
- * ×îºóµÃµ½µÄ$resolved_body¾ÍÊÇÍÆËÍ¹ýºóµÄÊý¾Ý
+ * ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½$resolved_bodyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * At last, var $resolved_body is the data that is pushed
  */
-
- Util::l($resolved_body);
+echo $resolved_body;
+// Util::l($resolved_body);
 
 /**
  * *************************************
- * Ò»¸ö¼òµ¥µÄÊ¾Àý½áÊø
+ * Ò»ï¿½ï¿½ï¿½òµ¥µï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  * A simple example ends
  ***************************************/

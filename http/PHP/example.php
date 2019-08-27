@@ -35,7 +35,7 @@ $resolved_body = Util::resolveBody($raw_input);
  * At last, var $resolved_body is the data that is pushed
  */
 
- Util::l($resolved_body);
+ //Util::l($resolved_body);
 
  echo $resolved_body;
 

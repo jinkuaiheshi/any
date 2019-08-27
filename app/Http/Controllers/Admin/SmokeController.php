@@ -403,12 +403,7 @@ class SmokeController extends CommonController
     }
     public function tick(){
         $raw_input = file_get_contents('php://input');
-      //  $resolved_body = Util::resolveBody($raw_input);
-
-        if (is_array($resolved_body)){
-            $msg = 'Array|' . json_encode($resolved_body);
-        }
-
-        file_put_contents('/tmp/util_test', $msg . "\n", FILE_APPEND);
+        $resolved_body = Util::resolveBody($raw_input);
+        echo $resolved_body;
     }
 }

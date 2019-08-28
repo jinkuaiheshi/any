@@ -4888,8 +4888,12 @@ table.focus-on tbody tr.focused th, table.focus-on tbody tr.focused td {
   box-shadow:  0px 0px 30px #fff;
 }
 
-.static-modal:hover modal-content{
-  border: 0px;
+.modal-content{
+  border: none !important;
+}
+
+.gradient{
+  border-radius:3px;
 }
 
 /* =================================================================

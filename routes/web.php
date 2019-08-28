@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/admin/smoke/tick','Admin\SmokeController@tick');//赛特维尔烟感
+Route::any('/admin/smoke/tick','Admin\SmokeController@tick');//赛特维尔烟感
 Route::any('/admin/login','Admin\AdminController@login' );
 Route::get('/admin/logout','Admin\AdminController@logout' );
 

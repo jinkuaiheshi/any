@@ -26,7 +26,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body class="img-cover">
+<body class="img-cover login_bg">
 
 <div class="container-fluid">
     <div class="sign-form">

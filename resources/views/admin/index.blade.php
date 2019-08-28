@@ -86,13 +86,13 @@
                             <input type="hidden" name="pwd" value="{{$info->password}}">
                             <input type="hidden" name="type" value="9">
 
-                        <div class="modal-content" style="position: relative">
+                        <div class="modal-content" style="position: relative;">
 
                             <button style="position: absolute;width: 100%; height: 100%;z-index: 999;opacity: 0;" type="submit" >
 
                             </button>
 
-                            <div class="cm-img img-cover">
+                            <div class="cm-img img-cover" style="background-image: url(img/photos-1/5.jpg);">
                                 <div class="gradient gradient-danger"></div>
                                 <div class="cm-content">
                                     <div class="cm-title">智慧用电</div>
@@ -111,7 +111,7 @@
                 <div class="modal-dialog">
                     <a href="{{url('/admin/terminal')}}">
                         <div class="modal-content">
-                            <div class="cm-img img-cover">
+                            <div class="cm-img img-cover" style="background-image: url(img/photos-1/5.jpg);">
                                 <div class="gradient gradient-success"></div>
                                 <div class="cm-content">
                                     <div class="cm-title">智慧末端</div>
@@ -147,7 +147,7 @@
                 <div class="modal-dialog">
                     <a href="{{url('/admin/new/smoke')}}">
                     <div class="modal-content">
-                        <div class="cm-img img-cover">
+                        <div class="cm-img img-cover" style="background-image: url(img/photos-1/5.jpg);">
                             <div class="gradient gradient-purple"></div>
                             <div class="cm-content">
                                 <div class="cm-title">智能烟感</div>
@@ -164,7 +164,7 @@
             <div class="modal static-modal custom-modal-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="cm-img img-cover">
+                        <div class="cm-img img-cover" style="background-image: url(img/photos-1/5.jpg);">
                             <div class="gradient gradient-primary"></div>
                             <div class="cm-content">
                                 <div class="cm-title">智慧用电</div>

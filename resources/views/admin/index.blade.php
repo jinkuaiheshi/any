@@ -77,7 +77,7 @@
 <div class="menban" style="text-align: center;height:120px;line-height: 120px;font-size: 42px;font-weight: bold;color:#fff;position: relative;">智 慧 物 联 云 平 台</div>
     <div class="row" style="width: 1400px; margin: 0 auto; padding-top: 5%;">
         <div class="col-md-3">
-            <div class="modal static-modal custom-modal-1">
+            <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">
                     {{--<a href="{{url('/admin/dashboard')}}">--}}
                     <form class="form-horizontal " method="post" enctype="multipart/form-data" action="{{url('http://dhy.anyzeal.cn/index.php/Portal/Login/Index/login')}}" name="login">
@@ -107,7 +107,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="modal static-modal custom-modal-1">
+            <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">
                     <a href="{{url('/admin/terminal')}}">
                         <div class="modal-content">
@@ -125,7 +125,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="modal static-modal custom-modal-1">
+            <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">
                     <a href="{{url('http://sec.anyzeal.cn/tcmr')}}">
                     <div class="modal-content">
@@ -143,7 +143,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="modal static-modal custom-modal-1">
+            <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">
                     <a href="{{url('/admin/new/smoke')}}">
                     <div class="modal-content">
@@ -161,7 +161,7 @@
             </div>
         </div>
         <div class="col-md-3" style="margin-top: 30px;">
-            <div class="modal static-modal custom-modal-1">
+            <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="cm-img img-cover" style="background-image: url(img/photos-1/5.jpg);">

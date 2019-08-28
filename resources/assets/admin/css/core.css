@@ -4884,7 +4884,7 @@ table.focus-on tbody tr.focused th, table.focus-on tbody tr.focused td {
   max-width: none;
 }
 
-.static-modal:hover {
+.modal_yy:hover {
   box-shadow:  0px 0px 10px #fff;
 }
 
@@ -7561,6 +7561,8 @@ a.text-grey:focus .underline, a.text-grey:hover .underline {
   background-size: 75% 100%;
   background-position: 60% center;
   background-repeat: no-repeat;
+  background: #000000;
+  opacity: 1;
 }
 
 .login_bg{

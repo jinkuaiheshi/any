@@ -407,12 +407,12 @@ class SmokeController extends CommonController
         $raw_input = file_get_contents('php://input');
 
         $resolved_body = \Util::resolveBody($raw_input);
-       
+
         if($resolved_body['ds_id'] == '3200_0_5503'){
             $smoke = Smoke::where('cid',$resolved_body['dev_id'])->first();
             $smokeLog = new  SmokeLog();
             $smokeLog->status = $resolved_body['value'];
-            $smokeLog->time = date('Y-m-d H:i:s',$resolved_body['at']);
+            $smokeLog->time = date('Y-m-d H:i:s',substr($resolved_body['at'],0,10));
             $smokeLog->cid = $resolved_body['dev_id'];
             $smokeLog->company_id = $smoke->company_id;
             $smokeLog->save();
@@ -440,16 +440,16 @@ class SmokeController extends CommonController
                     $rule = '拆卸报警';
                 }
                 if($company->phone1){
-                     AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone1,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',$resolved_body['at']),'rule'=>$rule));
+                     AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone1,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',substr($resolved_body['at'],0,10)),'rule'=>$rule));
                 }
                 if($company->phone2){
-                    AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone2,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',$resolved_body['at']),'rule'=>$rule));
+                    AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone2,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',substr($resolved_body['at'],0,10)),'rule'=>$rule));
                 }
                 if($company->phone3){
-                    AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone3,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',$resolved_body['at']),'rule'=>$rule));
+                    AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone3,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',substr($resolved_body['at'],0,10)),'rule'=>$rule));
                 }
                 if($company->phone4){
-                    AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone4,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',$resolved_body['at']),'rule'=>$rule));
+                    AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone4,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',substr($resolved_body['at'],0,10)),'rule'=>$rule));
                 }
 
             }

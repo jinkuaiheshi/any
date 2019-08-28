@@ -409,9 +409,9 @@ class SmokeController extends CommonController
 
 
         $resolved_body = \Util::resolveBody($raw_input);
-        //Util::l($resolved_body);
-        echo $resolved_body;
 
+        echo $resolved_body;
+        \Util::l($resolved_body);die;
             file_put_contents('/tmp/util_test', 'Array|' . json_encode($resolved_body) . "\n", FILE_APPEND);die;
 
 

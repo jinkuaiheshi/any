@@ -12,7 +12,7 @@ use App\Service\AliSms;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-use Util;
+
 class SmokeController extends CommonController
 {
     //
@@ -405,7 +405,10 @@ class SmokeController extends CommonController
     public function tick(){
         $raw_input = file_get_contents('php://input');
 
-        $resolved_body = Util::resolveBody($raw_input);
+
+
+
+        $resolved_body = \Util::resolveBody($raw_input);
         //Util::l($resolved_body);
         echo $resolved_body;
 

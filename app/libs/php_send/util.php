@@ -23,9 +23,11 @@ class Util
     public static function l($msg)
     {
         // echo $msg . '<br /><br />';
-        if (is_array($msg))
+        if (is_array($msg)){
+            file_put_contents('/tmp/util_test', $msg . "\n", FILE_APPEND);
+        }
 
-        file_put_contents('/tmp/util_test', $msg . "\n", FILE_APPEND);
+
     }
 
     /**

@@ -92,7 +92,7 @@
 
                             </button>
 
-                            <div class="cm-img img-cover" style="background-image: url(img/photos-1/5.jpg);">
+                            <div class="cm-img img-cover">
                                 <div class="gradient gradient-danger"></div>
                                 <div class="cm-content">
                                     <div class="cm-title">智慧用电</div>
@@ -111,7 +111,7 @@
                 <div class="modal-dialog">
                     <a href="{{url('/admin/terminal')}}">
                         <div class="modal-content">
-                            <div class="cm-img img-cover" style="background-image: url(img/photos-1/5.jpg);">
+                            <div class="cm-img img-cover">
                                 <div class="gradient gradient-success"></div>
                                 <div class="cm-content">
                                     <div class="cm-title">智慧末端</div>
@@ -147,7 +147,7 @@
                 <div class="modal-dialog">
                     <a href="{{url('/admin/new/smoke')}}">
                     <div class="modal-content">
-                        <div class="cm-img img-cover" style="background-image: url(img/photos-1/5.jpg);">
+                        <div class="cm-img img-cover">
                             <div class="gradient gradient-purple"></div>
                             <div class="cm-content">
                                 <div class="cm-title">智能烟感</div>
@@ -164,7 +164,7 @@
             <div class="modal static-modal custom-modal-1">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <div class="cm-img img-cover" style="background-image: url(img/photos-1/5.jpg);">
+                        <div class="cm-img img-cover">
                             <div class="gradient gradient-primary"></div>
                             <div class="cm-content">
                                 <div class="cm-title">智慧用电</div>

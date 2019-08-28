@@ -4893,7 +4893,7 @@ table.focus-on tbody tr.focused th, table.focus-on tbody tr.focused td {
 }
 
 .gradient{
-  border-radius:3px;
+  border-radius:5px;
 }
 
 /* =================================================================
@@ -7566,6 +7566,7 @@ a.text-grey:focus .underline, a.text-grey:hover .underline {
   background-size: 75% 100%;
   background-position: 60% center;
   background-repeat: no-repeat;
+  border-radius:5px;
 }
 
 .img-fixed {

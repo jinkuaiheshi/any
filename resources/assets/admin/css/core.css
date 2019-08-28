@@ -4884,6 +4884,11 @@ table.focus-on tbody tr.focused th, table.focus-on tbody tr.focused td {
   max-width: none;
 }
 
+.static-modal:hover {
+  box-shadow:  0px 0px 30px #fff;
+  border: #fff;
+}
+
 /* =================================================================
   Bootstrap
 ================================================================= */

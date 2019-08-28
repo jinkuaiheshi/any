@@ -408,9 +408,11 @@ class SmokeController extends CommonController
         $resolved_body = Util::resolveBody($raw_input);
         //Util::l($resolved_body);
         echo $resolved_body;
-        if (is_array($resolved_body))
+        if (is_array($resolved_body)){
             $msg = 'Array|' . json_encode($resolved_body);
-        file_put_contents('/tmp/util_test', $msg . "\n", FILE_APPEND);
+            file_put_contents('/tmp/util_test', $msg . "\n", FILE_APPEND);
+        }
+
         //$resolved_body =  array('at' => 1566870544074, 'type' => 1, 'ds_id' => '3200_0_5503','value'=>14, 'dev_id' =>542743030 );
         if($resolved_body['ds_id'] == '3200_0_5503'){
             $smoke = Smoke::where('cid',$resolved_body['dev_id'])->first();

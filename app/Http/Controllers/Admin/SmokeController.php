@@ -406,8 +406,12 @@ class SmokeController extends CommonController
         $raw_input = file_get_contents('php://input');
         $resolved_body = \Util::resolveBody($raw_input);
         echo $resolved_body;
-        
-            file_put_contents('/tmp/util_test', 'Array|' . json_encode($raw_input) . "\n", FILE_APPEND);die;
+        if (is_array($resolved_body)){
+
+            $msg = 'Array|' . json_encode($resolved_body);
+            file_put_contents('/tmp/util_test', $msg . "\n", FILE_APPEND);
+        }
+        die;
 
 
         //$resolved_body =  array('at' => 1566870544074, 'type' => 1, 'ds_id' => '3200_0_5503','value'=>14, 'dev_id' =>542743030 );

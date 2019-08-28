@@ -4886,7 +4886,10 @@ table.focus-on tbody tr.focused th, table.focus-on tbody tr.focused td {
 
 .static-modal:hover {
   box-shadow:  0px 0px 30px #fff;
-  border: #fff;
+}
+
+.static-modal:hover modal-content{
+  border: 0px;
 }
 
 /* =================================================================

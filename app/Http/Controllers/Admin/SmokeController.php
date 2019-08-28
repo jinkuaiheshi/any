@@ -407,7 +407,7 @@ class SmokeController extends CommonController
         $resolved_body = \Util::resolveBody($raw_input);
         echo $resolved_body;
 
-        file_put_contents('/tmp/util_test', $raw_input . "\n".'raw'.'\n', FILE_APPEND);
+        file_put_contents('/tmp/util_test', $raw_input . "\n".'raw'."\n", FILE_APPEND);
         file_put_contents('/tmp/util_test', $resolved_body . "\n".'body'. "\n", FILE_APPEND);
         die;
 

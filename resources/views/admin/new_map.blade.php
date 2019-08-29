@@ -297,61 +297,8 @@
         }
     };
 
-    var zNodes = [{
-        id: 1,
-        pId: 0,
-        name: "宁波",
-        open: true,
-        checked: true
-    },
-        {
-            id: 111,
-            pId: 11,
-            name: "安云电海洋演示箱",
-            open: true,
-            checked: true,
-            url: 'http://www.baidu.com'
-            // children: [{
-            // 	name: '烟感',
-            // 	href: 'http://www.baidu.com'
-            // }]
-        }, {
-            id: 11,
-            pId: 1,
-            name: "鄞州区",
-            open: true,
-            checked: true
-        },
-        {
-            id: 112,
-            pId: 11,
-            name: "无锡江海街道办事处",
-            open: true,
-            checked: true,
-            url: 'http://www.baidu.com'
-        },
-        {
-            id: 2,
-            pId: 0,
-            name: "杭州",
-            open: false,
-            checked: true
-        }, {
-            id: 21,
-            pId: 11,
-            name: "平湖市当湖镇金沙碧浪沐浴休闲城",
-            open: true,
-            checked: true,
-            url: 'http://www.baidu.com'
-        }, {
-            id: 211,
-            pId: 11,
-            name: "光明便利店",
-            open: true,
-            checked: true,
-            url: 'http://www.baidu.com'
-        }
-    ];
+    var zNodes =  {!! $mapDate !!}
+    ;
     $(document).ready(function () {
         var tree = $.fn.zTree.init($("#tree"), setting, zNodes);
     });

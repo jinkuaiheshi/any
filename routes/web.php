@@ -51,6 +51,7 @@ Route::group(['middleware'=>['web','Admin']],function() {
     Route::get('/admin/new/map','Admin\SmokeController@new_map');//赛特维尔烟感
     Route::get('/admin/new/pro','Admin\SmokeController@new_pro');//赛特维尔烟感
     Route::get('/admin/smoke/info/{cid}','Admin\SmokeController@info');//赛特维尔烟感
+    Route::get('/admin/new/smoke/login/{company_id}','Admin\SmokeController@login');//赛特维尔烟感
 
 
     //运营中心

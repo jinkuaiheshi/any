@@ -1,8 +1,8 @@
 @extends('admin.somke_header')
 @section('content')
-<body>
+<body class="mapbody">
 <div class="dataLayout">
-    <a href="{{url('/admin/new/pro')}}" target="_block">
+    <a href="{{url('/admin/new/map')}}" target="_block">
         <div class="dataTextLogo">
             烟感监督平台
         </div>

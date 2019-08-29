@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Admin\AlarmLog;
+use App\Admin\Area;
 use App\Admin\City;
 use App\Admin\Company;
+use App\Admin\Province;
 use App\Admin\Smoke;
 use App\Admin\SmokeLog;
+use App\Admin\Street;
 use App\Http\Controllers\CommonController;
 use App\Service\AliSms;
 use Illuminate\Http\Request;
@@ -289,10 +292,116 @@ class SmokeController extends CommonController
                 $maps[] = $map;
 
             }
+            //地图json
+            $smoke = Smoke::groupby('company_id')->get();
+            $json = array();
+            $mapDate = array();
+            array_push($mapDate,array(
+                'id' => 0,
+                'pId' => -1,
+                'name' => '全国',
+                'open' => true,
+                'checked' => true
+            ));
+            foreach ($smoke as $v){
+                $company = Company::where('id',$v->company_id)->first();
+
+                if(!isset($json[$company->id])) {
+                    if (!isset($json[$company->province_code])) {
+                        $json[$company->province_code]['id'] = $company->province_code;
+                        $json[$company->province_code]['pId'] = 0;
+                        $province = Province::where('code', $company->province_code)->first();
+
+                        $json[$company->province_code]['name'] = $province->name;
+                        $json[$company->province_code]['open'] = false;
+                        $json[$company->province_code]['checked'] = true;
+                        $mapDate[] = $json[$company->province_code];
+                    }
+
+                    if (!isset($json[$company->city_code])) {
+                        $json[$company->city_code]['id'] = $company->city_code;
+                        $json[$company->city_code]['pId'] = $company->province_code;
+                        $city = City::where('code', $company->city_code)->first();
+
+                        $json[$company->city_code]['name'] = $city->name;
+                        $json[$company->city_code]['open'] = false;
+                        $json[$company->city_code]['checked'] = true;
+                        $mapDate[] = $json[$company->city_code];
+                    }
+                    if (!isset($json[$company->area_code])) {
+                        $json[$company->area_code]['id'] = $company->area_code;
+                        $json[$company->area_code]['pId'] = $company->city_code;
+                        $area = Area::where('code', $company->area_code)->first();
+
+                        $json[$company->area_code]['name'] = $area->name;
+                        $json[$company->area_code]['open'] = false;
+                        $json[$company->area_code]['checked'] = true;
+                        $mapDate[] = $json[$company->area_code];
+                    }
+                    if (!isset($json[$company->street_code])) {
+                        $json[$company->street_code]['id'] = $company->street_code;
+                        $json[$company->street_code]['pId'] = $company->area_code;
+                        $street = Street::where('code', $company->street_code)->first();
+
+                        $json[$company->street_code]['name'] = $street->name;
+                        $json[$company->street_code]['open'] = false;
+                        $json[$company->street_code]['checked'] = true;
+                        $mapDate[] = $json[$company->street_code];
+                    }
+                    if (!isset($json[$company->id])) {
+                        $json[$company->id]['id'] = $company->id;
+                        $json[$company->id]['pId'] = $company->street_code;
+
+
+                        $json[$company->id]['name'] = $company->name;
+                        $json[$company->id]['open'] = true;
+                        $json[$company->id]['checked'] = true;
+                        $json[$company->id]['url'] = '/admin/new/smoke/login/' . $company->id;
+                        $mapDate[] = $json[$company->id];
+                    }
+                }
+            }
+
+
+
 
 
         }
-        return view('admin/new_map')->with('data',$data)->with('company',$companys)->with('map',json_encode($maps));
+        return view('admin/new_map')->with('data',$data)->with('company',$companys)->with('map',json_encode($maps))->with('mapDate',json_encode($mapDate));
+    }
+    public function login($company_id){
+        if($company_id){
+            $smoke = Smoke::with('Company')->where('company_id',$company_id)->get();
+            $pro = array();
+            $pros = array();
+            foreach ($smoke as $v){
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL,'http://api.heclouds.com/devices/'.$v->cid.'/datapoints?datastream_id=3200_0_5503');//抓取指定网页
+                curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
+                curl_setopt($ch, CURLOPT_HTTPHEADER ,array('api-key:BtlWp3lrdfRJ7cggnoAd7Tp2c=A='));//这里要用自己的api-key 我用###########把自己的隐藏掉了
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
+                $datas = curl_exec($ch);//运行curl
+
+
+
+
+                foreach (json_decode($datas)->data->datastreams as $vvv){
+
+                    foreach ($vvv->datapoints as $vvvv){
+
+                        $pro['name'] = $v->name;
+                        $pro['time'] = $vvvv->at;
+                        $pro['status'] = $vvvv->value;
+                        $pro['cid'] = $v->cid;
+                        $pros[] = $pro;
+
+                    }
+                }
+
+
+            }
+        }
+        return view('admin/new_pro')->with('smoke',$pros);
     }
     public function new_pro(){
         $islogin = session('islogin');

@@ -4,7 +4,7 @@
 	border: 0;
 }
 
-body {
+.mapbody {
 	width: 100%;
 	background: #0a0b20 url('../images/bg.jpg') no-repeat;
 	transform-origin: left top 0px;

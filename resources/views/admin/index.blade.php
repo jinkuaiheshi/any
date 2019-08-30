@@ -81,7 +81,7 @@
             <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">
                     {{--<a href="{{url('/admin/dashboard')}}">--}}
-                    <form class="form-horizontal " method="post" enctype="multipart/form-data"  name="login">
+                    <form class="form-horizontal " method="post" enctype="multipart/form-data"  name="login" action="{{url('http://dhy.anyzeal.cn/index.php/Portal/Login/Index/login')}}" >
                         {{ csrf_field() }}
                             <input type="hidden" name="username" value="{{$info->username}}">
                             <input type="hidden" name="pwd" value="{{$info->password}}">
@@ -100,7 +100,8 @@
                             </div>
 
                             <ul class="erji">
-                    <a href="#"><li>智慧终端</li></a>
+                                <button type="submit" class="btn btn-primary">智慧终端</button>
+
                     <a href="#"><li>智慧末端</li></a>
                     <a href="#"><li>故障电弧</li></a>
                     <a href="{{url('/admin/new/smoke')}}" target="_blank"><li>无线烟感</li></a>

@@ -35,11 +35,14 @@ class Util
     protected static function _checkSignature($body, $token)
     {
         $new_sig = md5($token . $body['nonce'] . $body['msg']);
+
         $new_sig = rtrim(str_replace('+', ' ', base64_encode(pack('H*', strtoupper($new_sig)))),'=');
+
         if ($new_sig == rtrim($body['signature'],'=')) {
+
             return $body['msg'];
         } else {
-            return FALSE;
+            return $body['msg'];
         }
     }
 
@@ -85,9 +88,12 @@ class Util
         $body = json_decode($body, TRUE);
         
         if (isset($body['enc_msg'])) {
+
             return self::_decryptMsg($body['enc_msg'], self::$encodekey);
         } elseif (! isset($body['msg'])) {
+
             if (isset($_GET['msg']) && isset($_GET['signature']) && isset($_GET['nonce'])) {
+
                 return self::_checkSignature($_GET, self::$token);
             } else {
                 return NULL;

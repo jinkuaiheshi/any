@@ -77,7 +77,7 @@
 <div class="menban" style="text-align: center;height:120px;line-height: 120px;font-size: 42px;font-weight: bold;color:#fff;position: relative;">智 慧 物 联 云 平 台</div>
     <div class="row" style="width: 1400px; margin: 0 auto; padding-top: 5%;">
         <div class="row">
-	<div class="col-md-4 offset-md-1 yiji">
+	<div class="col-md-4 offset-md-2 yiji">
             <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">
                     {{--<a href="{{url('/admin/dashboard')}}">--}}
@@ -100,13 +100,14 @@
                             </div>
 
                             <ul class="erji">
-                    <a href="http://baidu.com">
-                        <li>智慧终端</li>
-                    </a>
-                    <li>智慧末端</li>
-                    <li>无线烟感</li>
-                    <li>水压</li>
-                    <li>消防栓</li>
+                    <a href="#"><li>智慧终端</li></a>
+                    <a href="#"><li>智慧末端</li></a>
+                    <a href="#"><li>故障电弧</li></a>
+                    <a href="{{url('/admin/new/smoke')}}" target="_blank"><li>无线烟感</li></a>
+                    <a href="#"><li>燃气报警器</li></a>
+                    <a href="#"><li>消防栓</li></a>
+                    <a href="#"><li>水压</li></a>
+                    <a href="#"><li>信息传输装置</li></a>
                 </ul>
 
                         </div>
@@ -115,7 +116,6 @@
                 </div>
             </div>
         </div>
-	<div class="col-md-2"></div>
         <div class="col-md-4 yiji">
             <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">
@@ -123,11 +123,16 @@
                         <div class="modal-content">
                             <div class="cm-img img-cover" style="background-image: url(img/photos-1/5.jpg);">
                                 <div class="gradient gradient-success"></div>
-                                <div class="cm-content">
+                                <div class="cm-content biaoqian">
                                     <div class="cm-title">智慧能耗</div>
                                     <div class="cm-text">Intelligent terminal</div>
                                 </div>
                             </div>
+
+                            <ul class="erji">
+                    <a href="http://sec.anyzeal.cn/tcmr/main/index.action" target="_blank"><li>智能电表</li></a>
+                    <a href="javascript:void(0)"><li>智能水表</li></a>
+                </ul>
 
                         </div>
                     </a>
@@ -136,25 +141,30 @@
         </div>
 	</div>
 	<div class="row">
-        <div class="col-md-4 offset-md-1 yiji">
+        <div class="col-md-4 offset-md-2 yiji">
             <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">
                     <a href="#">
                     <div class="modal-content">
                         <div class="cm-img img-cover" style="background-image: url(img/photos-1/5.jpg);">
                             <div class="gradient gradient-info"></div>
-                            <div class="cm-content">
+                            <div class="cm-content biaoqian">
                                 <div class="cm-title">智慧安防</div>
                                 <div class="cm-text">Smart meter</div>
                             </div>
                         </div>
+
+                        <ul class="erji">
+                    <a href="#"><li>监控摄像头</li></a>
+                    <a href="#"><li>门禁系统</li></a>
+                    <a href="#"><li>可视对讲</li></a>
+                </ul>
 
                     </div>
                     </a>
                 </div>
             </div>
         </div>
-	<div class="col-md-2></div>
         <div class="col-md-4 yiji">
             <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">
@@ -162,11 +172,16 @@
                     <div class="modal-content">
                         <div class="cm-img img-cover" style="background-image: url(img/photos-1/5.jpg);">
                             <div class="gradient gradient-purple"></div>
-                            <div class="cm-content">
-                                <div class="cm-title">智慧充电桩</div>
+                            <div class="cm-content biaoqian">
+                                <div class="cm-title">智慧充电</div>
                                 <div class="cm-text">Smart Smoke Sense</div>
                             </div>
                         </div>
+
+                        <ul class="erji">
+                    <a href="#"><li>非机动车</li></a>
+                    <a href="#"><li>汽车充电桩</li></a>
+                </ul>
 
                     </div>
                     </a>
@@ -203,7 +218,7 @@ $('.yiji').click(function () {
     $(this).find('.erji').delay(500).show(0);
 
     $(this).find('.biaoqian').stop().animate({
-        top: '-25px'
+        top: '-30px'
     }, 1000);
 })
 

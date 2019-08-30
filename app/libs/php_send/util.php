@@ -9,7 +9,7 @@
 class Util
 {
 
-    public static $token = 'anyun168';
+    public static $token = 'anyun123456';
 
     public static $encodekey = '';
 

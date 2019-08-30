@@ -46,6 +46,7 @@ html {
 }
 
 body {
+  position:relative;
   background-color: #bbc2ce;
   font-family: '微软雅黑', sans-serif;
 }
@@ -9180,8 +9181,40 @@ a.text-grey:focus .underline, a.text-grey:hover .underline {
   height: 100%;
 }
 
-.menban{
+.yiji {
+  position:relative;
+}
 
+        .biaoqian {
+            position: absolute;
+	    top: 0px;
+	    left:0px;
+        }
+
+        .erji {
+            display: none;
+            position: absolute;
+            top: 120px;
+            left: 8%;
+            padding: 0px;
+	    z-index:999;
+        }
+
+        .erji li {
+            list-style: none;
+            float: left;
+            width: 80px;
+            height: 35px;
+            line-height: 35px;
+            background: #fff;
+	    border-radius:5px;
+	    text-align:center;
+            margin: 3px 3px;
+            color: #939393;
+        }
+
+.login_bg {
+  background: url("../img/keji.jpg") no-repeat;
 }
 .color373a3c{
   color: #373a3c;

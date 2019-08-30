@@ -516,7 +516,7 @@ class SmokeController extends CommonController
         $raw_input = file_get_contents('php://input');
 
         $resolved_body = \Util::resolveBody($raw_input);
-
+        echo $resolved_body;
         if($resolved_body['ds_id'] == '3200_0_5503'){
             $smoke = Smoke::where('cid',$resolved_body['dev_id'])->first();
             $smokeLog = new  SmokeLog();

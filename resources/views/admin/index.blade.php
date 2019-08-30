@@ -76,7 +76,8 @@
 <div class="bg-keji">
 <div class="menban" style="text-align: center;height:120px;line-height: 120px;font-size: 42px;font-weight: bold;color:#fff;position: relative;">智 慧 物 联 云 平 台</div>
     <div class="row" style="width: 1400px; margin: 0 auto; padding-top: 5%;">
-        <div class="col-md-6 yiji">
+        <div class="row">
+	<div class="col-md-4 offset-md-1 yiji">
             <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">
                     {{--<a href="{{url('/admin/dashboard')}}">--}}
@@ -114,7 +115,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6  yiji">
+	<div class="col-md-2"></div>
+        <div class="col-md-4 yiji">
             <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">
                     <a href="#">
@@ -132,7 +134,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 yiji">
+	</div>
+	<div class="row">
+        <div class="col-md-4 offset-md-1 yiji">
             <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">
                     <a href="#">
@@ -150,7 +154,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 yiji">
+	<div class="col-md-2></div>
+        <div class="col-md-4 yiji">
             <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">
                     <a href="#">
@@ -168,6 +173,7 @@
                 </div>
             </div>
         </div>
+	</div>
         <!-- <div class="col-md-3" style="margin-top: 30px;">
             <div class="modal static-modal custom-modal-1 modal_yy">
                 <div class="modal-dialog">

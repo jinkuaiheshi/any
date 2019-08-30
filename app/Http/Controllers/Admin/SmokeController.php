@@ -511,61 +511,69 @@ class SmokeController extends CommonController
             }
         }
     }
-    public function tick(){
+    public function tick(Request $request){
+        if ($request->isMethod('POST')) {
+            $raw_input = file_get_contents('php://input');
 
-        $raw_input = file_get_contents('php://input');
+            $resolved_body = \Util::resolveBody($raw_input);
+            if($resolved_body['ds_id'] == '3200_0_5503'){
+                $smoke = Smoke::where('cid',$resolved_body['dev_id'])->first();
+                $smokeLog = new  SmokeLog();
+                $smokeLog->status = $resolved_body['value'];
+                $smokeLog->time = date('Y-m-d H:i:s',substr($resolved_body['at'],0,10));
+                $smokeLog->cid = $resolved_body['dev_id'];
+                $smokeLog->company_id = $smoke->company_id;
+                $smokeLog->save();
+                //打电话
+                if($resolved_body['value'] == 1||$resolved_body['value'] == 4||$resolved_body['value'] == 5||$resolved_body['value'] == 14||$resolved_body['value'] == 15||$resolved_body['value'] == 10){
 
-        $resolved_body = \Util::resolveBody($raw_input);
-        echo $resolved_body;
-        
-        if($resolved_body['ds_id'] == '3200_0_5503'){
-            $smoke = Smoke::where('cid',$resolved_body['dev_id'])->first();
-            $smokeLog = new  SmokeLog();
-            $smokeLog->status = $resolved_body['value'];
-            $smokeLog->time = date('Y-m-d H:i:s',substr($resolved_body['at'],0,10));
-            $smokeLog->cid = $resolved_body['dev_id'];
-            $smokeLog->company_id = $smoke->company_id;
-            $smokeLog->save();
-            //打电话
-            if($resolved_body['value'] == 1||$resolved_body['value'] == 4||$resolved_body['value'] == 5||$resolved_body['value'] == 14||$resolved_body['value'] == 15||$resolved_body['value'] == 10){
+                    $company = Company::where('id',$smoke->company_id)->first();
 
-                $company = Company::where('id',$smoke->company_id)->first();
+                    if($resolved_body['value'] == 1){
+                        $rule = '烟雾报警';
+                    }
+                    if($resolved_body['value'] == 4){
+                        $rule = '低压';
+                    }
+                    if($resolved_body['value'] == 5){
+                        $rule = '传感器故障';
+                    }
+                    if($resolved_body['value'] == 14){
+                        $rule = '测试键在正常状态按下';
+                    }
+                    if($resolved_body['value'] == 15){
+                        $rule = '测试键在低压状态按下';
+                    }
+                    if($resolved_body['value'] == 10){
+                        $rule = '拆卸报警';
+                    }
+                    if($company->phone1){
+                        AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone1,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',substr($resolved_body['at'],0,10)),'rule'=>$rule));
+                    }
+                    if($company->phone2){
+                        AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone2,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',substr($resolved_body['at'],0,10)),'rule'=>$rule));
+                    }
+                    if($company->phone3){
+                        AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone3,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',substr($resolved_body['at'],0,10)),'rule'=>$rule));
+                    }
+                    if($company->phone4){
+                        AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone4,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',substr($resolved_body['at'],0,10)),'rule'=>$rule));
+                    }
 
-                if($resolved_body['value'] == 1){
-                    $rule = '烟雾报警';
                 }
-                if($resolved_body['value'] == 4){
-                    $rule = '低压';
-                }
-                if($resolved_body['value'] == 5){
-                    $rule = '传感器故障';
-                }
-                if($resolved_body['value'] == 14){
-                    $rule = '测试键在正常状态按下';
-                }
-                if($resolved_body['value'] == 15){
-                    $rule = '测试键在低压状态按下';
-                }
-                if($resolved_body['value'] == 10){
-                    $rule = '拆卸报警';
-                }
-                if($company->phone1){
-                     AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone1,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',substr($resolved_body['at'],0,10)),'rule'=>$rule));
-                }
-                if($company->phone2){
-                    AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone2,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',substr($resolved_body['at'],0,10)),'rule'=>$rule));
-                }
-                if($company->phone3){
-                    AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone3,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',substr($resolved_body['at'],0,10)),'rule'=>$rule));
-                }
-                if($company->phone4){
-                    AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345',$company->phone4,array('name'=> $smoke->name,'time'=>date('Y-m-d H:i:s',substr($resolved_body['at'],0,10)),'rule'=>$rule));
-                }
+
 
             }
 
+        }else{
+            $raw_input = file_get_contents('php://input');
 
+            $resolved_body = \Util::resolveBody($raw_input);
+            echo $resolved_body;
         }
+
+
+
 
     }
 }

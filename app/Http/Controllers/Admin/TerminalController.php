@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\City;
 use App\Admin\Company;
 use App\Admin\Mac;
 use App\Admin\Monitor;
@@ -207,7 +208,24 @@ class TerminalController extends CommonController
             $alarmType = array($yujing,$baojing);
 
             //最新5条报警
+            $listalatm = array();
+            $listalatms = array();
             $newAlarm = TerminalAlarmLog::take(5)->orderBy('time','DESC')->get();
+            foreach ($newAlarm as $v){
+                $mac = Mac::where('id',$v->mac)->first();
+
+                if($mac){
+                    $company = Company::where('id',$mac->company_id)->first();
+                    $city = City::where('code',$company->city_code)->first();
+                    $listalatm['company'] =$company->name ;
+                    $listalatm['city'] =$city->name ;
+
+                    $listalatm['info'] =$v->info ;
+                    $listalatm['time'] =$v->time ;
+                    $listalatms[] = $listalatm;
+
+                }
+            }
 
             //企业接入
 
@@ -220,7 +238,7 @@ class TerminalController extends CommonController
             $sum = 1;
         }
 
-        return view('admin/lot_index')->with('data',$terminal)->with('sum',$sum)->with('mac',Mac::count())->with('userinfo',$islogin)->with('fenbus',json_encode($fenbus))->with('title',json_encode($title))->with('alarmType',json_encode($alarmType))->with('newAlarm',$newAlarm);
+        return view('admin/lot_index')->with('data',$terminal)->with('sum',$sum)->with('mac',Mac::count())->with('userinfo',$islogin)->with('fenbus',json_encode($fenbus))->with('title',json_encode($title))->with('alarmType',json_encode($alarmType))->with('newAlarm',$listalatms);
 
     }
     public function map(){

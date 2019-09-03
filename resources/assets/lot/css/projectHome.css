@@ -13,7 +13,7 @@
 		top: 7px;
 		left: 45px;
 	}
-	
+
 	.topNav {
 		height: 60px;
 		line-height: 60px;
@@ -24,15 +24,19 @@
 		left: 0;
 		z-index: 20;
 	}
+
 	/*侧边栏*/
-	
+
 	.slidContain {
-		width: 11%;
+		width: 19%;
 		height: 100%;
 		margin-top: 60px;
 		background-color: #022961;
+		position: fixed;
+		top: 0px;
+		left: 0px;
 	}
-	
+
 	.slidContain a {
 		display: block;
 		overflow: hidden;
@@ -42,27 +46,28 @@
 		color: rgba(255, 255, 255, 0.8);
 		text-decoration: none;
 	}
-	
+
 	.slidContain a span {
 		margin-left: 30px;
 	}
-	
+
 	.nav-item {
 		position: relative;
 	}
-	
+
 	.nav-item.nav-show {
 		border-bottom: none;
 	}
-	
+
 	.nav-item ul {
 		display: none;
 		background: rgba(0, 0, 0, .1);
 	}
+
 	.nav-item.nav-show ul {
 		display: block;
 	}
-	
+
 	.nav-item>a:before {
 		content: "";
 		position: absolute;
@@ -72,78 +77,83 @@
 		background: #34A0CE;
 		opacity: 0;
 	}
-	
+
 	.slidContain .nav-icon {
 		font-size: 20px;
 		position: absolute;
 		margin-left: -1px;
 	}
+
 	/* 此处修改导航图标 可自定义iconfont 替换*/
-	
+
 	.icon_1::after {
 		content: "\e62b";
 	}
-	
+
 	.icon_2::after {
 		content: "\e669";
 	}
-	
+
 	.icon_3::after {
 		content: "\e61d";
 	}
+
 	/*---------------------*/
-	
+
 	.nav-more {
 		float: right;
 		margin-right: 20px;
 		font-size: 12px;
 		transition: transform .3s;
 	}
+
 	/* 此处为导航右侧箭头 如果自定义iconfont 也需要替换*/
-	
+
 	.nav-more::after {
 		content: "\e621";
 	}
+
 	/*---------------------*/
-	
+
 	.nav-show .nav-more {
 		transform: rotate(90deg);
 	}
-	
-	
+
+
 	.nav-show,
 	.nav-item>a:hover {
 		color: #FFF;
 		background: rgba(0, 0, 0, .1);
 	}
-	
+
 	.nav-show>a:before,
 	.nav-item>a:hover:before {
 		opacity: 1;
 	}
-	
+
 	.nav-item li:hover a {
 		color: #FFF;
 		background: rgba(0, 0, 0, .1);
 	}
+
 	/* nav-mini */
-	
+
 	.nav-mini.nav {
 		width: 60px;
 	}
-	
+
 	.nav-mini.nav .nav-icon {
 		/* margin-left:-2px; */
 	}
-	
+
 	.nav-mini.nav .nav-item>a span {
 		display: none;
 	}
-	
+
 	.nav-mini.nav .nav-more {
 		margin-right: -20px;
 	}
-	
+
 	.nav-mini.nav .nav-item ul {
 		position: absolute;
 		top: 0px;
@@ -153,42 +163,43 @@
 		background: #3C474C;
 		overflow: hidden;
 	}
-	
+
 	.nav-mini.nav .nav-item:hover {
 		background: rgba(255, 255, 255, .1);
 	}
-	
+
 	.nav-mini.nav .nav-item:hover .nav-item a {
 		color: #FFF;
 	}
-	
+
 	.nav-mini.nav .nav-item:hover a:before {
 		opacity: 1;
 	}
-	
+
 	.nav-mini.nav .nav-item:hover ul {
 		display: block;
 	}
-	
+
 	.navbar {
 		border-radius: 0px;
 	}
+
 	/********下半部分内容**********/
 	/*.rightBottom{
 		overflow: hidden;
 	}*/
-	
+
 	.rightBottomBox {
 		/*overflow: hidden;*/
 		/*height: 479px;*/
-		height: 760px;
-		overflow-y: auto;
+		/* height: 760px; */
+		/* overflow-y: auto; */
 	}
-	
+
 	.bottomContent {
-		height: 100%;
+		height: 89%;
 	}
-	
+
 	.slidContain,
 	.rightContent,
 	.rightNav,
@@ -199,37 +210,39 @@
 	.inputBox {
 		float: left;
 	}
-	
+
 	.rightContent {
 		margin-top: 60px;
-		width: 89%;
-		/*height: 100%;*/
+		width: 81%;
+		/* height: 100%; */
 		background-color: #f8f8f8;
+		position: relative;
+		left: 19%;
 	}
-	
+
 	.rightNav {
 		margin-top: 5px;
 	}
-	
+
 	.rightNav li,
 	.rightChartBox,
 	.leftChartBox {
 		float: left;
 	}
-	
+
 	.rightNav li a {
 		color: #666;
 		text-decoration: none;
 	}
-	
+
 	.rightNav li a.active {
 		color: #409eff;
 	}
-	
+
 	.rightSelect {
 		float: right;
 	}
-	
+
 	.rightContentTop {
 		padding: 10px 20px;
 		min-height: 30px;
@@ -237,17 +250,18 @@
 		border-bottom: 1px solid #eee;
 		background-color: #fff;
 	}
-	
+
 	.rightNav li a.whiteColor {
 		color: #7d7e80;
 		cursor: default;
 	}
-	
+
 	.grayColor {
 		color: #b0bad5;
 	}
+
 	/*右侧选择*/
-	
+
 	.rightSelect .btnExport {
 		padding: 3px 10px;
 		border-radius: 4px;
@@ -256,7 +270,7 @@
 		cursor: pointer;
 		margin-right: 8px;
 	}
-	
+
 	.richradio,
 	.richcheckbox {
 		border: 1px solid #CCC;
@@ -269,22 +283,22 @@
 		border-radius: 4px;
 		font-weight: 400;
 	}
-	
+
 	.richradio:hover,
 	.richcheckbox:hover {
 		cursor: pointer;
 	}
-	
+
 	.lowIE {
 		position: absolute\9;
 		top: -999px\9;
 		left: -999px\9;
 	}
-	
+
 	.otherBrowser {
 		display: none;
 	}
-	
+
 	.IEChecked {
 		background-size: auto auto;
 		border: 1px solid #409eff;
@@ -293,7 +307,7 @@
 		background-color: #409eff;
 		;
 	}
-	
+
 	.otherBrowserChecked {
 		background-size: auto auto;
 		border: 1px solid #409eff;
@@ -301,44 +315,45 @@
 		color: #fff;
 		background-color: #409eff;
 	}
-	
+
 	.inputLayout {
 		padding: 2px 0;
 		margin-left: 6px;
 	}
-	
+
 	.inputLayout span {
 		color: '#666'
 	}
-	
+
 	#inputMonth {
 		display: none;
 	}
+
 	/*echart*/
-	
+
 	.rightEchart {
 		margin: 10px 15px;
 	}
-	
+
 	.rightEchartOne {
 		margin: 10px 15px;
 		background: #fff;
 		padding: 15px;
 		position: relative;
 	}
-	
+
 	.rightChartBox,
 	.leftChartBox {
 		height: 330px;
 		background-color: #fff;
 		border-radius: 4px;
 	}
-	
+
 	.rightChartBox {
 		width: 49%;
 		margin-right: 1%;
 	}
-	
+
 	#lineEchart1,
 	#lineEchart2,
 	#power1,
@@ -347,14 +362,15 @@
 	#load2 {
 		margin: 15px;
 	}
+
 	/*全部告警echart tab切换*/
-	
+
 	#tit,
 	#tit1 {
 		height: 30px;
 		border-bottom: 1px solid #eee;
 	}
-	
+
 	#tit span,
 	#tit1 span {
 		float: left;
@@ -366,97 +382,98 @@
 		color: #666;
 		cursor: pointer;
 	}
-	
+
 	#con li,
 	#con1 li {
 		display: none;
 		height: 300px;
 	}
-	
+
 	#tit span.select,
 	#tit1 span.select1 {
 		color: #409eff;
 		border-bottom: 1px solid #409eff;
 	}
-	
+
 	#con li.show,
 	#con1 li.show1 {
 		display: block;
 	}
-	
+
 	.leftChartBox {
 		width: 50%;
 	}
+
 	/*table*/
-	
+
 	.rightTable {
 		background-color: #fff;
 		margin: 0 15px 10px 15px;
 		padding-bottom: 10px;
-		overflow-y: auto;
+		/* overflow-y: auto; */
 		position: relative;
 	}
-	
+
 	.tableBtn {
 		border: 1px solid #eee;
 		padding: 5px 10px;
 		border-radius: 4px;
 	}
-	
+
 	.tableBtn1 {
 		color: #409EFF;
 	}
-	
+
 	.tableBtn2 {
 		color: #F43530;
 	}
-	
+
 	.margingTop10 {
 		margin-top: 10px;
 	}
-	
+
 	.tableInput {
 		margin: 10px 18px;
 	}
-	
+
 	.startDay {
 		margin-right: 15px;
 	}
-	
+
 	.tableInputTitle {
 		height: 32.8px;
 		line-height: 32.8px;
 	}
-	
+
 	.startDay,
 	.endDay {
 		width: 160px;
 	}
-	
+
 	.selectContent {
 		height: 40px;
 	}
-	
+
 	.selectBox {
 		position: absolute;
 		top: 12px;
 		left: 434px;
 		width: 160px;
 	}
-	
+
 	.selectBox1 {
 		left: 20px;
 	}
-	
+
 	.selectBox2 {
 		left: 172px;
 	}
-	
+
 	.selectBox3 {
 		left: 330px;
 		width: 218px;
 	}
-	
+
 	.selectBtn {
 		position: absolute;
 		left: 605px;
@@ -468,11 +485,11 @@
 		padding: 5px 10px;
 		border-radius: 4px;
 	}
-	
+
 	.selectBtn:hover {
 		border: 1px solid #409EFF;
 	}
-	
+
 	.powerTitle {
 		position: absolute;
 		top: 15px;
@@ -480,18 +497,18 @@
 		font-size: 18px;
 		color: #666;
 	}
-	
+
 	.powerNumber {
 		margin-top: 70px;
 		width: 30%;
 		font-size: 18px;
 		float: left;
 	}
-	
+
 	.powerNumber div {
 		margin-bottom: 20px;
 	}
-	
+
 	.inputPower,
 	.inputControl {
 		height: 32.8px;
@@ -500,67 +517,67 @@
 		top: 11px;
 		left: 552px;
 	}
-	
+
 	.inputControl {
 		left: 295px;
 	}
-	
+
 	.powerBtn {
 		left: 810px;
 	}
-	
+
 	.controlBtn {
 		left: 478px;
 	}
-	
+
 	.setBtn {
 		left: 545px;
 		width: 150px;
 	}
-	
+
 	.currentPower {
 		color: #2EC7C9;
 	}
-	
+
 	.lastPower {
 		color: #5AB1EF;
 	}
-	
+
 	.comparePower {
 		color: #5AB1EF;
 		font-size: 16px;
 	}
-	
+
 	.closeContorl {
 		color: red;
 	}
-	
+
 	.contorlLine {
 		margin: 0 5px;
 	}
-	
+
 	.mr15 {
 		margin-right: 15px;
 	}
-	
+
 	.tabPower {
 		position: relative;
 		margin-top: 4px;
 	}
-	
+
 	.tabPower li a {
 		color: #666;
 		text-decoration: none;
 	}
-	
+
 	.tabPower li a.tabPowerActive {
 		color: #409EFF;
 	}
-	
+
 	.tabPower li a:hover {
 		color: #7d7e80;
 	}
-	
+
 	.tabPowerOneLine,
 	.tabPowerTwoLine {
 		width: 110px;
@@ -569,28 +586,30 @@
 		position: absolute;
 		bottom: -11px;
 	}
-	
+
 	.tabPowerOneLine {
 		left: -4px;
 	}
-	
+
 	.tabPowerTwoLine {
 		left: 108px;
 	}
-	
+
 	@media (min-width: 768px) {
 		.navbar {
 			border-radius: 0px !important;
 		}
 	}
-	
+
 	@media (max-width: 1400px) {
 		.rightBottomBox {
-			height: 480px
+			/* height: 480px */
 		}
+
 		.slidContain {
 			width: 18%;
 		}
+
 		.rightContent {
 			width: 82%;
 		}

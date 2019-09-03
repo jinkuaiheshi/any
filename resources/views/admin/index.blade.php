@@ -99,10 +99,15 @@
                                 </div>
                             </div>
 
-                            <ul class="erji">
-                                <button type="submit" class="btn btn-primary">智慧终端</button>
+                            <ul class="erji" >
+                                <button type="submit" class="" style="float: left; width: 80px; height: 35px;    background: #fff;
+    border-radius: 3px;
+    text-align: center;
+    margin: 3px 3px;
+    color: #939393;
+    font-size: 12px;border: none;">智慧终端</button>
 
-                    <a href="#"><li>智慧末端</li></a>
+                    <a href="{{url('/admin/lot')}}" target="_blank"><li>智慧末端</li></a>
                     <a href="#"><li>故障电弧</li></a>
                     <a href="{{url('/admin/new/smoke')}}" target="_blank"><li>无线烟感</li></a>
                     <a href="#"><li>燃气报警器</li></a>

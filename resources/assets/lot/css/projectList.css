@@ -34,6 +34,9 @@
 	margin-top: 60px;
 	background-color: #022961;
 	transition: all .3s;
+	position: fixed;
+	top: 0px;
+	left: 0px;
 }
 
 .slidContain a {
@@ -217,10 +220,12 @@
 /*列表内容*/
 
 .rightContentBox {
+	position: relative;
+	left: 19%;
 	height: 479px;
 	height: 910px;
-	overflow-y: auto;
-	width: 89%;
+	/* overflow-y: auto; */
+	width: 81%;
 }
 
 .listNav {
@@ -254,7 +259,7 @@
 .rightBottomBox {
 	/*overflow: hidden;*/
 	height: 510px;
-	overflow-y: auto;
+	/* overflow-y: auto; */
 }
 
 .bottomContent {
@@ -399,11 +404,13 @@
 	.rightBottomBox {
 		height: 480px
 	}
+
 	.slidContain {
 		width: 18%;
 	}
+
 	.rightContentBox {
-		height: 510px;
+		/* height: 510px; */
 		width: 82%;
 		overflow-y: auto;
 	}

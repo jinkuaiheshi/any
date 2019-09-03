@@ -29,7 +29,7 @@ class OperationController extends CommonController
 
         $orgs=Organization::where('parent_id','!=','0')->where('is_deleted',0)->where('is_old',1)->select('crcid','name')->get();
         //$p_company=D('Company')->field('name,id,province_code,city_code,area_code')->where(['isdel'=>0])->select();
-        $company = Company::where('is_deleted',0)->select('id','name','province_code','city_code','area_code')->get();
+        $company = Company::where('is_deleted',0)->select('id','name','province_code','city_code','area_code','address')->get();
         $kkk = array();
         $uuu = array();
         $alarms = array();
@@ -39,6 +39,7 @@ class OperationController extends CommonController
             $uuu[$v['name'].'_province']=$v['province_code'];
             $uuu[$v['name'].'_city']=$v['city_code'];
             $uuu[$v['name'].'_area']=$v['area_code'];
+            $uuu[$v['name'].'_address']=$v['address'];
 
 
         }
@@ -73,6 +74,7 @@ class OperationController extends CommonController
                 $offline[$k]['province_code']=$uuu[$v->CustomerName.'_province'];
                 $offline[$k]['city_code']=$uuu[$v->CustomerName.'_city'];
                 $offline[$k]['area_code']=$uuu[$v->CustomerName.'_area'];
+                $offline[$k]['address']=$uuu[$v->CustomerName.'_address'];
                 $offline[$k]['SimCard']=$v->SimCard;
 
             }else{
@@ -110,7 +112,11 @@ class OperationController extends CommonController
                             } else {
                                 $kkk['area_code'] = $uuu[$v->CustomerName . '_area'];
                             }
-
+                            if (!isset($uuu[$v->CustomerName . '_address'])) {
+                                $kkk['address'] = '';
+                            } else {
+                                $kkk['address'] = $uuu[$v->CustomerName . '_address'];
+                            }
 
                             if (((int)$v1 === 2 && (int)$status == 9) || ((int)$v1 == 2 && (int)$status == 5)) {
 
@@ -182,6 +188,8 @@ class OperationController extends CommonController
                 $off['province_code'] = $lixian->Company->province_code;
                 $off['city_code'] = $lixian->Company->city_code;
                 $off['area_code'] = $lixian->Company->area_code;
+                $off['address'] = $lixian->Company->address;
+
                 $off['alarm_type'] = $lixian->alarm_type;
 
                 $offs[] = $off;
@@ -253,6 +261,7 @@ class OperationController extends CommonController
             $offline_E[$k]['city_code']=$monitor->Company->city_code;
 
             $offline_E[$k]['area_code']=$monitor->Company->area_code;
+            $offline_E[$k]['address']=$monitor->Company->address;
         }
 
         $province = $request['province'] != '' ? $request['province'] : 0;
@@ -296,6 +305,7 @@ class OperationController extends CommonController
 
             return view('admin/operation_alarmlist')->with('status',$status)->with('data', $data_p)->with('province',$provinces)->with('area',$area)->with('city',$city)->with('prov',$province)->with('citys',$citys)->with('areas',$areas);
         }else{
+
             $province = Province::All();
             return view('admin/operation_alarmlist')->with('status',$status)->with('data', $data)->with('province',$province)->with('prov','')->with('city','')->with('area','');
 

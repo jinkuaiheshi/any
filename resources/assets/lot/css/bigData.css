@@ -4,7 +4,7 @@
 	border: 0;
 }
 
-.mapbody {
+body {
 	width: 100%;
 	background: #0a0b20 url('../images/bg.jpg') no-repeat;
 	transform-origin: left top 0px;
@@ -320,63 +320,80 @@ table td {
 	.day .time {
 		font-size: 18px;
 	}
+
 	.currentUserSpan,
 	.value small {
 		font-size: 16px;
 	}
+
 	.day .date,
 	.name {
 		font-size: 14px;
 	}
+
 	.currentUser {
 		top: 20px;
 	}
+
 	.day {
 		left: 50px;
 		top: 20px;
 	}
+
 	.dataTotal {
 		width: 174px;
 		top: 94px;
 	}
+
 	.value {
 		font-size: 20px;
 	}
+
 	.row-hr {
 		margin: 0px;
 	}
+
 	.dataTextLogo {
 		font-size: 22px;
 		line-height: 58px;
 	}
+
 	.day .time {
 		font-size: 18px;
 	}
+
 	.currentUserSpan,
 	.value small {
 		font-size: 16px;
 	}
+
 	.day .date,
 	.name {
 		font-size: 14px;
 	}
+
 	.currentUser {
 		top: 25px;
 	}
+
 	.day {
 		left: 50px;
 		top: 25px;
 	}
+
 	.dataTotal {
 		width: 174px;
 		top: 94px;
 	}
+
 	.value {
 		font-size: 20px;
 	}
+
 	.row-hr {
 		margin: 0px;
 	}
+
 	.currentAlarm,
 	.alarmType,
 	.breakWg,

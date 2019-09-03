@@ -131,12 +131,15 @@
 	width: 14px;
 	visibility: visible;
 }
-.downImg{	
+
+.downImg {
 	background-image: url(../images/portlet-collapse-icon.png);
 }
-.upImg{
+
+.upImg {
 	background-image: url(../images/portlet-expand-icon.png);
 }
+
 .portlet>.portlet-title>.tools>a {
 	display: inline-block;
 	height: 16px;

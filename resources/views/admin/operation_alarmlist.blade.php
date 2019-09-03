@@ -93,6 +93,7 @@
                 <tr>
                     <th>企业</th>
                     <th>设备名称</th>
+                    <th>地址</th>
                     <th>网关编号</th>
                     <th>SimCard</th>
                     <th>设备状态</th>
@@ -105,6 +106,7 @@
                 <tr>
                     <td>{{$v['company_name']}}</td>
                     <td>{{$v['org_name']}}</td>
+                    <td>{{$v['address']}}</td>
                     <td>{{$v['code']}}</td>
                     <td>{{$v['SimCard']}}</td>
                     <td>

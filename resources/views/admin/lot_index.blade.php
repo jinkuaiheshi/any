@@ -41,28 +41,28 @@
     <div class="currentUser">
         当前登录用户：<span class="currentUserSpan">@if($userinfo->type == 1)
                 超级管理员
-        @elseif($userinfo->type == 2)
-        服务商
-         @else
-            企业
-                                                 @endif
+            @elseif($userinfo->type == 2)
+                服务商
+            @else
+                企业
+            @endif
         </span>
     </div>
     @if($userinfo->type == 1)
-    <div class="dataTotal">
-        <!--总接入企业和 总监控点-->
-        <div class="demo-detail">
-            <span class="value" id="totalCompany"> {{$sum}} <small>家</small></span>
-            <span class="name"> 总接入企业 </span>
+        <div class="dataTotal">
+            <!--总接入企业和 总监控点-->
+            <div class="demo-detail">
+                <span class="value" id="totalCompany"> {{$sum}} <small>家</small></span>
+                <span class="name"> 总接入企业 </span>
+            </div>
+            <hr class="row-hr" />
+            <div class="demo-detail">
+                <span class="value" id="totalMonitor"> {{$mac}} <small>组</small></span>
+                <span class="name"> 总监控组 </span>
+            </div>
         </div>
-        <hr class="row-hr" />
-        <div class="demo-detail">
-            <span class="value" id="totalMonitor"> {{$mac}} <small>组</small></span>
-            <span class="name"> 总监控组 </span>
-        </div>
-    </div>
-    @endif
-    <!--地图-->
+@endif
+<!--地图-->
     <div class="dataMap">
         <div id="mapChart"></div>
     </div>
@@ -77,29 +77,29 @@
                 <th>排序</th>
                 <th>告警企业名称</th>
                 <th>所在城市</th>
-                <th>隐患点个数</th>
+                <th>报警类型</th>
                 <th>最新告警时间</th>
             </tr>
             </thead>
             <tbody id=" alarmList ">
             @foreach( $newAlarm as $k=>$value)
-            <tr class="color-red ">
-                <td><span class="badge " style="background-color: @if($k==0)
-                            #F43530
-                            @elseif($k==1)
-                            #ff8457
-                            @elseif($k==2)
-                            #ecb11c
-                            @elseif($k==3)
-                            #2458cd
-                            @elseif($k==4)
-                            #2458cd
-                            @endif; ">{{$k+1}}</span></td>
-                <td>{{$value->mac}}</td>
-                <td>{{$value->info}}</td>
-                <td>{{$value->node}}</td>
-                <td>{{$value->time}}</td>
-            </tr>
+                <tr class="color-red ">
+                    <td><span class="badge " style="background-color: @if($k==0)
+                                #F43530
+                        @elseif($k==1)
+                                #ff8457
+                        @elseif($k==2)
+                                #ecb11c
+                        @elseif($k==3)
+                                #2458cd
+                        @elseif($k==4)
+                                #2458cd
+                        @endif; ">{{$k+1}}</span></td>
+                    <td>{{$value['company']}}</td>
+                    <td>{{$value['city']}}</td>
+                    <td>{{$value['info']}}</td>
+                    <td>{{$value['time']}}</td>
+                </tr>
             @endforeach
 
 
@@ -118,11 +118,11 @@
         <div class="no-data ">暂无数据</div>
         <div id="barChart"></div>
     </div>
-    <div class="accessNum ">
-        <div class="box-title ">用户接入</div>
-        <div class="no-data ">暂无数据</div>
-        <div id="lineChart"></div>
-    </div>
+    {{--<div class="accessNum ">--}}
+        {{--<div class="box-title ">用户接入</div>--}}
+        {{--<div class="no-data ">暂无数据</div>--}}
+        {{--<div id="lineChart"></div>--}}
+    {{--</div>--}}
 </div>
 
 <script src="{{asset('resources/assets/lot/js/jquery-3.4.1.min.js')}} "></script>{
@@ -131,7 +131,7 @@
 <script>
     window.onload = function() {
         //获取盒子的宽高
-        //$('body').width($(window).width());
+        //  $('body').width($(window).width());
         $('body').height($(window).height());
 
         if(document.body.clientWidth < 1400) {

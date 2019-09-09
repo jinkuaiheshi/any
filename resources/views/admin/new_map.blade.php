@@ -274,7 +274,7 @@
         });
         marker.setMap(map);
         marker.on('click', function (e) {
-            location.href = 'projectHome.html';
+            window.open("{{url('/admin/lot/login/')}}"+ '/' +data.fid);
         })
         return marker;
     }

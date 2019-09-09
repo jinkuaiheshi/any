@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Admin\Area;
 use App\Admin\City;
 use App\Admin\Company;
 use App\Admin\Mac;
 use App\Admin\Monitor;
 use App\Admin\Provider;
 use App\Admin\Province;
+use App\Admin\Street;
 use App\Admin\Terminal;
 use App\Admin\TerminalAlarmLog;
 use App\Admin\TerminalLeakage;
@@ -242,7 +244,161 @@ class TerminalController extends CommonController
 
     }
     public function map(){
-        return view('admin/lot_map')->with('mac',Mac::count());
+        $islogin = session('islogin');
+        if($islogin->type == 1){
+            $companys = MAC::All()->groupBy('company_id')->count();
+            $data = MAC::All()->count();
+            //
+            $mac = Mac::groupby('company_id')->get();
+
+            $map = array();
+            $maps= array();
+            foreach ($mac as $v ){
+                $company = Company::where('id',$v->company_id)->first();
+                //查看他下面的烟感是否有报警的
+                $map['fid'] = $company->id;;
+                $map['flag'] = 1;
+                $map['fLong'] =$company->lng;
+                $map['fLati'] =$company->lat;
+                $map['content'] =$company->name;
+                $map['show'] = 'true';
+                $maps[] = $map;
+
+            }
+
+            //地图json
+            $mac = Mac::groupby('company_id')->get();
+            $json = array();
+            $mapDate = array();
+            array_push($mapDate,array(
+                'id' => 0,
+                'pId' => -1,
+                'name' => '全国',
+                'open' => true,
+                'checked' => true
+            ));
+            foreach ($mac as $v){
+                $company = Company::where('id',$v->company_id)->first();
+
+                if(!isset($json[$company->id])) {
+                    if (!isset($json[$company->province_code])) {
+                        $json[$company->province_code]['id'] = $company->province_code;
+                        $json[$company->province_code]['pId'] = 0;
+                        $province = Province::where('code', $company->province_code)->first();
+
+                        $json[$company->province_code]['name'] = $province->name;
+                        $json[$company->province_code]['open'] = false;
+                        $json[$company->province_code]['checked'] = true;
+                        $mapDate[] = $json[$company->province_code];
+                    }
+
+                    if (!isset($json[$company->city_code])) {
+                        $json[$company->city_code]['id'] = $company->city_code;
+                        $json[$company->city_code]['pId'] = $company->province_code;
+                        $city = City::where('code', $company->city_code)->first();
+
+                        $json[$company->city_code]['name'] = $city->name;
+                        $json[$company->city_code]['open'] = false;
+                        $json[$company->city_code]['checked'] = true;
+                        $mapDate[] = $json[$company->city_code];
+                    }
+                    if (!isset($json[$company->area_code])) {
+                        $json[$company->area_code]['id'] = $company->area_code;
+                        $json[$company->area_code]['pId'] = $company->city_code;
+                        $area = Area::where('code', $company->area_code)->first();
+
+                        $json[$company->area_code]['name'] = $area->name;
+                        $json[$company->area_code]['open'] = false;
+                        $json[$company->area_code]['checked'] = true;
+                        $mapDate[] = $json[$company->area_code];
+                    }
+                    if (!isset($json[$company->street_code])) {
+                        $json[$company->street_code]['id'] = $company->street_code;
+                        $json[$company->street_code]['pId'] = $company->area_code;
+                        $street = Street::where('code', $company->street_code)->first();
+
+                        $json[$company->street_code]['name'] = $street->name;
+                        $json[$company->street_code]['open'] = false;
+                        $json[$company->street_code]['checked'] = true;
+                        $mapDate[] = $json[$company->street_code];
+                    }
+                    if (!isset($json[$company->id])) {
+                        $json[$company->id]['id'] = $company->id;
+                        $json[$company->id]['pId'] = $company->street_code;
+
+
+                        $json[$company->id]['name'] = $company->name;
+                        $json[$company->id]['open'] = true;
+                        $json[$company->id]['checked'] = true;
+                        $json[$company->id]['url'] = '/admin/lot/login/' . $company->id;
+                        $mapDate[] = $json[$company->id];
+                    }
+                }
+            }
+
+
+
+        }
+        return view('admin/lot_map')->with('company',$companys)->with('data',$data)->with('map',json_encode($maps))->with('mapDate',json_encode($mapDate));
+    }
+    public function login($company_id){
+        if($company_id){
+
+
+            $token = $this->mandunToken();
+            $APP_SECRET = '7B814218CC2A3EED32BD571059D58B2B';
+
+            $accessToken = json_decode($token)->data->accessToken;
+
+            //session(['accessToken' => $accessToken]);
+            $method = 'GET_BOXES';
+            $client_id ='O000002093';
+            $timestamp = date('YmdHis',time());
+            //dd($accessToken,$method,$client_id,$timestamp);
+            $projectCode = 'P00000001204';
+            $sign = md5($accessToken.$client_id.$method.$projectCode.$timestamp.$APP_SECRET);
+
+            $url = 'https://open.snd02.com/invoke/router.as';
+
+//       $param = ['client_id'=>$client_id,'method'=>$method,'access_token'=>$accessToken,'timestamp'=>$timestamp,'sign'=>$sign,'projectCode'=>$projectCode];
+            $param = ['client_id'=>$client_id,'method'=>$method,'access_token'=>$accessToken,'timestamp'=>$timestamp,'sign'=>$sign,'projectCode'=>$projectCode];
+            $o = "";
+            foreach ( $param as $k => $v )
+            {
+                $o.= "$k=" . urlencode( $v ). "&" ;
+            }
+            $param = substr($o,0,-1);
+
+            $ch = curl_init();//初始化curl
+            curl_setopt($ch, CURLOPT_URL,$url);//抓取指定网页
+            curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
+            curl_setopt($ch, CURLOPT_POST, 1);//post提交方式
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+            //https请求需要加上此行
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 对认证证书来源的检查
+            $data = curl_exec($ch);//运行curl
+            curl_close($ch);
+
+            $info = json_decode($data)->data;
+
+            $pro = array();
+            $pros = array();
+            foreach ($info as $vv){
+                $isset_mac = Mac::where('company_id',$company_id)->where('mac',$vv->mac)->first();
+
+                if ($isset_mac){
+
+                    $pro['online'] = $vv->online;
+                    $pro['address'] = $vv->build.$vv->unit.$vv->room;
+                    $pro['mac'] = $vv->mac;
+                    $pro['time'] = date('Y-m-d H:i:s',time());
+                    $pros[] = $pro;
+                }
+            }
+
+            return view('admin/lot_pro')->with('pro',$pros);
+        }
     }
     public function duilie(){
         $accessId = "LTAI32xr6egWoWsF";
@@ -1586,5 +1742,59 @@ class TerminalController extends CommonController
 
         return view('admin/dhy_wuxi')->with('data',$sum);
     }
+    public function lotPower($mac){
+       if($mac){
 
+       }
+        return view('admin/lot_power');
+    }
+    public function allAlarm(){
+        $start = date('Y-m-d 00:00',strtotime("-0 year -3 month -0 day"));
+        $end = date('Y-m-d H:i:s',time());
+        $data = TerminalAlarmLog::with('Mac')->where('info','like','%报警')->whereBetween('time',[$start,$end])->orderBy('time','DESC')->get();
+
+
+        //用电报警
+        $type = DB::table('terminal_alarm_log')
+            ->select('info', DB::raw('count(info) as num'))
+            ->where('info','like','%报警')
+            ->groupBy('info')
+            ->whereBetween('time',[$start,$end])
+            ->get();
+        $baojingname = array();
+        $baojingnum = array();
+        $baojing = array();
+        $baojings = array();
+        foreach ($type as $v){
+            $baojingname[] = $v->info;
+            $baojingnum[] = $v->num;
+            $baojing['name'] = $v->info;
+            $baojing['value'] = $v->num;
+            $baojings[] = $baojing;
+        }
+        //预警
+        $type = DB::table('terminal_alarm_log')
+            ->select('info', DB::raw('count(info) as num'))
+            ->where('info','like','%预警')
+            ->groupBy('info')
+            ->whereBetween('time',[$start,$end])
+            ->get();
+        $yujingname = array();
+        $yujingnum = array();
+        $yujing = array();
+        $yujings = array();
+
+        foreach ($type as $v){
+            $yujingname[] = $v->info;
+            $yujingnum[] = $v->num;
+            $yujing['name'] = $v->info;
+            $yujing['value'] = $v->num;
+            $yujings[] = $yujing;
+        }
+
+        return view('admin/lot_allAlarm')->with('data',$data)->with('baojingname',json_encode($baojingname))->with('baojingnum',json_encode($baojingnum))->with('yujingname',json_encode($yujingname))->with('yujingnum',json_encode($yujingnum))->with('baojing',json_encode($baojings))->with('yujing',json_encode($yujings));
+    }
+    public function allLeakage(){
+
+    }
 }

@@ -14,4 +14,8 @@ class TerminalAlarmLog extends Model
     {
         return $this->hasOne('App\Admin\Company','id','type');
     }
+    public function Mac()
+    {
+        return $this->hasOne('App\Admin\Mac','id','mac');
+    }
 }

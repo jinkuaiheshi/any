@@ -285,6 +285,7 @@ class SmokeController extends CommonController
                     }
 
                 }
+                $map['fid'] = $company->id;;
                 $map['fLong'] =$company->lng;
                 $map['fLati'] =$company->lat;
                 $map['content'] =$company->name;

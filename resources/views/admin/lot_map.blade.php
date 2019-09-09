@@ -25,11 +25,11 @@
             <div class="city-box">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="item-num"><b id="totalCompany">200</b>家</div>
+                        <div class="item-num"><b id="totalCompany">{{$company}}</b>家</div>
                         <div class="item-title">总接入企业</div>
                     </div>
                     <div class="col-md-6">
-                        <div class="item-num"><b id="totalMonitor">{{$mac}}</b>组</div>
+                        <div class="item-num"><b id="totalMonitor">{{$data}}</b>组</div>
                         <div class="item-title">总监控组</div>
                     </div>
                 </div>
@@ -37,171 +37,7 @@
                     <ul id="tree" class="ztree"></ul>
                 </div>
             </div>
-            {{--<div class="alarm-box">--}}
-                {{--<div class="row">--}}
-                    {{--<div class="col-md-6">--}}
-                        {{--<div class="item-num red"><b id="alarmCompany">0</b>家</div>--}}
-                        {{--<div class="item-title">当前告警企业</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="col-md-6">--}}
-                        {{--<div class="item-num red"><b id="alarmMonitor">0</b>个</div>--}}
-                        {{--<div class="item-title">当前告警监控点</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="portlet light" style="margin-bottom: 0;padding-bottom: 0;">--}}
-                    {{--<div class="portlet-title">--}}
-                        {{--<div class="caption"><span style="font-size:16px;margin-right:10px;">实时告警列表</span>--}}
-                            {{--<a class="btn btn-primary btn-xs" href="./bigData.html" target="_blank">切换大屏展示</a>--}}
-                            {{--<a class="btn btn-warning btn-xs" id="stopSound" href="javascript:;">关闭报警声音</a>--}}
-                        {{--</div>--}}
-                        {{--<div class="tools" style="padding:0">--}}
-                            {{--<a href="javascript:;" class="collapse downImg" title="展开/折叠"></a>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div class="portlet-body" style="max-height: 300px;overflow: auto">--}}
-                        {{--<table class="table order-column dataTable text-center margin-top-10">--}}
-                            {{--<thead>--}}
-                            {{--<tr>--}}
-                                {{--<th>告警企业</th>--}}
-                                {{--<th>城市</th>--}}
-                                {{--<th>隐患点</th>--}}
-                                {{--<th>最新告警时间</th>--}}
-                                {{--<th>详情</th>--}}
-                                {{--<th>电话确认</th>--}}
-                            {{--</tr>--}}
-                            {{--</thead>--}}
-                            {{--<tbody id="alarmList">--}}
-                            {{--<tr style="display: table-row;">--}}
-                                {{--<td>--}}
-                                    {{--<a target="_blank" href="/">南北零食</a>--}}
-                                {{--</td>--}}
-                                {{--<td>市辖区</td>--}}
-                                {{--<td>1</td>--}}
-                                {{--<td class="font-red">07-29 22:29</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="detail_532" class="btn blue-madison btn-sm viewBtn"><span class="fa"></span> 详情</a>--}}
-                                {{--</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="check_532" class="btn blue-madison btn-sm checkBtn"><span class="fa"></span> 确认</a>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                            {{--<tr style="display: table-row;">--}}
-                                {{--<td>--}}
-                                    {{--<a target="_blank" href="/">南北零食南北零食南北零食南北</a>--}}
-                                {{--</td>--}}
-                                {{--<td>市辖区</td>--}}
-                                {{--<td>1</td>--}}
-                                {{--<td class="font-red">07-29 22:29</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="detail_532" class="btn blue-madison btn-sm viewBtn"><span class="fa"></span> 详情</a>--}}
-                                {{--</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="check_532" class="btn blue-madison btn-sm checkBtn"><span class="fa"></span> 确认</a>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                            {{--<tr style="display: table-row;">--}}
-                                {{--<td>--}}
-                                    {{--<a target="_blank" href="/">南北零食</a>--}}
-                                {{--</td>--}}
-                                {{--<td>市辖区</td>--}}
-                                {{--<td>1</td>--}}
-                                {{--<td class="font-red">07-29 22:29</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="detail_532" class="btn blue-madison btn-sm viewBtn"><span class="fa"></span> 详情</a>--}}
-                                {{--</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="check_532" class="btn blue-madison btn-sm checkBtn"><span class="fa"></span> 确认</a>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                            {{--<tr style="display: table-row;">--}}
-                                {{--<td>--}}
-                                    {{--<a target="_blank" href="/">南北零食</a>--}}
-                                {{--</td>--}}
-                                {{--<td>市辖区</td>--}}
-                                {{--<td>1</td>--}}
-                                {{--<td class="font-red">07-29 22:29</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="detail_532" class="btn blue-madison btn-sm viewBtn"><span class="fa"></span> 详情</a>--}}
-                                {{--</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="check_532" class="btn blue-madison btn-sm checkBtn"><span class="fa"></span> 确认</a>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                            {{--<tr style="display: table-row;">--}}
-                                {{--<td>--}}
-                                    {{--<a target="_blank" href="/">南北零食</a>--}}
-                                {{--</td>--}}
-                                {{--<td>市辖区</td>--}}
-                                {{--<td>1</td>--}}
-                                {{--<td class="font-red">07-29 22:29</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="detail_532" class="btn blue-madison btn-sm viewBtn"><span class="fa"></span> 详情</a>--}}
-                                {{--</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="check_532" class="btn blue-madison btn-sm checkBtn"><span class="fa"></span> 确认</a>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                            {{--<tr style="display: table-row;">--}}
-                                {{--<td>--}}
-                                    {{--<a target="_blank" href="/">南北零食</a>--}}
-                                {{--</td>--}}
-                                {{--<td>市辖区</td>--}}
-                                {{--<td>1</td>--}}
-                                {{--<td class="font-red">07-29 22:29</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="detail_532" class="btn blue-madison btn-sm viewBtn"><span class="fa"></span> 详情</a>--}}
-                                {{--</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="check_532" class="btn blue-madison btn-sm checkBtn"><span class="fa"></span> 确认</a>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                            {{--<tr style="display: table-row;">--}}
-                                {{--<td>--}}
-                                    {{--<a target="_blank" href="/">南北零食</a>--}}
-                                {{--</td>--}}
-                                {{--<td>市辖区</td>--}}
-                                {{--<td>1</td>--}}
-                                {{--<td class="font-red">07-29 22:29</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="detail_532" class="btn blue-madison btn-sm viewBtn"><span class="fa"></span> 详情</a>--}}
-                                {{--</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="check_532" class="btn blue-madison btn-sm checkBtn"><span class="fa"></span> 确认</a>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                            {{--<tr style="display: table-row;">--}}
-                                {{--<td>--}}
-                                    {{--<a target="_blank" href="/">南北零食</a>--}}
-                                {{--</td>--}}
-                                {{--<td>市辖区</td>--}}
-                                {{--<td>1</td>--}}
-                                {{--<td class="font-red">07-29 22:29</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="detail_532" class="btn blue-madison btn-sm viewBtn"><span class="fa"></span> 详情</a>--}}
-                                {{--</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="check_532" class="btn blue-madison btn-sm checkBtn"><span class="fa"></span> 确认</a>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                            {{--<tr style="display: table-row;">--}}
-                                {{--<td>--}}
-                                    {{--<a target="_blank" href="/">南北零食</a>--}}
-                                {{--</td>--}}
-                                {{--<td>市辖区</td>--}}
-                                {{--<td>1</td>--}}
-                                {{--<td class="font-red">07-29 22:29</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="detail_532" class="btn blue-madison btn-sm viewBtn"><span class="fa"></span> 详情</a>--}}
-                                {{--</td>--}}
-                                {{--<td>--}}
-                                    {{--<a href="javascript:void(0);" id="check_532" class="btn blue-madison btn-sm checkBtn"><span class="fa"></span> 确认</a>--}}
-                                {{--</td>--}}
-                            {{--</tr>--}}
-                            {{--</tbody>--}}
-                        {{--</table>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
+
         </div>
     </div>
 </div>
@@ -221,25 +57,7 @@
         center: [121.424339, 29.793543]
     });
     var marker;
-    var data = [{
-        "fLong": 120.208495,
-        'fLati': 30.274967,
-        'flag': 1,
-        'content': '杭州测试',
-        'show':true
-    }, {
-        "fLong": 121.144393,
-        'fLati': 29.790786,
-        'flag': 2,
-        'content': '杭州老板电器有限公司',
-        'show':true
-    }, {
-        "fLong": 121.750258,
-        'fLati': 29.876559,
-        'flag': 2,
-        'content': '华东医药',
-        'show':true
-    }];
+    var data = {!! $map !!};
     var markerList = [];
     var positionMarker = [];
     var icon;
@@ -252,9 +70,9 @@
     }
     function drawMark(data){
         if(data.flag == 1) {
-            icon = './images/map1.png'
+            icon = '{{asset('resources/assets/smoke/images/map1.png')}}'
         } else if(data.flag == 2) {
-            icon = './images/map2.png'
+            icon = '{{asset('resources/assets/smoke/images/map1.png')}}'
         }
         positionMarker = [data.fLong, data.fLati];
         marker = new AMap.Marker({
@@ -268,8 +86,10 @@
             content: data.content
         });
         marker.setMap(map);
-        marker.on('click', function(e) {
-            location.href = 'projectHome.html';
+
+        marker.on('click', function() {
+            window.open("{{url('/admin/lot/login/')}}"+ '/' +data.fid);
+
         })
         return marker;
     }
@@ -292,33 +112,7 @@
         }
     };
 
-    var zNodes = [{
-        id: 1,
-        pId: 0,
-        name: "宁波",
-        open: false,
-        checked:true
-    },
-        {
-            id: 11,
-            pId: 1,
-            name: "杭州老板电器有限公司",
-            checked:true
-        },
-        {
-            id: 12,
-            pId: 1,
-            name: "华东医药",
-            checked:true
-        },
-        {
-            id: 2,
-            pId: 1,
-            name: "杭州测试",
-            open: true,
-            checked:true
-        }
-    ];
+    var zNodes = {!! $mapDate !!};
     $(document).ready(function() {
         var tree = $.fn.zTree.init($("#tree"), setting, zNodes);
     });
@@ -354,7 +148,8 @@
     function onClick(e, treeId, treeNode) {
         if (treeNode.isParent) //如果不是叶子结点，结束
             return;
-        window.open("http://www.baidu.com");
+
+        window.open("{{url('/admin/lot/login/')}}"+treeNode.id);
     };
     //折叠不展示表格数据
     $('.collapse').click(function() {

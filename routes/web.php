@@ -34,8 +34,13 @@ Route::group(['middleware'=>['web','Admin']],function() {
 
     Route::get('/admin/lot','Admin\TerminalController@lot');//曼顿末端
     Route::get('/admin/map','Admin\TerminalController@map');//曼顿末端
-
+    Route::get('/admin/lot/login/{company_id}','Admin\TerminalController@login');
     Route::get('/admin/alarm','Admin\TerminalController@alarmLog');//告警数据导入
+
+    Route::get('/admin/lot/power/{mac}','Admin\TerminalController@lotPower');//电量
+    Route::get('/admin/lot/allAlarm','Admin\TerminalController@allAlarm');//电量
+    Route::get('/admin/lot/leakage','Admin\TerminalController@allLeakage');//电量
+
 
 
 

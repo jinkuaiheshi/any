@@ -67,18 +67,16 @@
 	background: rgba(0, 0, 0, .1);
 }
 
-.nav-item:last-of-type ul {
-	display: block;
-}
+//.nav-item:last-of-type ul {
+//	display: block;
+//}
 
 .nav-item.nav-show ul {
 	display: block;
 }
 
-.nav-item:last-of-type li:nth-of-type(4) a {
-	color: #FFF;
-	background: rgba(0, 0, 0, .4);
-}
+
+
 
 .nav-item>a:before {
 	content: "";
@@ -136,10 +134,7 @@
 	transform: rotate(90deg);
 }
 
-.nav-item:first-of-type li:first-of-type a {
-	color: #FFF;
-	background: rgba(0, 0, 0, .1);
-}
+
 
 .nav-item:first-of-type li:first-of-type a.activeColor {
 	color: #FFF;
@@ -224,7 +219,7 @@
 	height: 479px;
 	height: 910px;
 	/* overflow-y: auto; */
-	width: 81%;
+	width: 100%;
 	float: right;
 }
 
@@ -411,7 +406,7 @@
 
 	.rightContentBox {
 		/* height: 510px; */
-		width: 82%;
+		width: 100%;
 		overflow-y: auto;
 	}
 }

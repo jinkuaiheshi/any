@@ -19,6 +19,7 @@ class Admin
         if(!$islogin){
             return redirect('admin/login');
         }
+
         view()->share('info',$islogin);
         return $next($request);
     }

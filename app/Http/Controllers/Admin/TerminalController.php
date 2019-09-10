@@ -1751,7 +1751,7 @@ class TerminalController extends CommonController
     public function allAlarm(){
         $start = date('Y-m-d 00:00',strtotime("-0 year -3 month -0 day"));
         $end = date('Y-m-d H:i:s',time());
-        $data = TerminalAlarmLog::with('Mac')->where('info','like','%报警')->whereBetween('time',[$start,$end])->orderBy('time','DESC')->get();
+        $data = TerminalAlarmLog::with('Mac')->where('info','like','%报警')->whereBetween('time',[$start,$end])->orderBy('time','ASC')->get();
 
 
         //用电报警
@@ -1792,9 +1792,599 @@ class TerminalController extends CommonController
             $yujings[] = $yujing;
         }
 
-        return view('admin/lot_allAlarm')->with('data',$data)->with('baojingname',json_encode($baojingname))->with('baojingnum',json_encode($baojingnum))->with('yujingname',json_encode($yujingname))->with('yujingnum',json_encode($yujingnum))->with('baojing',json_encode($baojings))->with('yujing',json_encode($yujings));
+        return view('admin/lot_allAlarm')->with('data',$data)->with('baojingname',json_encode($baojingname))->with('baojingnum',json_encode($baojingnum))->with('yujingname',json_encode($yujingname))->with('yujingnum',json_encode($yujingnum))->with('baojing',json_encode($baojings))->with('yujing',json_encode($yujings))->with('mac',session('mac'));
     }
-    public function allLeakage(){
+    public function allLeakage($mac){
+        if($mac){
+            $token = $this->mandunToken();
+            $APP_SECRET = '7B814218CC2A3EED32BD571059D58B2B';
 
+            $accessToken = json_decode($token)->data->accessToken;
+
+            $method = 'GET_STATISTIC_LEAKAGE';
+            $client_id ='O000002093';
+            $timestamp = date('YmdHis',time());
+            $projectCode = 'P00000001204';
+            $year = date('Y');
+            $month = date('m');
+            $day = date('d');
+
+            $statsType = 1;
+            $sign = md5($accessToken.$client_id.$day.$mac.$method.$month.$projectCode.$statsType.$timestamp.$year.$APP_SECRET);
+
+//
+//
+           $url = 'https://open.snd02.com/invoke/router.as';
+//
+            $param = ['client_id'=>$client_id,'method'=>$method,'access_token'=>$accessToken,'timestamp'=>$timestamp,'sign'=>$sign,'projectCode'=>$projectCode,'mac'=>$mac,'statsType'=>$statsType,'year'=>$year,'month'=>$month,'day'=>$day];
+            $o = "";
+            foreach ( $param as $k => $v )
+            {
+                $o.= "$k=" . urlencode( $v ). "&" ;
+            }
+            $param = substr($o,0,-1);
+
+            $ch = curl_init();//初始化curl
+            curl_setopt($ch, CURLOPT_URL,$url);//抓取指定网页
+            curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
+            curl_setopt($ch, CURLOPT_POST, 1);//post提交方式
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+            //https请求需要加上此行
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 对认证证书来源的检查
+            $data = curl_exec($ch);//运行curl
+            curl_close($ch);
+
+            $info = json_decode($data)->data;
+            $loudian = array();
+            if($info){
+                $hou_ = date('H');
+                for ($i=0;$i<24;$i++){
+                    if($i <= $hou_){
+                        $loudian[] = 0;
+                    }else{
+                        $loudian[] = '-';
+                    }
+                }
+            }
+            //最近三个月的漏电报警
+            $start = date('Y-m-d 00:00',strtotime("-0 year -3 month -0 day"));
+            $end = date('Y-m-d H:i:s',time());
+            $loudian_baojing = TerminalAlarmLog::with('Mac')->where('typeNumber',2)->whereBetween('time',[$start,$end])->get();
+
+
+            session(['mac' => $mac]);
+        }
+        return view('admin/lot_leakage')->with('mac',$mac)->with('loudian',\GuzzleHttp\json_encode($loudian))->with('loudian_baojing',$loudian_baojing);
+    }
+    public function Alltemperature($mac){
+        if($mac){
+            $token = $this->mandunToken();
+            $APP_SECRET = '7B814218CC2A3EED32BD571059D58B2B';
+
+            $accessToken = json_decode($token)->data->accessToken;
+
+            $method = 'GET_STATISTIC_TEMPERATURE';
+            $client_id ='O000002093';
+            $timestamp = date('YmdHis',time());
+            $projectCode = 'P00000001204';
+            $year = date('Y');
+            $month = date('m');
+            $day = date('d');
+            $statsType = 1;
+            $sign = md5($accessToken.$client_id.$day.$mac.$method.$month.$projectCode.$statsType.$timestamp.$year.$APP_SECRET);
+            $url = 'https://open.snd02.com/invoke/router.as';
+//
+            $param = ['client_id'=>$client_id,'method'=>$method,'access_token'=>$accessToken,'timestamp'=>$timestamp,'sign'=>$sign,'projectCode'=>$projectCode,'mac'=>$mac,'statsType'=>$statsType,'year'=>$year,'month'=>$month,'day'=>$day];
+            $o = "";
+            foreach ( $param as $k => $v )
+            {
+                $o.= "$k=" . urlencode( $v ). "&" ;
+            }
+            $param = substr($o,0,-1);
+
+            $ch = curl_init();//初始化curl
+            curl_setopt($ch, CURLOPT_URL,$url);//抓取指定网页
+            curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
+            curl_setopt($ch, CURLOPT_POST, 1);//post提交方式
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+            //https请求需要加上此行
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 对认证证书来源的检查
+            $data = curl_exec($ch);//运行curl
+            curl_close($ch);
+
+            $info = json_decode($data)->data;
+
+
+            $wendu_a = array();
+            $wendu_b = array();
+            $wendu_c = array();
+            $wendu = array();
+            if($info){
+                $hou_ = date('H');
+                for ($i=0;$i<24;$i++){
+                    if($i <= $hou_){
+
+                        $wendu_a[] = 0;
+                        $wendu_b[] = 0;
+                        $wendu_c[] = 0;
+
+
+                    }else{
+                        $wendu_a[] = '-';
+                        $wendu_b[] = '-';
+                        $wendu_c[] = '-';
+                    }
+                }
+            }
+
+
+
+            //最近三个月的漏电报警
+            $start = date('Y-m-d 00:00',strtotime("-0 year -3 month -0 day"));
+            $end = date('Y-m-d H:i:s',time());
+            $wendu_baojing = TerminalAlarmLog::with('Mac')->where('typeNumber',7)->whereBetween('time',[$start,$end])->get();
+            session(['mac' => $mac]);
+        }
+        return view('admin/lot_temperature')->with('mac',$mac)->with('wendua',\GuzzleHttp\json_encode($wendu_a))->with('wendub',\GuzzleHttp\json_encode($wendu_b))->with('wenduc',\GuzzleHttp\json_encode($wendu_c))->with('wendu_baojing',$wendu_baojing);
+
+    }
+    public function AllleakageW($mac){
+        if($mac){
+            $Mac = Mac::where('mac',$mac)->first();
+            $start = date('Y-m-d H:i:s',strtotime(date("Y-m-d"),time()));
+            $end = date('Y-m-d H:i:s',time());
+
+            $data = TerminalAlarmLog::with('Mac')->where('typeNumber',2)->whereBetween('time',[$start,$end])->where('mac',$Mac->mac)->get();
+        }
+        //漏电报警
+        $type = TerminalAlarmLog::with('Mac')
+
+            ->where('typeNumber',2)
+
+            ->whereBetween('time',[$start,$end])
+            ->get();
+        $baojing = array();
+        $tmp = 0;
+        for ($i=0;$i<24;$i++){
+            $hou_ = date('H');
+            if($i <= $hou_){
+                if($type){
+                    if(is_array($type)){
+                        foreach ($type as $vvv){
+
+                            if(date('H',$vvv->time) == $i){
+                                $tmp++;
+                                $baojing[] = $tmp;
+                            }
+                        }
+                    }else{
+                        $baojing[] = 0;
+                    }
+
+                }
+
+            }else{
+                $baojing[] = '-';
+
+            }
+        }
+
+
+        //漏电预警
+        $type = TerminalAlarmLog::with('Mac')
+
+            ->where('typeNumber',12)
+
+            ->whereBetween('time',[$start,$end])
+            ->get();
+        $yujing = array();
+        $tmp = 0;
+        for ($i=0;$i<24;$i++){
+            $hou_ = date('H');
+            if($i <= $hou_){
+                if($type){
+                    if(is_array($type)){
+                        foreach ($type as $vvv){
+
+                            if(date('H',$vvv->time) == $i){
+                                $tmp++;
+                                $yujing[] = $tmp;
+                            }
+                        }
+                    }else{
+                        $yujing[] = 0;
+                    }
+
+                }
+
+            }else{
+                $yujing[] = '-';
+
+            }
+        }
+        session(['mac' => $mac]);
+        return view('admin/lot_leakageW')->with('data',$data)->with('mac',$mac)->with('baojing',\GuzzleHttp\json_encode($baojing))->with('yujing',\GuzzleHttp\json_encode($yujing));
+    }
+    public function temAlarm($mac){
+        if($mac){
+            $Mac = Mac::where('mac',$mac)->first();
+            $start = date('Y-m-d H:i:s',strtotime(date("Y-m-d"),time()));
+            $end = date('Y-m-d H:i:s',time());
+
+            $data = TerminalAlarmLog::with('Mac')->where('typeNumber',7)->whereBetween('time',[$start,$end])->where('mac',$Mac->mac)->get();
+        }
+        //漏电报警
+        $type = TerminalAlarmLog::with('Mac')
+
+            ->where('typeNumber',7)
+
+            ->whereBetween('time',[$start,$end])
+            ->get();
+        $baojing = array();
+        $tmp = 0;
+        for ($i=0;$i<24;$i++){
+            $hou_ = date('H');
+            if($i <= $hou_){
+                if($type){
+                    if(is_array($type)){
+                        foreach ($type as $vvv){
+
+                            if(date('H',$vvv->time) == $i){
+                                $tmp++;
+                                $baojing[] = $tmp;
+                            }
+                        }
+                    }else{
+                        $baojing[] = 0;
+                    }
+
+                }
+
+            }else{
+                $baojing[] = '-';
+
+            }
+        }
+
+
+        session(['mac' => $mac]);
+
+        return view('admin/lot_temAlarm')->with('data',$data)->with('mac',$mac)->with('baojing',\GuzzleHttp\json_encode($baojing));
+    }
+    public function help($mac){
+        if($mac){
+            $Mac = Mac::where('mac',$mac)->first();
+            $start = date('Y-m-d H:i:s',strtotime(date("Y-m-d"),time()));
+            $end = date('Y-m-d H:i:s',time());
+
+            $data = TerminalAlarmLog::with('Mac')->where('typeNumber',9)->whereBetween('time',[$start,$end])->where('mac',$Mac->mac)->get();
+        }
+        //漏电报警
+        $type = TerminalAlarmLog::with('Mac')
+
+            ->where('typeNumber',9)
+
+            ->whereBetween('time',[$start,$end])
+            ->get();
+        $baojing = array();
+        $tmp = 0;
+        for ($i=0;$i<24;$i++){
+            $hou_ = date('H');
+            if($i <= $hou_){
+                if($type){
+                    if(is_array($type)){
+                        foreach ($type as $vvv){
+
+                            if(date('H',$vvv->time) == $i){
+                                $tmp++;
+                                $baojing[] = $tmp;
+                            }
+                        }
+                    }else{
+                        $baojing[] = 0;
+                    }
+
+                }
+
+            }else{
+                $baojing[] = '-';
+
+            }
+        }
+
+
+        session(['mac' => $mac]);
+        return view('admin/lot_help')->with('data',$data)->with('mac',$mac)->with('baojing',\GuzzleHttp\json_encode($baojing));
+    }
+    public function duanlu($mac){
+        if($mac){
+            $Mac = Mac::where('mac',$mac)->first();
+            $start = date('Y-m-d H:i:s',strtotime(date("Y-m-d"),time()));
+            $end = date('Y-m-d H:i:s',time());
+
+            $data = TerminalAlarmLog::with('Mac')->where('typeNumber',1)->whereBetween('time',[$start,$end])->where('mac',$Mac->mac)->get();
+        }
+        //漏电报警
+        $type = TerminalAlarmLog::with('Mac')
+
+            ->where('typeNumber',1)
+
+            ->whereBetween('time',[$start,$end])
+            ->get();
+        $baojing = array();
+        $tmp = 0;
+        for ($i=0;$i<24;$i++){
+            $hou_ = date('H');
+            if($i <= $hou_){
+                if($type){
+                    if(is_array($type)){
+                        foreach ($type as $vvv){
+
+                            if(date('H',$vvv->time) == $i){
+                                $tmp++;
+                                $baojing[] = $tmp;
+                            }
+                        }
+                    }else{
+                        $baojing[] = 0;
+                    }
+
+                }
+
+            }else{
+                $baojing[] = '-';
+
+            }
+        }
+
+
+        session(['mac' => $mac]);
+        return view('admin/lot_duanlu')->with('data',$data)->with('mac',$mac)->with('baojing',\GuzzleHttp\json_encode($baojing));
+    }
+    public function dahuo($mac){
+        if($mac){
+            $Mac = Mac::where('mac',$mac)->first();
+            $start = date('Y-m-d H:i:s',strtotime(date("Y-m-d"),time()));
+            $end = date('Y-m-d H:i:s',time());
+
+            $data = TerminalAlarmLog::with('Mac')->where('typeNumber',11)->whereBetween('time',[$start,$end])->where('mac',$Mac->mac)->get();
+        }
+        //漏电报警
+        $type = TerminalAlarmLog::with('Mac')
+
+            ->where('typeNumber',11)
+
+            ->whereBetween('time',[$start,$end])
+            ->get();
+        $baojing = array();
+        $tmp = 0;
+        for ($i=0;$i<24;$i++){
+            $hou_ = date('H');
+            if($i <= $hou_){
+                if($type){
+                    if(is_array($type)){
+                        foreach ($type as $vvv){
+
+                            if(date('H',$vvv->time) == $i){
+                                $tmp++;
+                                $baojing[] = $tmp;
+                            }
+                        }
+                    }else{
+                        $baojing[] = 0;
+                    }
+
+                }
+
+            }else{
+                $baojing[] = '-';
+
+            }
+        }
+
+
+        session(['mac' => $mac]);
+        return view('admin/lot_dahuo')->with('data',$data)->with('mac',$mac)->with('baojing',\GuzzleHttp\json_encode($baojing));
+    }
+    public function sanxiang($mac){
+        if($mac){
+            $Mac = Mac::where('mac',$mac)->first();
+            $start = date('Y-m-d H:i:s',strtotime(date("Y-m-d"),time()));
+            $end = date('Y-m-d H:i:s',time());
+
+            $data = TerminalAlarmLog::with('Mac')->where('typeNumber',19)->whereBetween('time',[$start,$end])->where('mac',$Mac->mac)->get();
+        }
+        //漏电报警
+        $type = TerminalAlarmLog::with('Mac')
+
+            ->where('typeNumber',19)
+
+            ->whereBetween('time',[$start,$end])
+            ->get();
+        $baojing = array();
+        $tmp = 0;
+        for ($i=0;$i<24;$i++){
+            $hou_ = date('H');
+            if($i <= $hou_){
+                if($type){
+                    if(is_array($type)){
+                        foreach ($type as $vvv){
+
+                            if(date('H',$vvv->time) == $i){
+                                $tmp++;
+                                $baojing[] = $tmp;
+                            }
+                        }
+                    }else{
+                        $baojing[] = 0;
+                    }
+
+                }
+
+            }else{
+                $baojing[] = '-';
+
+            }
+        }
+
+
+        session(['mac' => $mac]);
+        return view('admin/lot_sanxiang')->with('data',$data)->with('mac',$mac)->with('baojing',\GuzzleHttp\json_encode($baojing));
+    }
+    public function voltageAlarm($mac){
+        if($mac){
+            $Mac = Mac::where('mac',$mac)->first();
+            $start = date('Y-m-d H:i:s',strtotime(date("Y-m-d"),time()));
+            $end = date('Y-m-d H:i:s',time());
+
+            $data = TerminalAlarmLog::with('Mac')->whereIn('typeNumber',[5,6,14,15])->whereBetween('time',[$start,$end])->where('mac',$Mac->mac)->get();
+        }
+        //漏电报警
+        $type = TerminalAlarmLog::with('Mac')
+
+            ->whereIn('typeNumber',[5,6])
+
+            ->whereBetween('time',[$start,$end])
+            ->get();
+        $baojing = array();
+        $tmp = 0;
+        for ($i=0;$i<24;$i++){
+            $hou_ = date('H');
+            if($i <= $hou_){
+                if($type){
+                    if(is_array($type)){
+                        foreach ($type as $vvv){
+
+                            if(date('H',$vvv->time) == $i){
+                                $tmp++;
+                                $baojing[] = $tmp;
+                            }
+                        }
+                    }else{
+                        $baojing[] = 0;
+                    }
+
+                }
+
+            }else{
+                $baojing[] = '-';
+
+            }
+        }
+
+
+        //漏电预警
+        $type = TerminalAlarmLog::with('Mac')
+
+            ->whereIn('typeNumber',[14,15])
+
+            ->whereBetween('time',[$start,$end])
+            ->get();
+        $yujing = array();
+        $tmp = 0;
+        for ($i=0;$i<24;$i++){
+            $hou_ = date('H');
+            if($i <= $hou_){
+                if($type){
+                    if(is_array($type)){
+                        foreach ($type as $vvv){
+
+                            if(date('H',$vvv->time) == $i){
+                                $tmp++;
+                                $yujing[] = $tmp;
+                            }
+                        }
+                    }else{
+                        $yujing[] = 0;
+                    }
+
+                }
+
+            }else{
+                $yujing[] = '-';
+
+            }
+        }
+        session(['mac' => $mac]);
+        return view('admin/lot_voltage')->with('data',$data)->with('mac',$mac)->with('baojing',\GuzzleHttp\json_encode($baojing))->with('yujing',\GuzzleHttp\json_encode($yujing));
+    }
+    public function overload($mac){
+        if($mac){
+            $Mac = Mac::where('mac',$mac)->first();
+            $start = date('Y-m-d H:i:s',strtotime(date("Y-m-d"),time()));
+            $end = date('Y-m-d H:i:s',time());
+
+            $data = TerminalAlarmLog::with('Mac')->whereIn('typeNumber',[3,4,13])->whereBetween('time',[$start,$end])->where('mac',$Mac->mac)->get();
+        }
+        //漏电报警
+        $type = TerminalAlarmLog::with('Mac')
+
+            ->whereIn('typeNumber',[3,4])
+
+            ->whereBetween('time',[$start,$end])
+            ->get();
+        $baojing = array();
+        $tmp = 0;
+        for ($i=0;$i<24;$i++){
+            $hou_ = date('H');
+            if($i <= $hou_){
+                if($type){
+                    if(is_array($type)){
+                        foreach ($type as $vvv){
+
+                            if(date('H',$vvv->time) == $i){
+                                $tmp++;
+                                $baojing[] = $tmp;
+                            }
+                        }
+                    }else{
+                        $baojing[] = 0;
+                    }
+
+                }
+
+            }else{
+                $baojing[] = '-';
+
+            }
+        }
+
+
+        //漏电预警
+        $type = TerminalAlarmLog::with('Mac')
+
+            ->where('typeNumber',13)
+
+            ->whereBetween('time',[$start,$end])
+            ->get();
+        $yujing = array();
+        $tmp = 0;
+        for ($i=0;$i<24;$i++){
+            $hou_ = date('H');
+            if($i <= $hou_){
+                if($type){
+                    if(is_array($type)){
+                        foreach ($type as $vvv){
+
+                            if(date('H',$vvv->time) == $i){
+                                $tmp++;
+                                $yujing[] = $tmp;
+                            }
+                        }
+                    }else{
+                        $yujing[] = 0;
+                    }
+
+                }
+
+            }else{
+                $yujing[] = '-';
+
+            }
+        }
+        session(['mac' => $mac]);
+        return view('admin/lot_overload')->with('data',$data)->with('mac',$mac)->with('baojing',\GuzzleHttp\json_encode($baojing))->with('yujing',\GuzzleHttp\json_encode($yujing));
     }
 }

@@ -1,29 +1,8 @@
-@extends('admin.lot_header')
+@extends('admin.lot_header_info')
 @section('content')
         <!--右侧内容-->
-        <div class="rightContent">
-            <div class="rightContentTop clearfix">
-                <div class="rightNav clearfix">
-                    <ul>
-                        <li>
-                            <a href="./index.html" class="active">首页</a>
-                            <span class="grayColor">&nbsp;/&nbsp;</span>
-                        </li>
-                        <li>
-                            <a href="#">北仑耶稣堂</a>
-                            <span class="grayColor">&nbsp;/&nbsp;</span>
-                        </li>
-                        <li>
-                            <a href="#">电气安全监管</a>
-                            <span class="grayColor">&nbsp;/&nbsp;</span>
-                        </li>
-                        <li>
-                            <a href="#" class="whiteColor">全部报警</a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="rightContents">
 
-            </div>
             <div class="rightBottom">
                 <div class="rightBottomBox">
                     <div class="rightEchart clearfix">

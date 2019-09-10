@@ -119,5 +119,136 @@
         </ul>
         <!--</div>-->
     </div>
+    <div class="bottomContent clearfix">
+        <!--侧边栏-->
+        <div class="slidContain">
+            <ul>
+                <li class="nav-item">
+                    <a href="javascript:;"><i class="my-icon nav-icon icon_1"></i><span>电气安全监管</span><i class="my-icon nav-more"></i></a>
+                    <ul>
+                        <li>
+                            <a href="{{url('/admin/lot/allAlarm')}}"><span>全部报警</span></a>
+                        </li>
+                        <li>
+                            <a href="{{url('/admin/lot/leakage/').'/'.$mac}}"><span>漏电流</span></a>
+                        </li>
+                        <li>
+                            <a href="{{url('/admin/lot/temperature/').'/'.$mac}}"><span>温度</span></a>
+                        </li>
+                        <li>
+                            <a href="{{url('/admin/lot/leakAlarm/').'/'.$mac}}"><span>漏电报警</span></a>
+                        </li>
+                        <li>
+                            <a href="{{url('/admin/lot/temAlarm/').'/'.$mac}}"><span>温度报警</span></a>
+                        </li>
+                        <li>
+                            <a href="{{url('/admin/lot/help/').'/'.$mac}}"><span>漏保自检</span></a>
+                        </li>
+                        <li>
+                            <a href="{{url('/admin/lot/duanlu/').'/'.$mac}}"><span>短路报警</span></a>
+                        </li>
+                        <li>
+                            <a href="{{url('/admin/lot/voltage/').'/'.$mac}}"><span>过欠压报警</span></a>
+                        </li>
+                        <li>
+                            <a href="{{url('/admin/lot/overload/').'/'.$mac}}"><span>过流过载</span></a>
+                        </li>
+                        <li>
+                            <a href="{{url('/admin/lot/dahuo/').'/'.$mac}}"><span>打火报警</span></a>
+                        </li>
+                        <li>
+                            <a href="{{url('/admin/lot/sanxiang/').'/'.$mac}}"><span>三相报警</span></a>
+                        </li>
 
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="#"><i class="my-icon nav-icon icon_2"></i><span>智慧能源管理</span><i
+                                class="my-icon nav-more"></i></a>
+                    <ul>
+                                {{--<li>--}}
+                                {{--<a href="./power.html"><span>电量</span></a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="./load.html"><span>负载</span></a>--}}
+                            {{--</li>--}}
+                            {{--<li>--}}
+                                {{--<a href="./control.html"><span>综合管理</span></a>--}}
+                            {{--</li>--}}
+                        <li>
+                            <a href="{{url('admin/lot/login').'/'.$info->company_id}}"><span>项目列表</span></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+		<script>
+		$(function () {
+			if (window.location.pathname.indexOf("projectHome") >= 0) {
+				$(".nav-item:eq(0) li:eq(0) a").css("color", "#fff");
+				$(".nav-item:eq(0) li:eq(0) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+			if (window.location.pathname.indexOf("leakage") >= 0) {
+				$(".nav-item:eq(0) li:eq(1) a").css("color", "#fff");
+				$(".nav-item:eq(0) li:eq(1) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+			if (window.location.pathname.indexOf("temperature") >= 0) {
+				$(".nav-item:eq(0) li:eq(2) a").css("color", "#fff");
+				$(".nav-item:eq(0) li:eq(2) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+			if (window.location.pathname.indexOf("leakAlarm") >= 0) {
+				$(".nav-item:eq(0) li:eq(3) a").css("color", "#fff");
+				$(".nav-item:eq(0) li:eq(3) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+if (window.location.pathname.indexOf("temAlarm") >= 0) {
+				$(".nav-item:eq(0) li:eq(4) a").css("color", "#fff");
+				$(".nav-item:eq(0) li:eq(4) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+if (window.location.pathname.indexOf("help") >= 0) {
+				$(".nav-item:eq(0) li:eq(5) a").css("color", "#fff");
+				$(".nav-item:eq(0) li:eq(5) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+if (window.location.pathname.indexOf("duanlu") >= 0) {
+				$(".nav-item:eq(0) li:eq(6) a").css("color", "#fff");
+				$(".nav-item:eq(0) li:eq(6) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+if (window.location.pathname.indexOf("voltage") >= 0) {
+				$(".nav-item:eq(0) li:eq(7) a").css("color", "#fff");
+				$(".nav-item:eq(0) li:eq(7) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+if (window.location.pathname.indexOf("overload") >= 0) {
+				$(".nav-item:eq(0) li:eq(8) a").css("color", "#fff");
+				$(".nav-item:eq(0) li:eq(8) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+if (window.location.pathname.indexOf("dahuo") >= 0) {
+				$(".nav-item:eq(0) li:eq(9) a").css("color", "#fff");
+				$(".nav-item:eq(0) li:eq(9) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+if (window.location.pathname.indexOf("sanxiang") >= 0) {
+				$(".nav-item:eq(0) li:eq(10) a").css("color", "#fff");
+				$(".nav-item:eq(0) li:eq(10) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+if (window.location.pathname.indexOf("stealingAlarm") >= 0) {
+				$(".nav-item:eq(0) li:eq(11) a").css("color", "#fff");
+				$(".nav-item:eq(0) li:eq(11) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+if (window.location.pathname.indexOf("power") >= 0) {
+				$(".nav-item:eq(0) li:eq(0) a").css("color", "#fff");
+				$(".nav-item:eq(0) li:eq(0) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+if (window.location.pathname.indexOf("load") >= 0) {
+				$(".nav-item:eq(1) li:eq(1) a").css("color", "#fff");
+				$(".nav-item:eq(1) li:eq(1) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+if (window.location.pathname.indexOf("control") >= 0) {
+				$(".nav-item:eq(1) li:eq(2) a").css("color", "#fff");
+				$(".nav-item:eq(1) li:eq(2) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+if (window.location.pathname.indexOf("projectList") >= 0) {
+				$(".nav-item:eq(1) li:eq(3) a").css("color", "#fff");
+				$(".nav-item:eq(1) li:eq(3) a").css("background-color", "rgba(0, 0, 0, .4)");
+			}
+		})
+		</script>
+		
 @yield('content')

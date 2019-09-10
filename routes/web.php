@@ -38,8 +38,17 @@ Route::group(['middleware'=>['web','Admin']],function() {
     Route::get('/admin/alarm','Admin\TerminalController@alarmLog');//告警数据导入
 
     Route::get('/admin/lot/power/{mac}','Admin\TerminalController@lotPower');//电量
-    Route::get('/admin/lot/allAlarm','Admin\TerminalController@allAlarm');//电量
-    Route::get('/admin/lot/leakage','Admin\TerminalController@allLeakage');//电量
+    Route::get('/admin/lot/allAlarm','Admin\TerminalController@allAlarm');
+    Route::get('/admin/lot/leakage/{mac}','Admin\TerminalController@allLeakage');
+    Route::get('/admin/lot/temperature/{mac}','Admin\TerminalController@Alltemperature');
+    Route::get('/admin/lot/leakAlarm/{mac}','Admin\TerminalController@AllleakageW');
+    Route::get('/admin/lot/temAlarm/{mac}','Admin\TerminalController@temAlarm');
+    Route::get('/admin/lot/help/{mac}','Admin\TerminalController@help');
+    Route::get('/admin/lot/duanlu/{mac}','Admin\TerminalController@duanlu');
+    Route::get('/admin/lot/dahuo/{mac}','Admin\TerminalController@dahuo');
+    Route::get('/admin/lot/sanxiang/{mac}','Admin\TerminalController@sanxiang');
+    Route::get('/admin/lot/voltage/{mac}','Admin\TerminalController@voltageAlarm');
+    Route::get('/admin/lot/overload/{mac}','Admin\TerminalController@overload');
 
 
 

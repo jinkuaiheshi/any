@@ -1,7 +1,7 @@
-@extends('admin.lot_header')
+@extends('admin.lot_header_info')
 @section('content')
         <!--右侧内容-->
-        <div class="rightContent">
+        <div class="rightContents">
             <div class="rightContentTop clearfix">
                 <div class="rightNav fl clearfix">
                     <ul>

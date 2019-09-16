@@ -184,69 +184,69 @@
         </div>
 		<script>
 		$(function () {
-			if (window.location.pathname.indexOf("projectHome") >= 0) {
-				$(".nav-item:eq(0) li:eq(0) a").css("color", "#fff");
-				$(".nav-item:eq(0) li:eq(0) a").css("background-color", "rgba(0, 0, 0, .4)");
+			if (window.location.pathname.indexOf("allAlarm") >= 0) {
+				$(".nav-item:eq(0) li:eq(0) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 			if (window.location.pathname.indexOf("leakage") >= 0) {
-				$(".nav-item:eq(0) li:eq(1) a").css("color", "#fff");
-				$(".nav-item:eq(0) li:eq(1) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(0) li:eq(1) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 			if (window.location.pathname.indexOf("temperature") >= 0) {
-				$(".nav-item:eq(0) li:eq(2) a").css("color", "#fff");
-				$(".nav-item:eq(0) li:eq(2) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(0) li:eq(2) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 			if (window.location.pathname.indexOf("leakAlarm") >= 0) {
-				$(".nav-item:eq(0) li:eq(3) a").css("color", "#fff");
-				$(".nav-item:eq(0) li:eq(3) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(0) li:eq(3) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 if (window.location.pathname.indexOf("temAlarm") >= 0) {
-				$(".nav-item:eq(0) li:eq(4) a").css("color", "#fff");
-				$(".nav-item:eq(0) li:eq(4) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(0) li:eq(4) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 if (window.location.pathname.indexOf("help") >= 0) {
-				$(".nav-item:eq(0) li:eq(5) a").css("color", "#fff");
-				$(".nav-item:eq(0) li:eq(5) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(0) li:eq(5) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 if (window.location.pathname.indexOf("duanlu") >= 0) {
-				$(".nav-item:eq(0) li:eq(6) a").css("color", "#fff");
-				$(".nav-item:eq(0) li:eq(6) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(0) li:eq(6) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 if (window.location.pathname.indexOf("voltage") >= 0) {
-				$(".nav-item:eq(0) li:eq(7) a").css("color", "#fff");
-				$(".nav-item:eq(0) li:eq(7) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(0) li:eq(7) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 if (window.location.pathname.indexOf("overload") >= 0) {
-				$(".nav-item:eq(0) li:eq(8) a").css("color", "#fff");
-				$(".nav-item:eq(0) li:eq(8) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(0) li:eq(8) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 if (window.location.pathname.indexOf("dahuo") >= 0) {
-				$(".nav-item:eq(0) li:eq(9) a").css("color", "#fff");
-				$(".nav-item:eq(0) li:eq(9) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(0) li:eq(9) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 if (window.location.pathname.indexOf("sanxiang") >= 0) {
-				$(".nav-item:eq(0) li:eq(10) a").css("color", "#fff");
-				$(".nav-item:eq(0) li:eq(10) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(0) li:eq(10) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 if (window.location.pathname.indexOf("stealingAlarm") >= 0) {
-				$(".nav-item:eq(0) li:eq(11) a").css("color", "#fff");
-				$(".nav-item:eq(0) li:eq(11) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(0) li:eq(11) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 if (window.location.pathname.indexOf("power") >= 0) {
-				$(".nav-item:eq(0) li:eq(0) a").css("color", "#fff");
-				$(".nav-item:eq(0) li:eq(0) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(0) li:eq(0) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 if (window.location.pathname.indexOf("load") >= 0) {
-				$(".nav-item:eq(1) li:eq(1) a").css("color", "#fff");
-				$(".nav-item:eq(1) li:eq(1) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(1) li:eq(1) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 if (window.location.pathname.indexOf("control") >= 0) {
-				$(".nav-item:eq(1) li:eq(2) a").css("color", "#fff");
-				$(".nav-item:eq(1) li:eq(2) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(1) li:eq(2) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 if (window.location.pathname.indexOf("projectList") >= 0) {
-				$(".nav-item:eq(1) li:eq(3) a").css("color", "#fff");
-				$(".nav-item:eq(1) li:eq(3) a").css("background-color", "rgba(0, 0, 0, .4)");
+				$(".nav-item:eq(1) li:eq(3) a").css("color", "#fff").css("background-color", "rgba(0, 0, 0, .4)");
+
 			}
 		})
 		</script>

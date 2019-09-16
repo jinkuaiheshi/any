@@ -131,7 +131,7 @@
                                 <li class="fl">
                                     <div class="top clearfix">
                                         <div class="fl"><i class="backImg"></i>&nbsp;
-                                            <div class="floor">{{$value['name']}}</div>
+                                            <div class="floor">{{$value['name']}}({{$value['IMEI']}})</div>
                                         </div>
                                         <div class="btnDetail fl"><i class="backImg1 fl"></i><span
                                                     class="fl">详情</span>

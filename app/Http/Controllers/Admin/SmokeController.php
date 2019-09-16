@@ -430,6 +430,7 @@ class SmokeController extends CommonController
                        $pro['time'] = $vvvv->at;
                        $pro['status'] = $vvvv->value;
                        $pro['cid'] = $v->cid;
+                       $pro['IMEI'] = $v->IMEI;
                        $pros[] = $pro;
 
                    }
@@ -444,7 +445,7 @@ class SmokeController extends CommonController
     }
     public function info($cid){
         if($cid){
-            $log = SmokeLog::with('Company')->where('cid',$cid)->wherein('status',[1,4,5,10,14,15])->get();
+            $log = SmokeLog::with('Company','Smoke')->where('cid',$cid)->wherein('status',[1,4,5,10,14,15])->get();
             $end = str_replace(" ","T",date("Y-m-d H:i:s"));
             $start = str_replace(" ","T",date("Y-m-d H:i:s",strtotime("-0 year -3 month -0 day")));
             $ch = curl_init();

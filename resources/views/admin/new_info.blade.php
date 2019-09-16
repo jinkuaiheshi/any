@@ -146,7 +146,7 @@
                                 @foreach($log as $value)
                                 <tr>
                                     <td>{{$value->Company->name}}</td>
-                                    <td>{{$value->cid}}</td>
+                                    <td>{{$value->Smoke->IMEI}}</td>
                                     <td>@if($value->status == 1)烟雾报警@elseif($value->status == 4)低压@elseif($value->status == 5)传感器故障@elseif($value->status == 14)测试键在正常状态按下@elseif($value->status == 15)测试键在低压状态按下
                                             @endif
                                     </td>

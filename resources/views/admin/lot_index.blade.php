@@ -29,7 +29,7 @@
     </style>
 </head>
 
-<body style="width: 100%; height: auto;overflow: hidden; ">
+<body style="width: 100%;height: auto; /*overflow: hidden;*/">
 <div class="dataLayout">
     <div class="dataTextLogo">
         <a href="{{url('admin/map')}}" style="color: #fff;text-decoration: none;" >智慧用电安全监管服务平台</a>
@@ -71,7 +71,7 @@
         <div class="box-title">实时告警列表
             {{--<a class="stopBtn" id="stopSound" href="javascript:;">关闭报警声音</a>--}}
         </div>
-        <table class="table" border="0" cellspacing="0" cellpadding="0">
+        <table class="table1" border="0" cellspacing="0" cellpadding="0">
             <thead>
             <tr style="background-color: #2456c7;">
                 <th>排序</th>
@@ -143,7 +143,7 @@
             var ratioX = window.innerWidth / document.body.offsetWidth;
             var ratioY = window.innerHeight / document.body.offsetHeight;
             var leftMap = 420;
-            $('.dataLayout').css("transform", "scale(" + ratioX + "," + ratioY + ")");
+            //$('.dataLayout').css("transform", "scale(" + ratioX + "," + ratioY + ")");
         }
         $('.dataLayout').css('height',$(window).height());
 

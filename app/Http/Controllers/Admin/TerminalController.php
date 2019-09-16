@@ -1898,25 +1898,62 @@ class TerminalController extends CommonController
 
 
             $wendu_a = array();
-            $wendu_b = array();
-            $wendu_c = array();
+
             $wendu = array();
+            $number = array();
+            $max = 0 ;
             if($info){
                 $hou_ = date('H');
                 for ($i=0;$i<24;$i++){
-                    if($i <= $hou_){
+                    if($i <= $hou_) {
+                        if ($i < 10) {
+                            $time = '0' . $i;
+                            if (isset($info->$time)) {
+                                foreach ($info->$time as $vv) {
+                                    $number[] = $vv->tempN;
+                                    $number[] = $vv->tempB;
+                                    $number[] = $vv->tempC;
+                                    $number[] = $vv->tempA;
+                                }
 
-                        $wendu_a[] = 0;
-                        $wendu_b[] = 0;
-                        $wendu_c[] = 0;
+                                $max = max($number);
+                                $number = array();
+                                if ($max == 0) {
+                                    $wendu_a[] = 0;
+                                } else {
+                                    $wendu_a[] = $max;
+                                }
+                            }
+
+
+                        }else{
+                            $max = 0;
+                            $time = (string)$i;
+                            if (isset($info->$time)) {
+                                foreach ($info->$time as $vv) {
+                                    $number[] = $vv->tempN;
+                                    $number[] = $vv->tempB;
+                                    $number[] = $vv->tempC;
+                                    $number[] = $vv->tempA;
+                                }
+
+                                $max = max($number);
+                                $number = array();
+                                if ($max == 0) {
+                                    $wendu_a[] = 0;
+                                } else {
+                                    $wendu_a[] = $max;
+                                }
+
+                            }
+                        }
 
 
                     }else{
                         $wendu_a[] = '-';
-                        $wendu_b[] = '-';
-                        $wendu_c[] = '-';
                     }
                 }
+
             }
 
 
@@ -1927,7 +1964,7 @@ class TerminalController extends CommonController
             $wendu_baojing = TerminalAlarmLog::with('Mac')->where('typeNumber',7)->whereBetween('time',[$start,$end])->get();
             session(['mac' => $mac]);
         }
-        return view('admin/lot_temperature')->with('mac',$mac)->with('wendua',\GuzzleHttp\json_encode($wendu_a))->with('wendub',\GuzzleHttp\json_encode($wendu_b))->with('wenduc',\GuzzleHttp\json_encode($wendu_c))->with('wendu_baojing',$wendu_baojing);
+        return view('admin/lot_temperature')->with('mac',$mac)->with('wendua',\GuzzleHttp\json_encode($wendu_a))->with('wendu_baojing',$wendu_baojing);
 
     }
     public function AllleakageW($mac){

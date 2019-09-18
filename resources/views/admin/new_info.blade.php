@@ -7,34 +7,12 @@
     <div class="navbar navbar-default topNav">
         <div class="navbar-header">
             <div class="navLogo">
-                <div class="img"><img src="images/logo.png" alt="" /></div>
+                <div class="img"><a href="{{url('/admin/index')}}"><img src="{{asset('resources/assets/smoke/images/logo.png')}}" alt="" /></a></div>
                 <div class="titleLogo">智慧式用电安全监管与电能管理平台</div>
             </div>
         </div>
         <ul id="shownav" class="nav navbar-nav collapse navbar-collapse">
-            {{--<li>--}}
-                {{--<div class="noiceIcon"></div>--}}
-            {{--</li>--}}
-            {{--<li>--}}
-                {{--<a href="#" class="mainFontColor">--}}
-                    {{--<div>报警</div>--}}
-                    {{--<div class="flexDiv infoNumber"></div>--}}
-                {{--</a>--}}
-            {{--</li>--}}
-            {{--<li>--}}
-                {{--<a class="dropdown" data-toggle="dropdown" href="">安云智联<span class="caret"></span></a>--}}
-                {{--<ul class="dropdown-menu">--}}
-                    {{--<li>--}}
-                        {{--<a href="./index.html" class="mainFontColor">管理平台</a>--}}
-                    {{--</li>--}}
-                    {{--<li>--}}
-                        {{--<a href="./record.html" class="mainFontColor">操作日志</a>--}}
-                    {{--</li>--}}
-                {{--</ul>--}}
-            {{--</li>--}}
-            {{--<li>--}}
-                {{--<a href="#" class="mainFontColor" data-toggle="modal" data-target="#myModal">修改密码</a>--}}
-            {{--</li>--}}
+
             <li>
                 <a href="{{url('/admin/logout')}}" class="mainFontColor">退出</a>
             </li>
@@ -45,19 +23,7 @@
         <!--侧边栏-->
         <div class="slidContain">
             <ul>
-                <li class="nav-item ">
-                    <a href="javascript:;"><i class="my-icon nav-icon icon_1"></i><span>烟感安全监管</span><i
-                                class="my-icon nav-more"></i></a>
-                    <ul>
-                        <!-- <li>
-                            <a href="./projectHome.html"><span>全部报警</span></a>
-                        </li> -->
-                        <li>
-                            <a href="./smoke.html"><span>烟感</span></a>
-                        </li>
 
-                    </ul>
-                </li>
                 <li class="nav-item">
                     <a href="#"><i class="my-icon nav-icon icon_2"></i><span>智慧能源管理</span><i
                                 class="my-icon nav-more"></i></a>
@@ -72,8 +38,7 @@
                                 <a href="./control.html"><span>综合管理</span></a>
                             </li> -->
                         <li>
-                            <a href="{{url('admin/new/pro')}}">
-                                </i><span>项目列表</span></a>
+                            <a href="{{url('admin/new/smoke/login').'/'.$company_id}}"><span>项目列表</span></a>
                         </li>
                     </ul>
                 </li>
@@ -147,7 +112,7 @@
                                 <tr>
                                     <td>{{$value->Company->name}}</td>
                                     <td>{{$value->Smoke->IMEI}}</td>
-                                    <td>@if($value->status == 1)烟雾报警@elseif($value->status == 4)低压@elseif($value->status == 5)传感器故障@elseif($value->status == 14)测试键在正常状态按下@elseif($value->status == 15)测试键在低压状态按下
+                                    <td>@if($value->status == 1)烟雾报警@elseif($value->status == 10)拆卸报警@elseif($value->status == 4)低压@elseif($value->status == 5)传感器故障@elseif($value->status == 14)测试键在正常状态按下@elseif($value->status == 15)测试键在低压状态按下
                                             @endif
                                     </td>
                                     <td>{{$value->time}}</td>

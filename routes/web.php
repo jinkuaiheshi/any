@@ -50,7 +50,7 @@ Route::group(['middleware'=>['web','Admin']],function() {
     Route::get('/admin/lot/voltage/{mac}','Admin\TerminalController@voltageAlarm');
     Route::get('/admin/lot/overload/{mac}','Admin\TerminalController@overload');
 
-
+    Route::get('/admin/diqu','Admin\TerminalController@diqu');
 
 
     Route::get('/admin/smoke','Admin\SmokeController@index');//赛特维尔烟感

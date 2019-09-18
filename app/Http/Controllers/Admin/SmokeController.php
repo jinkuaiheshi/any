@@ -372,6 +372,7 @@ class SmokeController extends CommonController
     }
     public function login($company_id){
         if($company_id){
+
             $smoke = Smoke::with('Company')->where('company_id',$company_id)->get();
             $pro = array();
             $pros = array();
@@ -394,6 +395,7 @@ class SmokeController extends CommonController
                         $pro['time'] = $vvvv->at;
                         $pro['status'] = $vvvv->value;
                         $pro['cid'] = $v->cid;
+                        $pro['IMEI'] = $v->IMEI;
                         $pros[] = $pro;
 
                     }
@@ -402,7 +404,7 @@ class SmokeController extends CommonController
 
             }
         }
-        return view('admin/new_pro')->with('smoke',$pros);
+        return view('admin/new_pro')->with('smoke',$pros)->with('company_id',$company_id);
     }
     public function new_pro(){
         $islogin = session('islogin');
@@ -445,7 +447,8 @@ class SmokeController extends CommonController
     }
     public function info($cid){
         if($cid){
-            $log = SmokeLog::with('Company','Smoke')->where('cid',$cid)->wherein('status',[1,4,5,10,14,15])->get();
+            $company_id = SmokeLog::where('cid',$cid)->first();
+            $log = SmokeLog::with('Company','Smoke')->where('cid',$cid)->wherein('status',[1,4,5,10,14,15])->orderBy('time','DESC')->take(20)->get();
             $end = str_replace(" ","T",date("Y-m-d H:i:s"));
             $start = str_replace(" ","T",date("Y-m-d H:i:s",strtotime("-0 year -3 month -0 day")));
             $ch = curl_init();
@@ -489,7 +492,7 @@ class SmokeController extends CommonController
             }
 
 
-            return view('admin/new_info')->with('time',\GuzzleHttp\json_encode($time))->with('zhuangtai',\GuzzleHttp\json_encode($value))->with('time2',\GuzzleHttp\json_encode($time2))->with('nongdu',\GuzzleHttp\json_encode($value2))->with('log',$log);
+            return view('admin/new_info')->with('time',\GuzzleHttp\json_encode($time))->with('zhuangtai',\GuzzleHttp\json_encode($value))->with('time2',\GuzzleHttp\json_encode($time2))->with('nongdu',\GuzzleHttp\json_encode($value2))->with('log',$log)->with('company_id',$company_id->company_id);
         }
     }
     public function add(Request $request){

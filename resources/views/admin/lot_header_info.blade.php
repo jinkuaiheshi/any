@@ -99,7 +99,7 @@
     <div class="navbar navbar-default topNav">
         <div class="navbar-header">
             <div class="navLogo">
-                <div class="img"><img src="{{asset('resources/assets/lot/images/logo.png')}}" alt="" /></div>
+                <div class="img"><img src="{{asset('resources/assets/smoke/images/logo.png')}}" alt="" /></div>
                 <div class="titleLogo">智慧式用电安全监管与电能管理平台</div>
             </div>
         </div>
@@ -129,6 +129,7 @@
                         <li>
                             <a href="{{url('/admin/lot/allAlarm')}}"><span>全部报警</span></a>
                         </li>
+
                         <li>
                             <a href="{{url('/admin/lot/leakage/').'/'.$mac}}"><span>漏电流</span></a>
                         </li>
@@ -158,6 +159,9 @@
                         </li>
                         <li>
                             <a href="{{url('/admin/lot/sanxiang/').'/'.$mac}}"><span>三相报警</span></a>
+                        </li>
+                        <li>
+                            <a href="{{url('/admin/lot/shishi/').'/'.$mac}}"><span>实时数据</span></a>
                         </li>
 
                     </ul>

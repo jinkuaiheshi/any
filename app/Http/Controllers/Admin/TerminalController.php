@@ -1836,17 +1836,63 @@ class TerminalController extends CommonController
             curl_close($ch);
 
             $info = json_decode($data)->data;
+
             $loudian = array();
             if($info){
                 $hou_ = date('H');
                 for ($i=0;$i<24;$i++){
-                    if($i <= $hou_){
-                        $loudian[] = 0;
+                    if($i <= $hou_) {
+                        if ($i < 10) {
+                            $time = '0' . $i;
+                            if (isset($info->$time)) {
+                                foreach ($info->$time as $vv) {
+                                    $number[] = $vv->leakageValue;
+
+                                }
+
+                                $max = max($number);
+
+                                $number = array();
+                                if ($max == 0) {
+                                    $loudian[] = 0;
+                                } else {
+                                    $loudian[] = $max;
+                                }
+                            }else{
+                                $loudian[] = 0;
+                            }
+
+
+                        }else{
+                            $max = 0;
+                            $time = (string)$i;
+                            if (isset($info->$time)) {
+                                foreach ($info->$time as $vv) {
+                                    $number[] = $vv->leakageValue;
+
+                                }
+
+                                $max = max($number);
+                                $number = array();
+                                if ($max == 0) {
+                                    $loudian[] = 0;
+                                } else {
+                                    $loudian[] = $max;
+                                }
+
+                            }else{
+                                $loudian[] = 0;
+                            }
+                        }
+
+
                     }else{
                         $loudian[] = '-';
                     }
                 }
+
             }
+            
             //最近三个月的漏电报警
             $start = date('Y-m-d 00:00',strtotime("-0 year -3 month -0 day"));
             $end = date('Y-m-d H:i:s',time());
@@ -1923,6 +1969,8 @@ class TerminalController extends CommonController
                                 } else {
                                     $wendu_a[] = $max;
                                 }
+                            }else{
+                                $wendu_a[] = 0;
                             }
 
 
@@ -1945,7 +1993,9 @@ class TerminalController extends CommonController
                                     $wendu_a[] = $max;
                                 }
 
-                            }
+                            }else{
+                            $wendu_a[] = 0;
+                        }
                         }
 
 
@@ -2423,5 +2473,17 @@ class TerminalController extends CommonController
         }
         session(['mac' => $mac]);
         return view('admin/lot_overload')->with('data',$data)->with('mac',$mac)->with('baojing',\GuzzleHttp\json_encode($baojing))->with('yujing',\GuzzleHttp\json_encode($yujing));
+    }
+    public function diqu(){
+        $company = Company::where('area_code','330203')->get();
+        $shebei = array();
+       foreach ($company as $v){
+           $mon = Monitor::with('Company')->where('company_id',$v->id)->get();
+           foreach ($mon as $vv){
+               $shebei[] = $vv;
+           }
+       }
+
+        return view('admin/ceshi')->with('data',$shebei);
     }
 }

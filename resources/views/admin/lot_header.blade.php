@@ -99,7 +99,7 @@
     <div class="navbar navbar-default topNav">
         <div class="navbar-header">
             <div class="navLogo">
-                <div class="img"><img src="{{asset('resources/assets/lot/images/logo.png')}}" alt="" /></div>
+                <div class="img"><img src="{{asset('resources/assets/smoke/images/logo.png')}}" alt="" /></div>
                 <div class="titleLogo">智慧式用电安全监管与电能管理平台</div>
             </div>
         </div>

@@ -7,7 +7,7 @@
     <div class="navbar navbar-default topNav">
         <div class="navbar-header">
             <div class="navLogo">
-                <div class="img"><img src="{{asset('resources/assets/smoke/images/logo.png')}}" alt="" /></div>
+                <div class="img"><a href="{{url('/admin/index')}}"><img src="{{asset('resources/assets/smoke/images/logo.png')}}" alt="" /></a></div>
                 <div class="titleLogo">智慧式用电安全监管与电能管理平台</div>
             </div>
         </div>
@@ -46,48 +46,7 @@
         <!--侧边栏-->
         <div class="slidContain">
             <ul>
-                <li class="nav-item">
-                    <a href="javascript:;"><i class="my-icon nav-icon icon_1"></i><span>烟感安全监管</span><i
-                                class="my-icon nav-more"></i></a>
-                    <ul>
-                        <!-- <li>
-                            <a href="./projectHome.html"><span>全部报警</span></a>
-                        </li> -->
-                        <li>
-                            <a href="./smoke.html"><span>烟感</span></a>
-                        </li>
-                        <!-- <li>
-                                <a href="./temperature.html"><span>温度</span></a>
-                            </li>
-                            <li>
-                                <a href="./leakageW.html"><span>漏电报警</span></a>
-                            </li>
-                            <li>
-                                <a href="./temperatureW.html"><span>温度报警</span></a>
-                            </li>
-                            <li>
-                                <a href="./shortC.html"><span>漏保自检</span></a>
-                            </li>
-                            <li>
-                                <a href="./shortW.html"><span>短路报警</span></a>
-                            </li>
-                            <li>
-                                <a href="./OUvoltage.html"><span>过欠压</span></a>
-                            </li>
-                            <li>
-                                <a href="./overload.html"><span>过流过载</span></a>
-                            </li>
-                            <li>
-                                <a href="./sparkingW.html"><span>打火报警</span></a>
-                            </li>
-                            <li>
-                                <a href="./threephaseW.html"><span>三相报警</span></a>
-                            </li>
-                            <li>
-                                <a href="./stealingAlarm.html"><span>窃电报警</span></a>
-                            </li> -->
-                    </ul>
-                </li>
+
                 <li class="nav-item">
                     <a href="#"><i class="my-icon nav-icon icon_2"></i><span>智慧能源管理</span><i
                                 class="my-icon nav-more"></i></a>
@@ -102,7 +61,7 @@
                                 <a href="./control.html"><span>综合管理</span></a>
                             </li> -->
                         <li>
-                            <a href="{{url('admin/new/pro')}}"><span>项目列表</span></a>
+                            <a href="{{url('admin/new/smoke/login').'/'.$company_id}}"><span>项目列表</span></a>
                         </li>
                     </ul>
                 </li>

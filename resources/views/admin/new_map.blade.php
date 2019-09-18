@@ -274,7 +274,7 @@
         });
         marker.setMap(map);
         marker.on('click', function (e) {
-            window.open("{{url('/admin/lot/login/')}}"+ '/' +data.fid);
+            window.open("{{url('/admin/new/smoke/login')}}"+ '/' +data.fid);
         })
         return marker;
     }

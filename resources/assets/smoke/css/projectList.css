@@ -17,8 +17,8 @@
 .topNav {
 	height: 60px;
 	line-height: 60px;
-	/* background: #251c6d; */
-	background-color:#409EFF;
+	 background: #251c6d;
+
 	position: fixed;
 	width: 100%;
 	top: 0;

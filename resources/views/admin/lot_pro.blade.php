@@ -16,7 +16,6 @@
                     </ul>
                 </div>
                 <div class="list clearfix marginBtm15">
-
                     <div class="listProject clearfix">
                         <ul>
                             @foreach($pro as $value)

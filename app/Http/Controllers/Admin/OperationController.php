@@ -75,7 +75,7 @@ class OperationController extends CommonController
                 $offline[$k]['city_code']=$uuu[$v->CustomerName.'_city'];
                 $offline[$k]['area_code']=$uuu[$v->CustomerName.'_area'];
                 $offline[$k]['address']=$uuu[$v->CustomerName.'_address'];
-                $offline[$k]['SimCard']=$v->SimCard;
+                $offline[$k]['SimCard']=$v->SimCard.'SIM';
 
             }else{
 
@@ -249,7 +249,7 @@ class OperationController extends CommonController
 
             $dev =  Redis::hMGet('dev',(int)$vaule);
             foreach ($dev as $vvv){
-                $offline_E[$k]['SimCard'] = json_decode($vvv)->iccid;
+                $offline_E[$k]['SimCard'] = json_decode($vvv)->iccid.'SIM';
 
             }
 

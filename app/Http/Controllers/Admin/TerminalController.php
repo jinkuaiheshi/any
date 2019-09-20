@@ -1892,7 +1892,7 @@ class TerminalController extends CommonController
                 }
 
             }
-            
+
             //最近三个月的漏电报警
             $start = date('Y-m-d 00:00',strtotime("-0 year -3 month -0 day"));
             $end = date('Y-m-d H:i:s',time());
@@ -1902,6 +1902,122 @@ class TerminalController extends CommonController
             session(['mac' => $mac]);
         }
         return view('admin/lot_leakage')->with('mac',$mac)->with('loudian',\GuzzleHttp\json_encode($loudian))->with('loudian_baojing',$loudian_baojing);
+    }
+    public function shishi($mac){
+        if($mac){
+            $token = $this->mandunToken();
+            $APP_SECRET = '7B814218CC2A3EED32BD571059D58B2B';
+
+            $accessToken = json_decode($token)->data->accessToken;
+
+            $method = 'GET_BOX_CHANNELS_REALTIME';
+            $client_id ='O000002093';
+            $timestamp = date('YmdHis',time());
+            $projectCode = 'P00000001204';
+            $sign = md5($accessToken.$client_id.$mac.$method.$projectCode.$timestamp.$APP_SECRET);
+            $url = 'https://open.snd02.com/invoke/router.as';
+            $param = ['client_id'=>$client_id,'method'=>$method,'access_token'=>$accessToken,'timestamp'=>$timestamp,'sign'=>$sign,'projectCode'=>$projectCode,'mac'=>$mac];
+            $o = "";
+            foreach ( $param as $k => $v )
+            {
+                $o.= "$k=" . urlencode( $v ). "&" ;
+            }
+            $param = substr($o,0,-1);
+            $ch = curl_init();//初始化curl
+            curl_setopt($ch, CURLOPT_URL,$url);//抓取指定网页
+            curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
+            curl_setopt($ch, CURLOPT_POST, 1);//post提交方式
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+            //https请求需要加上此行
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 对认证证书来源的检查
+            $data = curl_exec($ch);//运行curl
+            curl_close($ch);
+
+            $info = json_decode($data)->data;
+
+        }
+        return view('admin/lot_shishi')->with('mac',$mac)->with('data',$info);
+    }
+    public function close($mac,$addr){
+        if($mac){
+            $token = $this->mandunToken();
+            $APP_SECRET = '7B814218CC2A3EED32BD571059D58B2B';
+
+            $accessToken = json_decode($token)->data->accessToken;
+
+            $method = 'PUT_BOX_CONTROL';
+            $client_id ='O000002093';
+            $timestamp = date('YmdHis',time());
+            $projectCode = 'P00000001204';
+            $cmd = 'OCSWITCH';
+            $value1 = 'close';
+            $value2 = $addr;
+
+            $sign = md5($accessToken.$client_id.$cmd.$mac.$method.$projectCode.$timestamp.$value1.$value2.$APP_SECRET);
+            $url = 'https://open.snd02.com/invoke/router.as';
+            $param = ['client_id'=>$client_id,'method'=>$method,'access_token'=>$accessToken,'timestamp'=>$timestamp,'sign'=>$sign,'projectCode'=>$projectCode,'mac'=>$mac,'cmd'=>$cmd,'value2'=>$value2,'value1'=>$value1];
+            $o = "";
+            foreach ( $param as $k => $v )
+            {
+                $o.= "$k=" . urlencode( $v ). "&" ;
+            }
+            $param = substr($o,0,-1);
+            $ch = curl_init();//初始化curl
+            curl_setopt($ch, CURLOPT_URL,$url);//抓取指定网页
+            curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
+            curl_setopt($ch, CURLOPT_POST, 1);//post提交方式
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+            //https请求需要加上此行
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 对认证证书来源的检查
+            $data = curl_exec($ch);//运行curl
+            curl_close($ch);
+            
+            if(json_decode($data)->success){
+                return redirect(url()->previous())->with('message', '操作成功')->with('type','success')->withInput();
+            }
+        }
+    }
+    public function open($mac,$addr){
+        if($mac){
+            $token = $this->mandunToken();
+            $APP_SECRET = '7B814218CC2A3EED32BD571059D58B2B';
+
+            $accessToken = json_decode($token)->data->accessToken;
+
+            $method = 'PUT_BOX_CONTROL';
+            $client_id ='O000002093';
+            $timestamp = date('YmdHis',time());
+            $projectCode = 'P00000001204';
+            $cmd = 'OCSWITCH';
+            $value1 = 'open';
+            $value2 = $addr;
+
+            $sign = md5($accessToken.$client_id.$cmd.$mac.$method.$projectCode.$timestamp.$value1.$value2.$APP_SECRET);
+            $url = 'https://open.snd02.com/invoke/router.as';
+            $param = ['client_id'=>$client_id,'method'=>$method,'access_token'=>$accessToken,'timestamp'=>$timestamp,'sign'=>$sign,'projectCode'=>$projectCode,'mac'=>$mac,'cmd'=>$cmd,'value2'=>$value2,'value1'=>$value1];
+            $o = "";
+            foreach ( $param as $k => $v )
+            {
+                $o.= "$k=" . urlencode( $v ). "&" ;
+            }
+            $param = substr($o,0,-1);
+            $ch = curl_init();//初始化curl
+            curl_setopt($ch, CURLOPT_URL,$url);//抓取指定网页
+            curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
+            curl_setopt($ch, CURLOPT_POST, 1);//post提交方式
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+            //https请求需要加上此行
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 对认证证书来源的检查
+            $data = curl_exec($ch);//运行curl
+            curl_close($ch);
+
+            if(json_decode($data)->success){
+                return redirect(url()->previous())->with('message', '操作成功')->with('type','success')->withInput();
+            }
+        }
     }
     public function Alltemperature($mac){
         if($mac){

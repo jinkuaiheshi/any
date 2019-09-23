@@ -2605,10 +2605,10 @@ class TerminalController extends CommonController
 
     public function tick(Request $request){
         if ($request->isMethod('POST')) {
-     
+
             $detect = $request['detect'];
             file_put_contents('/tmp/mandun_test', $detect . "\n", FILE_APPEND);
-            return $detect;
+            echo  $detect;
 
         }else{
             $raw_input = file_get_contents('php://input');

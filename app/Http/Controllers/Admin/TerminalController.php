@@ -2608,13 +2608,13 @@ class TerminalController extends CommonController
             $raw_input = file_get_contents('php://input');
 
             file_put_contents('/tmp/mandun_test', 'yang2'.$raw_input . "\n", FILE_APPEND);
-
+            echo $raw_input;
 
         }else{
             $raw_input = file_get_contents('php://input');
 
             file_put_contents('/tmp/mandun_test', 'yang'.$raw_input . "\n", FILE_APPEND);
-
+            echo $raw_input;
         }
 
 

@@ -2611,10 +2611,9 @@ class TerminalController extends CommonController
             echo  $detect;
 
         }else{
-            $raw_input = file_get_contents('php://input');
-
-            file_put_contents('/tmp/mandun_test', 'yang'.$raw_input . "\n", FILE_APPEND);
-            return $raw_input;
+            $detect = $request['detect'];
+            file_put_contents('/tmp/mandun_test', $detect . "\n", FILE_APPEND);
+            echo  $detect;
         }
 
 

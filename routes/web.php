@@ -11,6 +11,7 @@
 |
 */
 Route::any('/admin/smoke/tick','Admin\SmokeController@tick');//赛特维尔烟感
+Route::any('/admin/mandun/tick','Admin\TerminalController@tick');//曼顿推送
 Route::any('/admin/login','Admin\AdminController@login' );
 Route::get('/admin/logout','Admin\AdminController@logout' );
 

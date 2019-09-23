@@ -2061,7 +2061,7 @@ class TerminalController extends CommonController
 
             $wendu_a = array();
 
-            $wendu = array();
+
             $number = array();
             $max = 0 ;
             if($info){
@@ -2601,5 +2601,24 @@ class TerminalController extends CommonController
        }
 
         return view('admin/ceshi')->with('data',$shebei);
+    }
+
+    public function tick(Request $request){
+        if ($request->isMethod('POST')) {
+            $raw_input = file_get_contents('php://input');
+
+            file_put_contents('/tmp/mandun_test', 'yang2'.$raw_input . "\n", FILE_APPEND);
+
+
+        }else{
+            $raw_input = file_get_contents('php://input');
+
+            file_put_contents('/tmp/mandun_test', 'yang'.$raw_input . "\n", FILE_APPEND);
+
+        }
+
+
+
+
     }
 }

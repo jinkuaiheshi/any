@@ -13,6 +13,6 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         //
-        '/admin/smoke/tick',
+        '/admin/smoke/tick','/admin/mandun/tick',
     ];
 }

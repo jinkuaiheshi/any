@@ -2608,7 +2608,8 @@ class TerminalController extends CommonController
 
             $detect = $request['detect'];
             file_put_contents('/tmp/mandun_test', $detect . "\n", FILE_APPEND);
-            echo  $detect;
+            $res = array('msg'=>$detect,'code'=>0);
+            echo json_encode($res);
 
         }else{
             $detect = $request['detect'];

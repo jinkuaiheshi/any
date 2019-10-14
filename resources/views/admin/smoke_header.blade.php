@@ -145,6 +145,7 @@
                         <span class="s-icon"><i class="ti-signal"></i></span>
                         <span class="s-text">设备列表</span>
                     </a></li>
+
                 {{--<li class="with-sub"> <a href="{{url('/admin/terminal/user')}}" class="waves-effect  waves-light">--}}
                         {{--<span class="s-icon"><i class="ti-user"></i></span>--}}
                         {{--<span class="s-text">用户管理</span>--}}

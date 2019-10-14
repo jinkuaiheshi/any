@@ -581,4 +581,46 @@ class SmokeController extends CommonController
 
 
     }
+    public function week($company_id){
+        return view('admin/new_port')->with('company_id',$company_id);
+    }
+    public function week_port(Request $request){
+        if ($request->isMethod('POST')) {
+            $start = $request['week'];
+            $end = date('Y-m-d',strtotime($start)+86400*6);
+            $data = SmokeLog::whereBetween('time',[$start,$end])->where('company_id',$request['company_id'])->get();
+
+            $time = array();
+            $value = array();
+            foreach ($data as $v){
+                $time[] = $v->time;
+                $value[] = $v->status;
+
+            }
+
+
+
+        }
+        return view('admin/new_port_smoke')->with('log', $data)->with('data','success')->with('company_id',$request['company_id'])->with('time',\GuzzleHttp\json_encode($time))->with('zhuangtai',\GuzzleHttp\json_encode($value));
+    }
+    public function month($company_id){
+        return view('admin/new_port_month')->with('company_id',$company_id);
+    }
+    public function month_port(Request $request){
+        if ($request->isMethod('POST')) {
+            $start = date('Y-m-d',strtotime($request['year'].$request['month'].'01'));
+
+            $end = date('Y-m-d',strtotime($request['year'].$request['month'].'31'));
+            $data = SmokeLog::whereBetween('time',[$start,$end])->where('company_id',$request['company_id'])->get();
+
+            $time = array();
+            $value = array();
+            foreach ($data as $v){
+                $time[] = $v->time;
+                $value[] = $v->status;
+
+            }
+        }
+        return view('admin/new_port_smoke_month')->with('log', $data)->with('data','success')->with('company_id',$request['company_id'])->with('time',\GuzzleHttp\json_encode($time))->with('zhuangtai',\GuzzleHttp\json_encode($value));
+    }
 }

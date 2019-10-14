@@ -63,6 +63,12 @@
                         <li>
                             <a href="{{url('admin/new/smoke/login').'/'.$company_id}}"><span>项目列表</span></a>
                         </li>
+                        <li>
+                            <a href="{{url('admin/new/smoke/week').'/'.$company_id}}"><span>设备周报</span></a>
+                        </li>
+                        <li>
+                            <a href="{{url('admin/new/smoke/month').'/'.$company_id}}"><span>设备月报</span></a>
+                        </li>
                     </ul>
                 </li>
             </ul>

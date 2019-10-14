@@ -70,6 +70,10 @@ Route::group(['middleware'=>['web','Admin']],function() {
     Route::get('/admin/new/pro','Admin\SmokeController@new_pro');//赛特维尔烟感
     Route::get('/admin/smoke/info/{cid}','Admin\SmokeController@info');//赛特维尔烟感
     Route::get('/admin/new/smoke/login/{company_id}','Admin\SmokeController@login');//赛特维尔烟感
+    Route::get('/admin/new/smoke/week/{company_id}','Admin\SmokeController@week');//赛特维尔烟感
+    Route::get('/admin/new/smoke/month/{company_id}','Admin\SmokeController@month');//赛特维尔烟感
+    Route::post('/admin/new/smoke/week/port','Admin\SmokeController@week_port');//赛特维尔烟感
+    Route::post('/admin/new/smoke/month/port','Admin\SmokeController@month_port');//赛特维尔烟感
 
 
     //运营中心
@@ -77,6 +81,8 @@ Route::group(['middleware'=>['web','Admin']],function() {
     Route::post('/admin/ajax/getCity/{province}','Admin\OperationController@getCity');
     Route::post('/admin/ajax/getArea/{city}','Admin\OperationController@getArea');
     Route::post('/admin/ajax/getStreet/{area}','Admin\OperationController@getStreet');
+
+    Route::post('/admin/ajax/getWeek','Admin\OperationController@getWeek');
     Route::get('/admin/yyyy','Admin\OperationController@yyyy');
     Route::get('/admin/zzz','Admin\OperationController@zzz');//脚本返回地址所属街道
 

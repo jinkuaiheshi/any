@@ -381,4 +381,51 @@ class OperationController extends CommonController
 
         dd($aa);
     }
+    public function getWeek(Request $request){
+
+        $year = $request['year'];
+        $month = $request['month'];
+        $tmp = '01';
+        $week = date('w',strtotime($year.$month.$tmp));
+        if($week == 1){
+
+            $start = date('Y-m-d',strtotime($year.$month.$tmp));
+            $end= date('Y-m-d',strtotime($year.$month.$tmp+6));
+
+        }else{
+            if($week==0){
+                $jian = 1;
+            }else{
+                $jian = 8-$week;
+            }
+            $start = date('Y-m-d',strtotime($year.$month.$tmp+$jian));
+            $end = date('Y-m-d',strtotime($year.$month.$tmp+$jian+6));
+
+        }
+        $str = '';
+        $str .= '<option value='.$start.'>'.$start.'--'.$end.'</option>';
+
+        if(date('m',strtotime($end)) == $month){
+            $start = date('Y-m-d',strtotime($end.'+1 days'));
+            $end = date('Y-m-d',strtotime($end .'+7 days'));
+            $str .= '<option value='.$start.'>'.$start.'--'.$end.'</option>';
+        }
+        if(date('m',strtotime($end)) == $month){
+            $start = date('Y-m-d',strtotime($end.'+1 days'));
+            $end = date('Y-m-d',strtotime($end .'+7 days'));
+            $str .= '<option value='.$start.'>'.$start.'--'.$end.'</option>';
+        }
+        if(date('m',strtotime($end)) == $month){
+            $start = date('Y-m-d',strtotime($end.'+1 days'));
+            $end = date('Y-m-d',strtotime($end .'+7 days'));
+            $str .= '<option value='.$start.'>'.$start.'--'.$end.'</option>';
+        }
+        if(date('m',strtotime($end)) == $month){
+            $start = date('Y-m-d',strtotime($end.'+1 days'));
+            $end = date('Y-m-d',strtotime($end .'+7 days'));
+            $str .= '<option value='.$start.'>'.$start.'--'.$end.'</option>';
+        }
+
+        return $str;
+    }
 }

@@ -17,5 +17,15 @@
     <script src=" {{asset('resources/assets/smoke/js/jquery-3.4.1.min.js')}}"></script>
     <script src="{{asset('resources/assets/smoke/js/echarts.js')}} "></script>
     <script src="{{asset('resources/assets/smoke/js/china.js')}}"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+
+    <!-- jQuery -->
+    <script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+
+    <!-- DataTables -->
+    <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+
 </head>
 @yield('content')

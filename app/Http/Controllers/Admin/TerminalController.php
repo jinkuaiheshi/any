@@ -2591,16 +2591,38 @@ class TerminalController extends CommonController
         return view('admin/lot_overload')->with('data',$data)->with('mac',$mac)->with('baojing',\GuzzleHttp\json_encode($baojing))->with('yujing',\GuzzleHttp\json_encode($yujing));
     }
     public function diqu(){
-        $company = Company::where('area_code','330203')->get();
-        $shebei = array();
-       foreach ($company as $v){
-           $mon = Monitor::with('Company')->where('company_id',$v->id)->get();
-           foreach ($mon as $vv){
-               $shebei[] = $vv;
-           }
-       }
+        $company = Company::whereIn('provider_id',[5,15,20,21,23,26,27])->get();
 
-        return view('admin/ceshi')->with('data',$shebei);
+        $shebei = array();
+        $zong = array();
+       foreach ($company as $v){
+           $mon = Monitor::with('Company','Organization')->where('company_id',$v->id)->get();
+           foreach ($mon as $vv){
+                if(substr($vv->code,0,1) == 'E'){
+                    $vaule = substr($vv->code,1,7);
+
+                    $dev =  Redis::hMGet('dev',(int)$vaule);
+                    foreach ($dev as $vvv){
+                        $shebei['SimCard'] = json_decode($vvv)->iccid;
+
+                    }
+
+                }else{
+                    $shebei['SimCard'] = $vv->simcard;
+                }
+
+               $shebei['name'] = $vv->Company->name;
+               $shebei['code'] = $vv->code;
+               $shebei['org'] = isset($vv->Organization->name)?$vv->Organization->name:'';
+               $shebei['address'] = $vv->Company->address;
+
+                $zong[] = $shebei;
+
+           }
+
+       }
+      
+        return view('admin/ceshi')->with('data',$zong);
     }
 
     public function tick(Request $request){
@@ -2616,14 +2638,33 @@ class TerminalController extends CommonController
                 $mac = $request['mac'];
                 $content = $request['content'];
                 file_put_contents('/tmp/mandun_test', $key . "\n" .$mac ."\n" .$content, FILE_APPEND);
-
             }
-
-
         }
+    }
+    public function sim(){
+        $mon = Monitor::with('Company','Organization')->where('is_deleted',0)->get();
 
+        foreach ($mon as $vv){
+            if(substr($vv->code,0,1) == 'E'){
+                $vaule = substr($vv->code,1,7);
 
+                $dev =  Redis::hMGet('dev',(int)$vaule);
+                foreach ($dev as $vvv){
+                    $shebei['SimCard'] = json_decode($vvv)->iccid;
+                }
 
-
+            }else{
+                $shebei['SimCard'] = $vv->simcard;
+            }
+            $company = Company::where('id',$vv->company_id)->first();
+            $provider = Provider::where('id',$company->provider_id)->first();
+            $shebei['provider'] =$provider->name;
+            $shebei['name'] = $vv->Company->name;
+            $shebei['code'] = $vv->code;
+            $shebei['org'] = isset($vv->Organization->name)?$vv->Organization->name:'';
+            $shebei['address'] = $vv->Company->address;
+            $zong[] = $shebei;
+        }
+        return view('admin/ceshi')->with('data',$zong);
     }
 }

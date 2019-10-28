@@ -110,7 +110,7 @@
                     <a href="{{url('/admin/lot')}}" target="_blank"><li>智慧末端</li></a>
                     <a href="#"><li>故障电弧</li></a>
                     <a href="{{url('/admin/new/smoke')}}" target="_blank"><li>无线烟感</li></a>
-                    <a href="#"><li>燃气报警器</li></a>
+                    <a href="{{url('/admin/gas')}}"><li>燃气报警器</li></a>
                     <a href="#"><li>水压水位</li></a>
                     <a href="#"><li>信息传输装置</li></a>
                 </ul>

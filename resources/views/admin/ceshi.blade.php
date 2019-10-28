@@ -11,9 +11,13 @@
             <table class="table table-striped table-bordered dataTable" id="tab" >
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>名称</th>
+                    <th>设备号</th>
+                    <th>服务商</th>
 
-                    <th>创建时间</th>
+                    <th>监控点</th>
+                    <th>地址</th>
+                    <th>sim</th>
 
 
 
@@ -22,10 +26,12 @@
                 <tbody>
                 @foreach($data as $v)
                     <tr>
-                        <td>{{$v->Company->name}}</td>
-
-                        <td>{{$v->code}}</td>
-
+                        <td>{{$v['name']}}</td>
+                        <td>{{$v['code']}}</td>
+                        <td>{{$v['provider']}}</td>
+                        <td>{{$v['org']}}</td>
+                        <td>{{$v['address']}}</td>
+                        <td>{{'_SIM_'.$v['SimCard']}}</td>
 
 
                     </tr>

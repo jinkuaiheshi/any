@@ -11,6 +11,7 @@
 |
 */
 Route::any('/admin/smoke/tick','Admin\SmokeController@tick');//赛特维尔烟感
+Route::any('/admin/gas/tick','Admin\GasController@tick');//赛特维尔可燃气体
 Route::any('/admin/mandun/tick','Admin\TerminalController@tick');//曼顿推送
 Route::any('/admin/login','Admin\AdminController@login' );
 Route::get('/admin/logout','Admin\AdminController@logout' );
@@ -55,6 +56,7 @@ Route::group(['middleware'=>['web','Admin']],function() {
     Route::get('/admin/lot/open/{mac}/{addr}','Admin\TerminalController@open');
 
     Route::get('/admin/diqu','Admin\TerminalController@diqu');
+    Route::get('/admin/sim','Admin\TerminalController@sim');//SIMka
 
 
     Route::get('/admin/smoke','Admin\SmokeController@index');//赛特维尔烟感
@@ -74,6 +76,9 @@ Route::group(['middleware'=>['web','Admin']],function() {
     Route::get('/admin/new/smoke/month/{company_id}','Admin\SmokeController@month');//赛特维尔烟感
     Route::post('/admin/new/smoke/week/port','Admin\SmokeController@week_port');//赛特维尔烟感
     Route::post('/admin/new/smoke/month/port','Admin\SmokeController@month_port');//赛特维尔烟感
+
+
+    Route::get('/admin/gas','Admin\GasController@gas');//赛特维尔可燃气体
 
 
     //运营中心

@@ -12,7 +12,13 @@
         <span class="time" id="time">00 : 00 : 00</span>
     </div>
     <div class="currentUser">
-        当前登录用户：<span class="currentUserSpan">超级管理员</span>
+        当前登录用户：<span class="currentUserSpan">@if($info->type==1)
+        超级管理员
+        @elseif($info->type==2)
+服务商
+        @elseif($info->type==3)
+企业
+        @endif</span>
     </div>
     <div class="dataTotal">
         <!--总接入企业和 总监控点-->
@@ -269,6 +275,7 @@
             '慈溪市': [121.497, 30.1536],
             '市辖区': [121.425, 31.2261],
             '嘉兴市': [121.014, 30.6988],
+            '台州市': [121.289, 28.2478],
 
         };
         var convertData = function (data) { // 处理数据函数

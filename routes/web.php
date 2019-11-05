@@ -79,6 +79,8 @@ Route::group(['middleware'=>['web','Admin']],function() {
 
 
     Route::get('/admin/gas','Admin\GasController@gas');//赛特维尔可燃气体
+    Route::get('/admin/gas/map','Admin\GasController@gas_map');//赛特维尔可燃气体
+    Route::get('/admin/new/gas/login/{company_id}','Admin\GasController@login');//赛特维尔可燃气体
 
 
     //运营中心

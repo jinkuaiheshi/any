@@ -245,13 +245,98 @@ class SmokeController extends CommonController
 
             }
 
+        }elseif($islogin->type == 3){
+
+            $company = 1;
+            $data = Smoke::where('company_id',$islogin->company_id)->count();
+
+            //地图坐标
+
+            $map = DB::table('smoke')
+                ->where('company_id',$islogin->company_id)
+                ->select('company_id', DB::raw('count(company_id) as coms'))
+                ->groupBy('company_id')
+                ->get();
+
+
+
+
+            $tmps = array();
+            $tmp = array();
+            foreach ($map as $value){
+
+                $companys = Company::with('City')->where('id',$value->company_id)->first();
+                $tmp['name'] =$companys->City->name;
+                $tmp['value'] = $value->coms;
+                $tmps = array_prepend($tmps,$tmp);
+
+            }
+            //告警分类
+            $alarmgroup = DB::table('smoke_log')
+                ->where('company_id',$islogin->company_id)
+                ->select('status', DB::raw('count(status) as nums'))
+
+                ->groupBy('status')
+                ->get();
+
+            $fenbu = array();
+            $fenbus = array();
+
+            foreach ($alarmgroup as $value ){
+                if($value->status==7){
+                    $fenbu['name']='正常';
+                }
+                if($value->status==1){
+                    $fenbu['name']='烟雾报警';
+                }
+                if($value->status==2){
+                    $fenbu['name']='设备静音';
+                }
+                if($value->status==4){
+                    $fenbu['name']='低压';
+                }
+                if($value->status==5){
+                    $fenbu['name']='传感器故障';
+                }
+                if($value->status==8){
+                    $fenbu['name']='指示模块已接收平台下发单次静音指令';
+                }
+                if($value->status==9){
+                    $fenbu['name']='指示模块已接收平台下发连续静音指令';
+                }
+
+                if($value->status==10){
+                    $fenbu['name']='拆卸报警';
+                }
+                if($value->status==11){
+                    $fenbu['name']='拆卸恢复';
+                }
+                if($value->status==14){
+                    $fenbu['name']='测试键在正常状态按下';
+                }
+                if($value->status==15){
+                    $fenbu['name']='测试键在低压状态按下';
+                }
+
+                $fenbu['value'] = $value->nums;
+                $fenbus[] = $fenbu;
+                //设备状态
+
+                $time = date('Y-m-d 00:00',strtotime("-0 year -3 month -0 day"));
+                $ok = SmokeLog::where('status',7)->where('company_id',$islogin->company_id)->where('time','>=',$time)->count();
+                $no = SmokeLog::wherein('status',[1,4,5,10,14,15])->where('company_id',$islogin->company_id)->where('time','>=',$time)->count();
+                $alarmType = array($ok,$no);
+
+                $newAlarm = SmokeLog::with('Company','Smoke')->where('company_id',$islogin->company_id)->take(5)->orderBy('time','DESC')->where('status',14)->orwhere('status',1)->get();
+
+            }
         }
 
         return view('admin/new_smoke')->with('data',$data)->with('company',$company)->with('map1',\GuzzleHttp\json_encode($tmps))->with('fenbus',json_encode($fenbus))->with('newAlarm',$newAlarm)->with('alarmType',json_encode($alarmType));
     }
     public function new_map(){
         $islogin = session('islogin');
-        if($islogin->type == 1){
+        if($islogin->type == 1) {
             $companys = Smoke::All()->groupBy('company_id')->count();
             $data = Smoke::All()->count();
 
@@ -366,9 +451,106 @@ class SmokeController extends CommonController
 
 
 
+            return view('admin/new_map')->with('data',$data)->with('company',$companys)->with('map',json_encode($maps))->with('mapDate',json_encode($mapDate));
+        }elseif($islogin->type == 3){
+            $companys = 1;
+            $data = Smoke::where('company_id',$islogin->company_id)->count();
 
+            //
+            $smoke = Smoke::where('company_id',$islogin->company_id)->groupby('company_id')->get();
+
+            $map = array();
+            $maps= array();
+            foreach ($smoke as $v ){
+                $company = Company::where('id',$v->company_id)->first();
+                //查看他下面的烟感是否有报警的
+
+                $map['flag'] = 1;
+                $map['fid'] = $company->id;;
+                $map['fLong'] =$company->lng;
+                $map['fLati'] =$company->lat;
+                $map['content'] =$company->name;
+                $map['show'] = 'true';
+                $maps[] = $map;
+
+            }
+
+            //地图json
+            $smoke = Smoke::groupby('company_id')->get();
+            $json = array();
+            $mapDate = array();
+            array_push($mapDate,array(
+                'id' => 0,
+                'pId' => -1,
+                'name' => '全国',
+                'open' => true,
+                'checked' => true
+            ));
+            foreach ($smoke as $v){
+                $company = Company::where('id',$v->company_id)->first();
+
+                if(!isset($json[$company->id])) {
+                    if (!isset($json[$company->province_code])) {
+                        $json[$company->province_code]['id'] = $company->province_code;
+                        $json[$company->province_code]['pId'] = 0;
+                        $province = Province::where('code', $company->province_code)->first();
+
+                        $json[$company->province_code]['name'] = $province->name;
+                        $json[$company->province_code]['open'] = false;
+                        $json[$company->province_code]['checked'] = true;
+                        $mapDate[] = $json[$company->province_code];
+                    }
+
+                    if (!isset($json[$company->city_code])) {
+                        $json[$company->city_code]['id'] = $company->city_code;
+                        $json[$company->city_code]['pId'] = $company->province_code;
+                        $city = City::where('code', $company->city_code)->first();
+
+                        $json[$company->city_code]['name'] = $city->name;
+                        $json[$company->city_code]['open'] = false;
+                        $json[$company->city_code]['checked'] = true;
+                        $mapDate[] = $json[$company->city_code];
+                    }
+                    if (!isset($json[$company->area_code])) {
+                        $json[$company->area_code]['id'] = $company->area_code;
+                        $json[$company->area_code]['pId'] = $company->city_code;
+                        $area = Area::where('code', $company->area_code)->first();
+
+                        $json[$company->area_code]['name'] = $area->name;
+                        $json[$company->area_code]['open'] = false;
+                        $json[$company->area_code]['checked'] = true;
+                        $mapDate[] = $json[$company->area_code];
+                    }
+                    if (!isset($json[$company->street_code])) {
+                        $json[$company->street_code]['id'] = $company->street_code;
+                        $json[$company->street_code]['pId'] = $company->area_code;
+                        $street = Street::where('code', $company->street_code)->first();
+
+                        $json[$company->street_code]['name'] = $street->name;
+                        $json[$company->street_code]['open'] = false;
+                        $json[$company->street_code]['checked'] = true;
+                        $mapDate[] = $json[$company->street_code];
+                    }
+                    if (!isset($json[$company->id])) {
+                        $json[$company->id]['id'] = $company->id;
+                        $json[$company->id]['pId'] = $company->street_code;
+
+
+                        $json[$company->id]['name'] = $company->name;
+                        $json[$company->id]['open'] = true;
+                        $json[$company->id]['checked'] = true;
+                        $json[$company->id]['url'] = '/admin/new/smoke/login/' . $company->id;
+                        $mapDate[] = $json[$company->id];
+                    }
+                }
+            }
+
+
+
+
+            return view('admin/new_map')->with('data',$data)->with('company',$companys)->with('map',json_encode($maps))->with('mapDate',json_encode($mapDate));
         }
-        return view('admin/new_map')->with('data',$data)->with('company',$companys)->with('map',json_encode($maps))->with('mapDate',json_encode($mapDate));
+
     }
     public function login($company_id){
         if($company_id){
@@ -523,12 +705,18 @@ class SmokeController extends CommonController
             $resolved_body = \Util::resolveBody($raw_input);
             if($resolved_body['ds_id'] == '3200_0_5503'){
                 $smoke = Smoke::where('cid',$resolved_body['dev_id'])->first();
-                $smokeLog = new  SmokeLog();
-                $smokeLog->status = $resolved_body['value'];
-                $smokeLog->time = date('Y-m-d H:i:s',substr($resolved_body['at'],0,10));
-                $smokeLog->cid = $resolved_body['dev_id'];
-                $smokeLog->company_id = $smoke->company_id;
-                $smokeLog->save();
+
+                if($smoke){
+                    $smokeLog = new  SmokeLog();
+                    $smokeLog->status = $resolved_body['value'];
+                    $smokeLog->time = date('Y-m-d H:i:s',substr($resolved_body['at'],0,10));
+                    $smokeLog->cid = $resolved_body['dev_id'];
+                    $smokeLog->company_id = $smoke->company_id;
+                    $smokeLog->save();
+                }else{
+                    dd(123);
+                }
+
                 //打电话
                 if($resolved_body['value'] == 1||$resolved_body['value'] == 4||$resolved_body['value'] == 5||$resolved_body['value'] == 14||$resolved_body['value'] == 15||$resolved_body['value'] == 10){
 

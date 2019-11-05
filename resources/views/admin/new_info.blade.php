@@ -101,6 +101,85 @@
                             <table class="table table-bordered " style="margin: 8px 0 0 0;table-layout:fixed">
                                 <thead>
                                 <tr>
+                                    <th>设备状态</th>
+                                    <th>状态解释</th>
+
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>1</td>
+                                        <td>烟雾报警</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>设备静音</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>低压</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>传感器故障</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>状态正常</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>指示模块已接收平台下发单次静音指令</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td>指示模块已接收平台下发连续静音指令</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>拆卸报警</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>11</td>
+                                        <td>拆卸恢复</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>14</td>
+                                        <td>测试键在正常状态按下</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>15</td>
+                                        <td>测试键在低压状态按下</td>
+
+                                    </tr>
+
+
+
+
+
+                                </tbody>
+
+
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="rightTable">
+                        <div class="tableBody">
+                            <table class="table table-bordered " style="margin: 8px 0 0 0;table-layout:fixed">
+                                <thead>
+                                <tr>
                                     <th>公司名称</th>
                                     <th>设备号</th>
                                     <th>报警类型</th>
@@ -210,7 +289,7 @@
                 height: '70%'
             },
             xAxis: {
-                name: '单位',
+                name: '时间',
                 data: {!! $time !!},
                 axisLine: {
                     lineStyle: {
@@ -228,7 +307,7 @@
                 }
             },
             yAxis: {
-                name: '单位',
+                name: '状态',
                 axisLine: {
                     lineStyle: {
                         color: '#797979'
@@ -264,7 +343,7 @@
                 height: '70%'
             },
             xAxis: {
-                name: '单位',
+                name: '时间',
                 data: {!! $time2 !!},
                 axisLine: {
                     lineStyle: {
@@ -282,7 +361,7 @@
                 }
             },
             yAxis: {
-                name: '单位',
+                name: '浓度',
                 axisLine: {
                     lineStyle: {
                         color: '#797979'

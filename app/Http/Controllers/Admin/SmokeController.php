@@ -714,7 +714,7 @@ class SmokeController extends CommonController
                     $smokeLog->company_id = $smoke->company_id;
                     $smokeLog->save();
                 }else{
-                    dd(123);
+                    return $resolved_body;
                 }
 
                 //打电话

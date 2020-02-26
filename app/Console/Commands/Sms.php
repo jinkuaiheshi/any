@@ -3,6 +3,8 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Redis;
+use App\Service\AliSms;
 
 class Sms extends Command
 {
@@ -18,7 +20,7 @@ class Sms extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'redis';
 
     /**
      * Create a new command instance.
@@ -38,7 +40,7 @@ class Sms extends Command
     public function handle()
     {
         $dev =  Redis::hMGet('dev','60');
-        if($dev){
+        if(!$dev){
             AliSms::sendSms(AliSms::$defaultSignName,'SMS_172883345','18768534692',array('name'=> 'redis','time'=>date('Y-m-d H:i:s'),'rule'=>'服务器'));
         }
     }

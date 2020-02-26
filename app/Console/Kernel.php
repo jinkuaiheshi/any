@@ -38,8 +38,8 @@ class Kernel extends ConsoleKernel
      *
      * @return void
      */
-    protected function commands()
-    {
-        require base_path('routes/console.php');
-    }
+//    protected function commands()
+//    {
+//        require base_path('routes/console.php');
+//    }
 }

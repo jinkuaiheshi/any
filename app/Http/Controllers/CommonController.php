@@ -257,4 +257,40 @@ class CommonController extends Controller
             $value .= ' ';
         }
     }
+    public function getZhihui_Token(){
+
+        $userName = 'duijie';
+        $passWord = 'admin';
+        $param=['userName'=>$userName,'passWord'=>$passWord];
+        $url='public/httpsLogin';
+        $post_url='http://211.91.56.3:8100/IFCSI/'.$url;
+        //        $param = ['token'=>$this->token,'rows'=>999,'Customer'=>'Chin0'];
+
+        $o = "";
+
+        foreach ( $param as $k => $v )
+        {
+            $o.= "$k=" . urlencode( $v ). "&" ;
+        }
+        $param = substr($o,0,-1);
+
+
+        $ch = curl_init();//初始化curl
+        curl_setopt($ch, CURLOPT_URL,$post_url);//抓取指定网页
+        curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
+        curl_setopt($ch, CURLOPT_POST, 1);//post提交方式
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $param);
+        //https请求需要加上此行
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 对认证证书来源的检查
+        $data = curl_exec($ch);//运行curl
+        $data=json_decode($data);
+        dd($data);
+        // $info=$data->data->userdata->token;
+        $token = json_decode($data->data)->userdata->token;
+        curl_close($ch);
+
+        session(['zhihui_token' => $token]);
+        return $token;
+    }
 }

@@ -754,8 +754,6 @@ class SmokeController extends CommonController
                     }
 
                 }
-
-
             }
 
         }else{
@@ -769,9 +767,16 @@ class SmokeController extends CommonController
 
 
     }
+    public function validate(Request $request, array $rules, array $messages = [], array $customAttributes = [])
+    {
+        $request = asin();
+    }
+
     public function week($company_id){
         return view('admin/new_port')->with('company_id',$company_id);
+
     }
+
     public function week_port(Request $request){
         if ($request->isMethod('POST')) {
             $start = $request['week'];
@@ -785,8 +790,6 @@ class SmokeController extends CommonController
                 $value[] = $v->status;
 
             }
-
-
 
         }
         return view('admin/new_port_smoke')->with('log', $data)->with('data','success')->with('company_id',$request['company_id'])->with('time',\GuzzleHttp\json_encode($time))->with('zhuangtai',\GuzzleHttp\json_encode($value));

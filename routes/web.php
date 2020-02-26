@@ -194,5 +194,13 @@ Route::group(['middleware'=>['web','Admin']],function() {
     Route::get('/admin/terminal/ningbo','Admin\TerminalController@ningbo');//
     Route::get('/admin/terminal/yuhuan','Admin\TerminalController@yuhuan');//
     Route::get('/admin/terminal/wuxi','Admin\TerminalController@wuxi');//
+    Route::get('/admin/terminal/e0000','Admin\TerminalController@e0000');//
+
+
+
+
+
+
+    Route::get('/admin/zhihuichengshi/index','Admin\ZhihuichengshiController@index');//
 
 });

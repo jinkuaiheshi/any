@@ -1665,7 +1665,7 @@ class TerminalController extends CommonController
         return view('admin/dhy_ningbo')->with('data',$sum);
     }
     public function yuhuan(){
-        $company = Company::where('is_deleted',0)->where('city_code','331000')->get();
+        $company = Company::where('is_deleted',0)->where('city_code','310100')->get();
         $ids = array();
         foreach ( $company as $value){
             $ids[] = $value->id;
@@ -2591,7 +2591,7 @@ class TerminalController extends CommonController
         return view('admin/lot_overload')->with('data',$data)->with('mac',$mac)->with('baojing',\GuzzleHttp\json_encode($baojing))->with('yujing',\GuzzleHttp\json_encode($yujing));
     }
     public function diqu(){
-        $company = Company::whereIn('provider_id',[5,15,20,21,23,26,27])->get();
+        $company = Company::whereIn('provider_id',[15,20,21,23,26,27])->get();
 
         $shebei = array();
         $zong = array();
@@ -2610,7 +2610,9 @@ class TerminalController extends CommonController
                 }else{
                     $shebei['SimCard'] = $vv->simcard;
                 }
-
+               $company = Company::where('id',$vv->company_id)->first();
+               $provider = Provider::where('id',$company->provider_id)->first();
+               $shebei['provider'] =$provider->name;
                $shebei['name'] = $vv->Company->name;
                $shebei['code'] = $vv->code;
                $shebei['org'] = isset($vv->Organization->name)?$vv->Organization->name:'';
@@ -2621,7 +2623,7 @@ class TerminalController extends CommonController
            }
 
        }
-      
+
         return view('admin/ceshi')->with('data',$zong);
     }
 
@@ -2667,4 +2669,33 @@ class TerminalController extends CommonController
         }
         return view('admin/ceshi')->with('data',$zong);
     }
+    public function e0000(){
+        $mon = Monitor::with('Company','Organization')->where('is_deleted',0)->where('code','like','E100%')->get();
+
+        foreach ($mon as $vv){
+            if(substr($vv->code,0,1) == 'E'){
+                $vaule = substr($vv->code,1,7);
+
+                $dev =  Redis::hMGet('dev',(int)$vaule);
+                foreach ($dev as $vvv){
+                    $shebei['SimCard'] = json_decode($vvv)->iccid;
+                }
+
+            }else{
+                $shebei['SimCard'] = $vv->simcard;
+            }
+            $company = Company::where('id',$vv->company_id)->first();
+            $provider = Provider::where('id',$company->provider_id)->first();
+            $shebei['provider'] =$provider->name;
+            $shebei['name'] = $vv->Company->name;
+            $shebei['code'] = $vv->code;
+            $shebei['org'] = isset($vv->Organization->name)?$vv->Organization->name:'';
+            $shebei['address'] = $vv->Company->address;
+            $shebei['phone1'] = $vv->Company->phone1;
+            $shebei['phone2'] = $vv->Company->phone2;
+            $zong[] = $shebei;
+        }
+        return view('admin/e0000')->with('data',$zong);
+    }
+
 }

@@ -40,6 +40,8 @@ class OperationController extends CommonController
             $uuu[$v['name'].'_city']=$v['city_code'];
             $uuu[$v['name'].'_area']=$v['area_code'];
             $uuu[$v['name'].'_address']=$v['address'];
+            $uuu[$v['name'].'_phone1']=$v['phone1'];
+            $uuu[$v['name'].'_phone2']=$v['phone2'];
 
 
         }
@@ -75,6 +77,8 @@ class OperationController extends CommonController
                 $offline[$k]['city_code']=$uuu[$v->CustomerName.'_city'];
                 $offline[$k]['area_code']=$uuu[$v->CustomerName.'_area'];
                 $offline[$k]['address']=$uuu[$v->CustomerName.'_address'];
+                $offline[$k]['phone1']=$uuu[$v->CustomerName.'_phone1'];
+                $offline[$k]['phone2']=$uuu[$v->CustomerName.'_phone2'];
                 $offline[$k]['SimCard']=$v->SimCard.'SIM';
 
             }else{
@@ -116,6 +120,16 @@ class OperationController extends CommonController
                                 $kkk['address'] = '';
                             } else {
                                 $kkk['address'] = $uuu[$v->CustomerName . '_address'];
+                            }
+                            if (!isset($uuu[$v->CustomerName . 'phone1'])) {
+                                $kkk['phone1'] = '';
+                            } else {
+                                $kkk['phone1'] = $uuu[$v->CustomerName . 'phone1'];
+                            }
+                            if (!isset($uuu[$v->CustomerName . 'phone2'])) {
+                                $kkk['phone2'] = '';
+                            } else {
+                                $kkk['phone2'] = $uuu[$v->CustomerName . 'phone2'];
                             }
 
                             if (((int)$v1 === 2 && (int)$status == 9) || ((int)$v1 == 2 && (int)$status == 5)) {
@@ -189,6 +203,8 @@ class OperationController extends CommonController
                 $off['city_code'] = $lixian->Company->city_code;
                 $off['area_code'] = $lixian->Company->area_code;
                 $off['address'] = $lixian->Company->address;
+                $off['phone1'] = $lixian->Company->phone1;
+                $off['phone2'] = $lixian->Company->phone2;
 
                 $off['alarm_type'] = $lixian->alarm_type;
 
@@ -262,6 +278,8 @@ class OperationController extends CommonController
 
             $offline_E[$k]['area_code']=$monitor->Company->area_code;
             $offline_E[$k]['address']=$monitor->Company->address;
+            $offline_E[$k]['phone1']=$monitor->Company->phone1;
+            $offline_E[$k]['phone2']=$monitor->Company->phone2;
         }
 
         $province = $request['province'] != '' ? $request['province'] : 0;

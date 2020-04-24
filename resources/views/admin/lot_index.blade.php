@@ -301,16 +301,7 @@
             },
         ];
         // 散点数据
-        var sanData = [{
-            name: '宁波',
-            value: 44
-        }, {
-            name: '南京',
-            value: 14
-        }, {
-            name: '测试环境',
-            value: 29
-        }];
+        var sanData = [];
         // 散点坐标
         var geoCoordMap = {
             '宁波': [121.613715, 29.857638],

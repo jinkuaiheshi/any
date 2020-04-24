@@ -229,15 +229,84 @@ class TerminalController extends CommonController
                 }
             }
 
-            //企业接入
-
+//            //企业接入
+//            $map = Mac::SELECT('company_id')->groupBy('company_id')->get();
+//
+//            $ditu_json = array();
+//
+//
+//
+//            foreach ($map as $value){
+//
+//
+//                    $num = Mac::where('company_id',$value->company_id)->count();
+//
+//                    $Com = Company::where('id',$value->company_id)->first();
+//
+//                    $city = City::where('code',$Com->city_code)->first();
+//                    $ditu_json['name'] = $city->name;
+//                    $ditu_json['value'] = $num;
+//                    $ditu_jsons[$city->name] = $ditu_json;
+//
+//                    dd($ditu_jsons);
+//
+//            }
+//
+//            dd(json_encode($ditu_jsons));
 
 
         }elseif($islogin->type == 3){
             $islogin = session('islogin');
 
-            $terminal = Mac::where('company_id',$islogin->id)->count();
+
+
+            $company = Company::where('id',$islogin->company_id)->first();
+
+            $terminal = Mac::where('company_id',$company->id)->count();
+            $mac = Mac::where('company_id',$company->id)->first();
+
+
             $sum = 1;
+            $fenbus = array();
+            $title = '';
+
+            $time = date('Y-m-d 00:00',strtotime("-0 year -3 month -0 day"));
+            $yujing = TerminalAlarmLog::where('info','like','%预警')->where('time','>=',$time)->where('mac',$mac->id)->count();
+            $baojing = TerminalAlarmLog::where('info','like','%报警')->where('time','>=',$time)->where('mac',$mac->id)->count();
+            $alarmType = array($yujing,$baojing);
+
+
+            $listalatm = array();
+            $listalatms = array();
+            $newAlarm = TerminalAlarmLog::take(5)->orderBy('time','DESC')->where('mac',$mac->id)->get();
+            foreach ($newAlarm as $v){
+                $company = Company::where('id',$mac->company_id)->first();
+                $city = City::where('code',$company->city_code)->first();
+                $listalatm['company'] =$company->name;
+                $listalatm['city'] =$city->name ;
+                $listalatm['info'] =$v->info ;
+                $listalatm['time'] =$v->time ;
+                $listalatms[] = $listalatm;
+            }
+
+            $map = Mac::where('company_id',$company->id)->get();
+
+
+//            foreach ($newAlarm as $v){
+//                $mac = Mac::where('id',$v->mac)->first();
+//
+//                if($mac){
+//                    $company = Company::where('id',$mac->company_id)->first();
+//                    $city = City::where('code',$company->city_code)->first();
+//                    $listalatm['company'] =$company->name ;
+//                    $listalatm['city'] =$city->name ;
+//
+//                    $listalatm['info'] =$v->info ;
+//                    $listalatm['time'] =$v->time ;
+//                    $listalatms[] = $listalatm;
+//
+//                }
+//            }
         }
 
         return view('admin/lot_index')->with('data',$terminal)->with('sum',$sum)->with('mac',Mac::count())->with('userinfo',$islogin)->with('fenbus',json_encode($fenbus))->with('title',json_encode($title))->with('alarmType',json_encode($alarmType))->with('newAlarm',$listalatms);
@@ -337,6 +406,94 @@ class TerminalController extends CommonController
             }
 
 
+
+        }elseif($islogin->type == 3){
+            $companys = MAC::All()->groupBy('company_id')->where('company_id',$islogin->company_id)->count();
+            $data = MAC::All()->where('company_id',$islogin->company_id)->count();
+            $company = Company::where('id',$islogin->company_id)->first();
+            $map = array();
+            $maps= array();
+
+
+                //查看他下面的烟感是否有报警的
+                $map['fid'] = $company->id;;
+                $map['flag'] = 1;
+                $map['fLong'] =$company->lng;
+                $map['fLati'] =$company->lat;
+                $map['content'] =$company->name;
+                $map['show'] = 'true';
+                $maps[] = $map;
+
+
+            //地图json
+            $mac = Mac::groupby('company_id')->where('company_id',$islogin->company_id)->get();
+            $json = array();
+            $mapDate = array();
+            array_push($mapDate,array(
+                'id' => 0,
+                'pId' => -1,
+                'name' => '全国',
+                'open' => true,
+                'checked' => true
+            ));
+            foreach ($mac as $v){
+                $company = Company::where('id',$v->company_id)->first();
+
+                if(!isset($json[$company->id])) {
+                    if (!isset($json[$company->province_code])) {
+                        $json[$company->province_code]['id'] = $company->province_code;
+                        $json[$company->province_code]['pId'] = 0;
+                        $province = Province::where('code', $company->province_code)->first();
+
+                        $json[$company->province_code]['name'] = $province->name;
+                        $json[$company->province_code]['open'] = false;
+                        $json[$company->province_code]['checked'] = true;
+                        $mapDate[] = $json[$company->province_code];
+                    }
+
+                    if (!isset($json[$company->city_code])) {
+                        $json[$company->city_code]['id'] = $company->city_code;
+                        $json[$company->city_code]['pId'] = $company->province_code;
+                        $city = City::where('code', $company->city_code)->first();
+
+                        $json[$company->city_code]['name'] = $city->name;
+                        $json[$company->city_code]['open'] = false;
+                        $json[$company->city_code]['checked'] = true;
+                        $mapDate[] = $json[$company->city_code];
+                    }
+                    if (!isset($json[$company->area_code])) {
+                        $json[$company->area_code]['id'] = $company->area_code;
+                        $json[$company->area_code]['pId'] = $company->city_code;
+                        $area = Area::where('code', $company->area_code)->first();
+
+                        $json[$company->area_code]['name'] = $area->name;
+                        $json[$company->area_code]['open'] = false;
+                        $json[$company->area_code]['checked'] = true;
+                        $mapDate[] = $json[$company->area_code];
+                    }
+                    if (!isset($json[$company->street_code])) {
+                        $json[$company->street_code]['id'] = $company->street_code;
+                        $json[$company->street_code]['pId'] = $company->area_code;
+                        $street = Street::where('code', $company->street_code)->first();
+
+                        $json[$company->street_code]['name'] = $street->name;
+                        $json[$company->street_code]['open'] = false;
+                        $json[$company->street_code]['checked'] = true;
+                        $mapDate[] = $json[$company->street_code];
+                    }
+                    if (!isset($json[$company->id])) {
+                        $json[$company->id]['id'] = $company->id;
+                        $json[$company->id]['pId'] = $company->street_code;
+
+
+                        $json[$company->id]['name'] = $company->name;
+                        $json[$company->id]['open'] = true;
+                        $json[$company->id]['checked'] = true;
+                        $json[$company->id]['url'] = '/admin/lot/login/' . $company->id;
+                        $mapDate[] = $json[$company->id];
+                    }
+                }
+            }
 
         }
         return view('admin/lot_map')->with('company',$companys)->with('data',$data)->with('map',json_encode($maps))->with('mapDate',json_encode($mapDate));
@@ -1635,13 +1792,17 @@ class TerminalController extends CommonController
         }
     }
     public function ningbo(){
-        $company = Company::where('is_deleted',0)->where('city_code','330200')->get();
+       // $company = Company::where('is_deleted',0)->where('city_code','330200')->get();
+        $company = Company::where('is_deleted',0)->where('city_code','!=','310000')->where('city_code','!=','320000')->get();
+
+        //dd($company);
         $ids = array();
         foreach ( $company as $value){
             $ids[] = $value->id;
         }
 
-        $monitor = Monitor::with('Company')->where('code','like','E000%')->whereIn('company_id',$ids)->where('is_deleted',0)->get();
+        $monitor = Monitor::with('Company')->whereIn('company_id',$ids)->where('is_deleted',0)->get();
+        dd($monitor);
         $sum = array();
         foreach ($monitor as $vv){
             $data = array();
@@ -2024,7 +2185,7 @@ class TerminalController extends CommonController
             $token = $this->mandunToken();
             $APP_SECRET = '7B814218CC2A3EED32BD571059D58B2B';
 
-            $accessToken = json_decode($token)->data->accessToken;
+            $accessToken = json_decode($token)->data->accessToken; 
 
             $method = 'GET_STATISTIC_TEMPERATURE';
             $client_id ='O000002093';
@@ -2055,13 +2216,8 @@ class TerminalController extends CommonController
             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 对认证证书来源的检查
             $data = curl_exec($ch);//运行curl
             curl_close($ch);
-
             $info = json_decode($data)->data;
-
-
             $wendu_a = array();
-
-
             $number = array();
             $max = 0 ;
             if($info){
